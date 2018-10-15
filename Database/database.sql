@@ -75,7 +75,7 @@ alter table [Warehouse].[Product]
 	add constraint [U_Warehouse_Product_ProductName] unique ([ProductName])
 
 alter table [Warehouse].[ProductPriceHistory]
-    add constraint [PK_ProductPriceHistory] primary key ([ProductID])
+    add constraint [PK_Warehouse_ProductPriceHistory] primary key ([ProductPriceHistoryID])
 
 alter table [Sales].[OrderHeader]
     add constraint [PK_Sales_OrderHeader] primary key ([OrderHeaderID])
@@ -90,4 +90,10 @@ alter table [Sales].[OrderDetail]
 alter table [Sales].[OrderDetail]
 	add constraint [FK_Sales_OrderDetail_Warehouse_Product] foreign key (ProductID)
 		references [Warehouse].[Product]
+go
+
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
+	('Coke bottle 24 fl oz', 'Coke bottle 24 fl oz', 1.99, 0, 100, 1, 'seed', getdate())
 go
