@@ -4,7 +4,7 @@ using API.Core.EntityLayer.Warehouse;
 
 namespace API.Models
 {
-    public class ProductRequestModel
+    public class AddProductRequestModel
     {
         [Key]
         public Int32? ProductID { get; set; }
@@ -20,12 +20,22 @@ namespace API.Models
 
         [Required]
         [StringLength(25)]
-        public String CreationUser { get; set; }
+        public String User { get; set; }
+    }
+
+    public class UpdatePriceRequestModel
+    {
+        [Required]
+        public Decimal? Price { get; set; }
+
+        [Required]
+        [StringLength(25)]
+        public String User { get; set; }
     }
 
     public static class RequestsExtensions
     {
-        public static Product ToEntity(this ProductRequestModel requestModel)
+        public static Product ToEntity(this AddProductRequestModel requestModel)
         {
             return new Product
             {
@@ -33,19 +43,19 @@ namespace API.Models
                 ProductName = requestModel.ProductName,
                 ProductDescription = requestModel.ProductDescription,
                 Price = requestModel.Price,
-                CreationUser = requestModel.CreationUser
+                CreationUser = requestModel.User
             };
         }
 
-        public static ProductRequestModel ToRequestModel(this Product entity)
+        public static AddProductRequestModel ToRequestModel(this Product entity)
         {
-            return new ProductRequestModel
+            return new AddProductRequestModel
             {
                 ProductID = entity.ProductID,
                 ProductName = entity.ProductName,
                 ProductDescription = entity.ProductDescription,
                 Price = entity.Price,
-                CreationUser = entity.CreationUser
+                User = entity.CreationUser
             };
         }
     }

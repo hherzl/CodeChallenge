@@ -56,7 +56,7 @@ namespace API.Controllers
         }
 
         [HttpPost("Product")]
-        public async Task<IActionResult> PostProductAsync([FromBody]ProductRequestModel requestModel)
+        public async Task<IActionResult> PostProductAsync([FromBody]AddProductRequestModel requestModel)
         {
             Logger?.LogDebug("'{0}' has been invoked", nameof(PostProductAsync));
 
@@ -64,7 +64,7 @@ namespace API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(requestModel);
 
-            var response = new SingleResponse<ProductRequestModel>();
+            var response = new SingleResponse<AddProductRequestModel>();
 
             try
             {
@@ -76,8 +76,13 @@ namespace API.Controllers
                 entity.Available = true;
 
                 // Check if entity exists
-                if ((await Repository.GetProductByProductNameAsync(entity)) != null)
-                    return BadRequest();
+                var existingProduct = await Repository.GetProductByProductNameAsync(entity);
+
+                if (existingProduct != null)
+                {
+                    ModelState.AddModelError("ProductName", "Product name already exists");
+                    return BadRequest(ModelState);
+                }
 
                 // Add entity to database
                 Repository.Add(entity);
@@ -87,6 +92,63 @@ namespace API.Controllers
                 response.Model = entity.ToRequestModel();
 
                 Logger?.LogInformation("The entity was created successfully.");
+            }
+            catch (Exception ex)
+            {
+                response.SetError(Logger, ex);
+            }
+
+            return response.ToHttpResponse();
+        }
+
+        [HttpPut("Product/{id}")]
+        public async Task<IActionResult> UpdatePriceAsync(int id, [FromBody]UpdatePriceRequestModel requestModel)
+        {
+            Logger?.LogDebug("'{0}' has been invoked", nameof(UpdatePriceAsync));
+
+            // Validate request model
+            if (!ModelState.IsValid)
+                return BadRequest(requestModel);
+
+            var response = new SingleResponse<UpdatePriceRequestModel>();
+
+            try
+            {
+                // Get entity by id
+                var entity = await Repository.GetProductAsync(new Product(id));
+
+                if (entity == null)
+                    return NotFound();
+
+                // Set changes
+                entity.Price = requestModel.Price;
+                entity.LastUpdateUser = requestModel.User;
+                entity.LastUpdateDateTime = DateTime.Now;
+
+                // Update entity to database
+                Repository.Update(entity);
+
+                await Repository.CommitChangesAsync();
+
+                response.Message = "The price for product was changed successfully.";
+
+                Logger?.LogInformation(response.Message);
+
+                // Add product price to history
+                var history = new ProductPriceHistory
+                {
+                    ProductID = entity.ProductID,
+                    Price = entity.Price,
+                    StartDate = DateTime.Now,
+                    CreationUser = requestModel.User,
+                    CreationDateTime = DateTime.Now
+                };
+
+                Repository.Add(history);
+
+                await Repository.CommitChangesAsync();
+
+                Logger?.LogInformation("The price for product was saved in history successfully.");
             }
             catch (Exception ex)
             {
