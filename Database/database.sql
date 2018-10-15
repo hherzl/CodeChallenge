@@ -1,3 +1,9 @@
+use master
+go
+
+drop database [CodeChallenge]
+go
+
 create database [CodeChallenge]
 go
 
@@ -95,5 +101,32 @@ go
 insert into [Warehouse].[Product]
 	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
 values
-	('Coke bottle 24 fl oz', 'Coke bottle 24 fl oz', 1.99, 0, 100, 1, 'seed', getdate())
+	('Coca Cola 24 fl Oz Bottle', 'Enjoy Coca-Cola’s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
+
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
+	('Diet Coca Cola 24 fl Oz Bottle', 'Enjoy Coca-Cola’s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
 go
+
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
+	('Coca Cola 8.5 Oz Aluminum Bottle', 'Enjoy Coca-Cola’s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
+go
+
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
+	('Diet Coca Cola 8.5 Oz Aluminum Bottle', 'Enjoy Coca-Cola’s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
+go
+
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
+	('Coca Cola Zero 24 fl Oz Bottle', 'Enjoy Coca-Cola’s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
+
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
+	('Diet Coca Cola Zero 24 fl Oz Bottle', 'Enjoy Coca-Cola’s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
