@@ -1,0 +1,192 @@
+{
+	"id": "b0c8e7c4-c441-d1e6-e99f-fe1cb4b4e295",
+	"name": "Store API",
+	"description": "Tests for Store API",
+	"order": [
+		"e3e7b8a4-acfc-78b2-8ae1-f0cb967016da",
+		"e69362f0-ae9d-4ac6-6c09-7af0fa24b31d",
+		"5c2452e4-82f2-d75c-c6e1-4f3c0a7c683d",
+		"bd95ed2f-f7fc-aeb1-a758-0d99a720aaa7",
+		"7b8e28f5-bbc0-5efc-8741-ef307056306c",
+		"0d5dcc01-dcb9-7fc7-ffee-22d67fcbcdd8"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1539581635311,
+	"owner": "5604854",
+	"public": false,
+	"requests": [
+		{
+			"id": "0d5dcc01-dcb9-7fc7-ffee-22d67fcbcdd8",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5700/api/v1/Sales/PlaceOrder",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1539589793689,
+			"name": "Place Order",
+			"description": "",
+			"collectionId": "b0c8e7c4-c441-d1e6-e99f-fe1cb4b4e295",
+			"responses": [],
+			"rawModeData": "{\n\t\"User\": \"postman\",\n\t\"Details\": [\n\t\t{\n\t\t\t\"ProductID\": \"1000\",\n\t\t\t\"Quantity\": \"1\"\n\t\t}\n\t]\n}\n"
+		},
+		{
+			"id": "5c2452e4-82f2-d75c-c6e1-4f3c0a7c683d",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5700/api/v1/Warehouse/Product",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1539589676665,
+			"name": "Add Product",
+			"description": "Adding a new product",
+			"collectionId": "b0c8e7c4-c441-d1e6-e99f-fe1cb4b4e295",
+			"responses": [],
+			"rawModeData": "{\n\t\"ProductName\": \"Dr Pepper Bottle 24 fl oz (test)\",\n\t\"ProductDescription\": \"Dr Pepper Bottle 24 fl oz (test)\",\n\t\"Price\": \"1.90\",\n\t\"User\": \"postman\"\n}\n"
+		},
+		{
+			"id": "7b8e28f5-bbc0-5efc-8741-ef307056306c",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5700/api/v1/Warehouse/LikeProduct/2000",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "PUT",
+			"collectionId": "b0c8e7c4-c441-d1e6-e99f-fe1cb4b4e295",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Like Product",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1539588740573,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n\t\"User\": \"postmanreview\"\n}"
+		},
+		{
+			"id": "bd95ed2f-f7fc-aeb1-a758-0d99a720aaa7",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5700/api/v1/Warehouse/Product/1000",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1539589674541,
+			"name": "Update Price for Product",
+			"description": "",
+			"collectionId": "b0c8e7c4-c441-d1e6-e99f-fe1cb4b4e295",
+			"responses": [],
+			"rawModeData": "{\n\t\"Price\": \"2.15\",\n\t\"User\": \"postman\"\n}\n"
+		},
+		{
+			"id": "e3e7b8a4-acfc-78b2-8ae1-f0cb967016da",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:5700/api/v1/Warehouse",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1539586412212,
+			"name": "Get Products",
+			"description": "Retrieve products from snacks store",
+			"collectionId": "b0c8e7c4-c441-d1e6-e99f-fe1cb4b4e295",
+			"responses": []
+		},
+		{
+			"id": "e69362f0-ae9d-4ac6-6c09-7af0fa24b31d",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:5700/api/v1/Warehouse/?name=pepper",
+			"queryParams": [
+				{
+					"key": "name",
+					"value": "pepper",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "b0c8e7c4-c441-d1e6-e99f-fe1cb4b4e295",
+			"data": null,
+			"dataMode": "params",
+			"name": "Get Products by Name",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1539585511423,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		}
+	]
+}
