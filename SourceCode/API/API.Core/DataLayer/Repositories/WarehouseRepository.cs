@@ -13,17 +13,20 @@ namespace API.Core.DataLayer.Repositories
 		{
 		}
 
-		public IQueryable<Product> GetProducts(string name = "")
-		{
-			// Get query from DbSet
-			var query = DbContext.Set<Product>().AsQueryable();
+        public IQueryable<Product> GetProducts(string name = "")
+        {
+            // Get query from DbSet
+            var query = DbContext.Set<Product>().AsQueryable();
+
+            // Get only available products
+            query = query.Where(item => item.Available == true);
 
             // Search by name
             if (!string.IsNullOrEmpty(name))
                 query = query.Where(item => item.ProductName.ToLower().Contains(name.ToLower()));
-			
-			return query;
-		}
+
+            return query;
+        }
 
 		public async Task<Product> GetProductAsync(Product entity)
 			=> await DbContext.Set<Product>().FirstOrDefaultAsync(item => item.ProductID == entity.ProductID);
