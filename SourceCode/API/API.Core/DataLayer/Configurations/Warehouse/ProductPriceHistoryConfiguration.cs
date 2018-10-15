@@ -12,7 +12,7 @@ namespace API.Core.DataLayer.Configurations.Warehouse
 			builder.ToTable("ProductPriceHistory", "Warehouse");
 			
 			// Set key for entity
-			builder.HasKey(p => p.ProductID);
+			builder.HasKey(p => p.ProductPriceHistoryID);
 			
 			// Set identity for entity (auto increment)
 			builder.Property(p => p.ProductPriceHistoryID).UseSqlServerIdentityColumn();
