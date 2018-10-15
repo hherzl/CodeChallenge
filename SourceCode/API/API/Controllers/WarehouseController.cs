@@ -63,9 +63,9 @@ namespace API.Controllers
         }
 
         [HttpPost("Product")]
-        public async Task<IActionResult> PostProductAsync([FromBody]AddProductRequestModel requestModel)
+        public async Task<IActionResult> AddProductAsync([FromBody]AddProductRequestModel requestModel)
         {
-            Logger?.LogDebug("'{0}' has been invoked", nameof(PostProductAsync));
+            Logger?.LogDebug("'{0}' has been invoked", nameof(AddProductAsync));
 
             // Validate request model
             if (!ModelState.IsValid)
@@ -156,6 +156,47 @@ namespace API.Controllers
                 await Repository.CommitChangesAsync();
 
                 Logger?.LogInformation("The price for product was saved in history successfully.");
+            }
+            catch (Exception ex)
+            {
+                response.SetError(Logger, ex);
+            }
+
+            return response.ToHttpResponse();
+        }
+
+        [HttpPut("LikeProduct/{id}")]
+        public async Task<IActionResult> LikeProductAsync(int id, [FromBody]LikeProductRequestModel requestModel)
+        {
+            Logger?.LogDebug("'{0}' has been invoked", nameof(LikeProductAsync));
+
+            // Validate request model
+            if (!ModelState.IsValid)
+                return BadRequest(requestModel);
+
+            var response = new SingleResponse<LikeProductRequestModel>();
+
+            try
+            {
+                // Get entity by id
+                var entity = await Repository.GetProductAsync(new Product(id));
+
+                if (entity == null)
+                    return NotFound();
+
+                // Set changes
+                entity.Likes += 1;
+                entity.LastUpdateUser = requestModel.User;
+                entity.LastUpdateDateTime = DateTime.Now;
+
+                // Update entity to database
+                Repository.Update(entity);
+
+                await Repository.CommitChangesAsync();
+
+                response.Message = string.Format("The product '{0}' has a new like.", entity.ProductName);
+
+                Logger?.LogInformation(response.Message);
             }
             catch (Exception ex)
             {

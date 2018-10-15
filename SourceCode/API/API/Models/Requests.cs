@@ -33,6 +33,13 @@ namespace API.Models
         public String User { get; set; }
     }
 
+    public class LikeProductRequestModel
+    {
+        [Required]
+        [StringLength(25)]
+        public String User { get; set; }
+    }
+
     public static class RequestsExtensions
     {
         public static Product ToEntity(this AddProductRequestModel requestModel)
