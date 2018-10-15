@@ -76,12 +76,12 @@ namespace API.Models
 
     public static class ResponseExtensions
     {
-        public static void SetError(this IResponse response, ILogger logger, Exception ex)
+        public static void SetError(this IResponse response, ILogger logger, string name, Exception ex)
         {
             response.DidError = true;
             response.ErrorMessage = "There was an internal error, please contact to technical support.";
 
-            logger.LogCritical(ex.ToString());
+            logger.LogCritical("There was an error on '{0}': {1}", name, ex);
         }
 
         public static IActionResult ToHttpResponse<TModel>(this IListResponse<TModel> response)

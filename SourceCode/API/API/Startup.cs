@@ -35,9 +35,11 @@ namespace API
 
             // Set up dependency injection for controller's logger
             services.AddScoped<ILogger, Logger<WarehouseController>>();
+            services.AddScoped<ILogger, Logger<SalesController>>();
 
             // Set up dependency injection for repository
             services.AddScoped<IWarehouseRepository, WarehouseRepository>();
+            services.AddScoped<ISalesRepository, SalesRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

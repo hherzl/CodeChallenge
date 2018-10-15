@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using API.Core.EntityLayer.Warehouse;
 
@@ -38,6 +39,24 @@ namespace API.Models
         [Required]
         [StringLength(25)]
         public String User { get; set; }
+    }
+
+    public class PlaceOrderRequestModel
+    {
+        [Required]
+        [StringLength(25)]
+        public String User { get; set; }
+
+        public IEnumerable<PlaceOrderDetailRequestModel> Details { get; set; }
+    }
+
+    public class PlaceOrderDetailRequestModel
+    {
+        [Required]
+        public Int32? ProductID { get; set; }
+
+        [Required]
+        public Int32? Quantity { get; set; }
     }
 
     public static class RequestsExtensions

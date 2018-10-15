@@ -56,7 +56,7 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                response.SetError(Logger, ex);
+                response.SetError(Logger, nameof(GetProductsAsync), ex);
             }
 
             return response.ToHttpResponse();
@@ -102,7 +102,7 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                response.SetError(Logger, ex);
+                response.SetError(Logger, nameof(AddProductAsync), ex);
             }
 
             return response.ToHttpResponse();
@@ -159,7 +159,7 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                response.SetError(Logger, ex);
+                response.SetError(Logger, nameof(UpdatePriceAsync), ex);
             }
 
             return response.ToHttpResponse();
@@ -200,7 +200,7 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                response.SetError(Logger, ex);
+                response.SetError(Logger, nameof(LikeProductAsync), ex);
             }
 
             return response.ToHttpResponse();
