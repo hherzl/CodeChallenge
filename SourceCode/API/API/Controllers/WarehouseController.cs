@@ -43,7 +43,50 @@ namespace API.Controllers
                 // Retrieve items by page size and page number, set model for response
                 response.Model = await query.Paging(response.PageSize, response.PageNumber).ToListAsync();
 
-                Logger?.LogInformation("Page {0} of {1}, Total of rows: {2}", response.PageNumber, response.PageCount, response.ItemsCount);
+                response.Message = string.Format("Page {0} of {1}, Total of rows: {2}.", pageNumber, response.PageCount, response.ItemsCount);
+
+                Logger?.LogInformation(response.Message);
+            }
+            catch (Exception ex)
+            {
+                response.SetError(Logger, ex);
+            }
+
+            return response.ToHttpResponse();
+        }
+
+        [HttpPost("Product")]
+        public async Task<IActionResult> PostProductAsync([FromBody]ProductRequestModel requestModel)
+        {
+            Logger?.LogDebug("'{0}' has been invoked", nameof(PostProductAsync));
+
+            // Validate request model
+            if (!ModelState.IsValid)
+                return BadRequest(requestModel);
+
+            var response = new SingleResponse<ProductRequestModel>();
+
+            try
+            {
+                var entity = requestModel.ToEntity();
+
+                // Set default values
+                entity.Likes = 0;
+                entity.Stocks = 0;
+                entity.Available = true;
+
+                // Check if entity exists
+                if ((await Repository.GetProductByProductNameAsync(entity)) != null)
+                    return BadRequest();
+
+                // Add entity to database
+                Repository.Add(entity);
+
+                await Repository.CommitChangesAsync();
+
+                response.Model = entity.ToRequestModel();
+
+                Logger?.LogInformation("The entity was created successfully.");
             }
             catch (Exception ex)
             {
