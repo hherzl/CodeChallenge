@@ -50,6 +50,15 @@ namespace API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(policy =>
+            {
+                // Add client origin in CORS policy
+                // todo: Set port number for client app
+                policy.WithOrigins("http://localhost:4200");
+                policy.AllowAnyHeader();
+                policy.AllowAnyMethod();
+            });
+
             app.UseMvc();
         }
     }
