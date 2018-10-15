@@ -1,24 +1,26 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using API.Core.EntityLayer.Sales;
 using API.Core.DataLayer.Contracts;
 using API.Core.EntityLayer.Warehouse;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Core.DataLayer.Repositories
 {
-	public class WarehouseRepository : Repository, IWarehouseRepository
+    public class WarehouseRepository : Repository, IWarehouseRepository
 	{
 		public WarehouseRepository(CodeChallengeDbContext dbContext)
 			: base(dbContext)
 		{
 		}
 
-		public IQueryable<Product> GetProducts()
+		public IQueryable<Product> GetProducts(string name = "")
 		{
 			// Get query from DbSet
 			var query = DbContext.Set<Product>().AsQueryable();
+
+            // Search by name
+            if (!string.IsNullOrEmpty(name))
+                query = query.Where(item => item.ProductName.ToLower().Contains(name.ToLower()));
 			
 			return query;
 		}

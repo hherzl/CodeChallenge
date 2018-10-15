@@ -1,16 +1,12 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using API.Core.EntityLayer.Sales;
-using API.Core.DataLayer.Contracts;
 using API.Core.EntityLayer.Warehouse;
 
 namespace API.Core.DataLayer.Contracts
 {
-	public interface IWarehouseRepository : IRepository
+    public interface IWarehouseRepository : IRepository
 	{
-		IQueryable<Product> GetProducts();
+		IQueryable<Product> GetProducts(string name = "");
 
 		Task<Product> GetProductAsync(Product entity);
 

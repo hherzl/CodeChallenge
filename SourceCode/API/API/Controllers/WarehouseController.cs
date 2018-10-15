@@ -24,7 +24,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProductsAsync(int? pageSize = 10, int? pageNumber = 1)
+        public async Task<IActionResult> GetProductsAsync(int? pageSize = 10, int? pageNumber = 1, string name = "")
         {
             Logger?.LogDebug("'{0}' has been invoked", nameof(GetProductsAsync));
 
@@ -33,7 +33,7 @@ namespace API.Controllers
             try
             {
                 // Get query from repository
-                var query = Repository.GetProducts();
+                var query = Repository.GetProducts(name);
 
                 // Set paging's information
                 response.PageSize = (int)pageSize;
