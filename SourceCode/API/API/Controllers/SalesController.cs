@@ -92,6 +92,15 @@ namespace API.Controllers
 
                 await SalesRepository.CommitChangesAsync();
 
+                foreach (var detail in requestModel.Details)
+                {
+                    var product = await WarehouseRepository.GetProductAsync(new Product(detail.ProductID));
+
+                    product.Stocks -= 1;
+                }
+
+                await SalesRepository.CommitChangesAsync();
+
                 response.Message = string.Format("The order was placed successfully, ID: {0}", header.OrderHeaderID);
 
                 Logger?.LogInformation(response.Message);
