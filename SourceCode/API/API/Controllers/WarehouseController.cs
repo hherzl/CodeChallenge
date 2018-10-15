@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using API.Core.DataLayer.Contracts;
 using API.Core.DataLayer.Repositories;
@@ -24,7 +25,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProductsAsync(int? pageSize = 10, int? pageNumber = 1, string name = "")
+        public async Task<IActionResult> GetProductsAsync(int? pageSize = 10, int? pageNumber = 1, string name = "", string sortBy = "")
         {
             Logger?.LogDebug("'{0}' has been invoked", nameof(GetProductsAsync));
 
@@ -34,6 +35,12 @@ namespace API.Controllers
             {
                 // Get query from repository
                 var query = Repository.GetProducts(name);
+
+                // Sorting list
+                if (sortBy == "popularity")
+                    query = query.OrderByDescending(item => item.Likes);
+                else
+                    query = query.OrderBy(item => item.ProductName);
 
                 // Set paging's information
                 response.PageSize = (int)pageSize;
