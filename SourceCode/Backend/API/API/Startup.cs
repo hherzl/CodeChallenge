@@ -28,20 +28,6 @@ namespace API
                 .AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services
-                .AddMvcCore()
-                .AddAuthorization()
-                .AddJsonFormatters();
-
-            services.AddAuthentication("Bearer")
-                .AddIdentityServerAuthentication(options =>
-                {
-                    options.Authority = "http://localhost:5600";
-                    options.RequireHttpsMetadata = false;
-
-                    options.ApiName = "SnacksApi";
-                });
-
             // Add configuration for DbContext
             // Use connection string from appsettings.json file
             services.AddDbContext<CodeChallengeDbContext>(options =>
@@ -56,6 +42,17 @@ namespace API
             // Set up dependency injection for repository
             services.AddScoped<IWarehouseRepository, WarehouseRepository>();
             services.AddScoped<ISalesRepository, SalesRepository>();
+
+            services
+                .AddMvcCore();
+
+            services.AddAuthentication("Bearer")
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = "http://localhost:5600";
+                    options.ApiName = "SnacksApi";
+                    options.RequireHttpsMetadata = false;
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,16 +61,17 @@ namespace API
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
+            // todo: Set port number for client app
             app.UseCors(policy =>
             {
                 // Add client origin in CORS policy
-                // todo: Set port number for client app
                 policy.WithOrigins("http://localhost:4200");
                 policy.AllowAnyHeader();
                 policy.AllowAnyMethod();
             });
 
             app.UseMvc();
+            app.UseAuthentication();
         }
     }
 }

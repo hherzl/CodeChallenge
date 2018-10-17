@@ -5,7 +5,6 @@ using API.Core.DataLayer.Contracts;
 using API.Core.DataLayer.Repositories;
 using API.Core.EntityLayer.Warehouse;
 using API.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -14,7 +13,6 @@ namespace API.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    [Authorize]
     public class WarehouseController : ControllerBase
     {
         protected readonly IWarehouseRepository Repository;
@@ -26,8 +24,7 @@ namespace API.Controllers
             Logger = logger;
         }
 
-        [HttpGet]
-        [AllowAnonymous]
+        [HttpGet("Product")]
         public async Task<IActionResult> GetProductsAsync(int? pageSize = 10, int? pageNumber = 1, string name = "", string sortBy = "")
         {
             Logger?.LogDebug("'{0}' has been invoked", nameof(GetProductsAsync));

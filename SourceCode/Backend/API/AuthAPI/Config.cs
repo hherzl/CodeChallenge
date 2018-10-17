@@ -1,15 +1,22 @@
 ﻿using System.Collections.Generic;
-using IdentityServer4;
 using IdentityServer4.Models;
+using IdentityServer4.Test;
 
 namespace AuthAPI
 {
     public class Config
     {
+        public static IEnumerable<IdentityResource> GetIdentityResources()
+            => new List<IdentityResource>
+            {
+                new IdentityResources.OpenId(),
+                new IdentityResources.Profile(),
+            };
+
         public static IEnumerable<ApiResource> GetApiResources()
             => new List<ApiResource>
             {
-                new ApiResource("SnacksApi", "Snacks API")
+                new ApiResource("snacksapi", "Snacks API")
             };
 
         public static IEnumerable<Client> GetClients()
@@ -18,46 +25,27 @@ namespace AuthAPI
                 new Client
                 {
                     ClientId = "client",
-
-                    // No interactive user, use the clientid/secret for authentication
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
 
-                    // Secret for authentication
                     ClientSecrets =
                     {
-                        new Secret("secret123".Sha256())
+                        new Secret("secret1".Sha256())
                     },
+                    AllowedScopes =
+                    {
+                        "snacksapi"
+                    }
+                }
+            };
 
-                    // Scopes that client has access to
-                    AllowedScopes =
-                    {
-                        "SnacksApi"
-                    }
-                },
-                new Client
+        public static List<TestUser> GetUsers()
+            => new List<TestUser>
+            {
+                new TestUser
                 {
-                    ClientId = "jsclient",
-                    ClientName = "JavaScript Client",
-                    AllowedGrantTypes = GrantTypes.Implicit,
-                    AllowAccessTokensViaBrowser = true,
-                    RedirectUris =
-                    {
-                        "http://localhost:5700"
-                    },
-                    PostLogoutRedirectUris =
-                    {
-                        "http://localhost:5700"
-                    },
-                    AllowedCorsOrigins =
-                    {
-                        "http://localhost:5003"
-                    },
-                    AllowedScopes =
-                    {
-                        IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile,
-                        "SnacksApi"
-                    }
+                    SubjectId = "1",
+                    Username = "johnd",
+                    Password = "password1"
                 }
             };
     }

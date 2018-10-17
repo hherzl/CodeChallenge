@@ -7,9 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Core", "API.Core\API.Core.csproj", "{86C0ADF6-5AF9-4E4C-85CB-6FF294267B35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthAPI", "AuthAPI\AuthAPI.csproj", "{B76C8754-61FC-4AD3-BF3C-5B45061F92CF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIClient", "APIClient\APIClient.csproj", "{F2ADC2E4-BEC0-4A7D-A936-81B2FB2D7129}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthAPI", "AuthAPI\AuthAPI.csproj", "{B76C8754-61FC-4AD3-BF3C-5B45061F92CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{B76C8754-61FC-4AD3-BF3C-5B45061F92CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B76C8754-61FC-4AD3-BF3C-5B45061F92CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B76C8754-61FC-4AD3-BF3C-5B45061F92CF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F2ADC2E4-BEC0-4A7D-A936-81B2FB2D7129}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F2ADC2E4-BEC0-4A7D-A936-81B2FB2D7129}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F2ADC2E4-BEC0-4A7D-A936-81B2FB2D7129}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F2ADC2E4-BEC0-4A7D-A936-81B2FB2D7129}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
