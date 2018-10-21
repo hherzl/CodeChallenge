@@ -1,22 +1,14 @@
 ﻿using System.Collections.Generic;
 using IdentityServer4.Models;
-using IdentityServer4.Test;
 
 namespace AuthAPI
 {
     public class Config
     {
-        public static IEnumerable<IdentityResource> GetIdentityResources()
-            => new List<IdentityResource>
-            {
-                new IdentityResources.OpenId(),
-                new IdentityResources.Profile(),
-            };
-
         public static IEnumerable<ApiResource> GetApiResources()
             => new List<ApiResource>
             {
-                new ApiResource("snacksapi", "Snacks API")
+                new ApiResource("SnacksApi", "Snacks API")
             };
 
         public static IEnumerable<Client> GetClients()
@@ -33,19 +25,8 @@ namespace AuthAPI
                     },
                     AllowedScopes =
                     {
-                        "snacksapi"
+                        "SnacksApi"
                     }
-                }
-            };
-
-        public static List<TestUser> GetUsers()
-            => new List<TestUser>
-            {
-                new TestUser
-                {
-                    SubjectId = "1",
-                    Username = "johnd",
-                    Password = "password1"
                 }
             };
     }

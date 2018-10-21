@@ -4,7 +4,6 @@ using API.Core.DataLayer.Contracts;
 using API.Core.DataLayer.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,10 +23,6 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
             // Add configuration for DbContext
             // Use connection string from appsettings.json file
             services.AddDbContext<CodeChallengeDbContext>(options =>
@@ -43,16 +38,16 @@ namespace API
             services.AddScoped<IWarehouseRepository, WarehouseRepository>();
             services.AddScoped<ISalesRepository, SalesRepository>();
 
-            services
-                .AddMvcCore();
+            services.AddMvc();
 
-            services.AddAuthentication("Bearer")
-                .AddIdentityServerAuthentication(options =>
-                {
-                    options.Authority = "http://localhost:5600";
-                    options.ApiName = "SnacksApi";
-                    options.RequireHttpsMetadata = false;
-                });
+            services.AddMvcCore().AddAuthorization().AddJsonFormatters();
+
+            services.AddAuthentication("Bearer").AddIdentityServerAuthentication(options =>
+            {
+                options.Authority = "http://localhost:5600";
+                options.RequireHttpsMetadata = false;
+                options.ApiName = "SnacksApi";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,8 +65,9 @@ namespace API
                 policy.AllowAnyMethod();
             });
 
-            app.UseMvc();
             app.UseAuthentication();
+
+            app.UseMvc();
         }
     }
 }

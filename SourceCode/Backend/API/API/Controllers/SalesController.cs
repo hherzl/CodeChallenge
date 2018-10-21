@@ -6,13 +6,15 @@ using API.Core.DataLayer.Contracts;
 using API.Core.EntityLayer.Sales;
 using API.Core.EntityLayer.Warehouse;
 using API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace API.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Authorize]
     [ApiController]
+    [Route("api/v1/[controller]")]
     public class SalesController : ControllerBase
     {
         protected readonly IWarehouseRepository WarehouseRepository;
