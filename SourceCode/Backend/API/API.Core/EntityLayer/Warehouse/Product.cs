@@ -4,40 +4,40 @@ using API.Core.EntityLayer.Sales;
 
 namespace API.Core.EntityLayer.Warehouse
 {
-	public partial class Product : IAuditEntity
+    public partial class Product : IAuditEntity
 	{
 		public Product()
 		{
 		}
 
-		public Product(Int32? productID)
+		public Product(int? productID)
 		{
 			ProductID = productID;
 		}
 
-		public Int32? ProductID { get; set; }
+		public int? ProductID { get; set; }
 
-		public String ProductName { get; set; }
+		public string ProductName { get; set; }
 
-		public String ProductDescription { get; set; }
+		public string ProductDescription { get; set; }
 
-		public Decimal? Price { get; set; }
+		public decimal? Price { get; set; }
 
-		public Int32? Likes { get; set; }
+		public int? Likes { get; set; }
 
-		public Int32? Stocks { get; set; }
+		public int? Stocks { get; set; }
 
-		public Boolean? Available { get; set; }
+		public bool? Available { get; set; }
 
-		public String CreationUser { get; set; }
+		public string CreationUser { get; set; }
 
 		public DateTime? CreationDateTime { get; set; }
 
-		public String LastUpdateUser { get; set; }
+		public string LastUpdateUser { get; set; }
 
 		public DateTime? LastUpdateDateTime { get; set; }
 
-		public Byte[] Timestamp { get; set; }
+		public byte[] Timestamp { get; set; }
 
 		public Collection<OrderDetail> OrderDetails { get; set; }
 	}

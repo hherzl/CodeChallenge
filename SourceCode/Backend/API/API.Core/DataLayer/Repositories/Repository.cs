@@ -1,14 +1,13 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using API.Core.EntityLayer;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Core.DataLayer.Contracts
 {
-	public class Repository
+    public class Repository
 	{
-		protected Boolean Disposed;
+		protected bool Disposed;
 		protected CodeChallengeDbContext DbContext;
 
 		public Repository(CodeChallengeDbContext dbContext)
@@ -28,20 +27,18 @@ namespace API.Core.DataLayer.Contracts
 
 		public virtual void Add<TEntity>(TEntity entity) where TEntity : class
 		{
-			// Cast entity to IAuditEntity
-			var cast = entity as IAuditEntity;
-			
-			if (cast != null)
-			{
-				if (!cast.CreationDateTime.HasValue)
-				{
-					// Set creation date time
-					cast.CreationDateTime = DateTime.Now;
-				}
-			}
-			
-			// Get entry from Db context
-			var entry = DbContext.Entry(entity);
+            // Cast entity to IAuditEntity
+            if (entity is IAuditEntity cast)
+            {
+                if (!cast.CreationDateTime.HasValue)
+                {
+                    // Set creation date time
+                    cast.CreationDateTime = DateTime.Now;
+                }
+            }
+
+            // Get entry from Db context
+            var entry = DbContext.Entry(entity);
 			
 			if (entry.State != EntityState.Detached)
 			{
@@ -57,19 +54,17 @@ namespace API.Core.DataLayer.Contracts
 
 		public virtual void Update<TEntity>(TEntity entity) where TEntity : class
 		{
-			var cast = entity as IAuditEntity;
-			
-			if (cast != null)
-			{
-				if (!cast.LastUpdateDateTime.HasValue)
-				{
-					// Set last update date time
-					cast.LastUpdateDateTime = DateTime.Now;
-				}
-			}
-			
-			// Get entity's entry
-			var entry = DbContext.Entry(entity);
+            if (entity is IAuditEntity cast)
+            {
+                if (!cast.LastUpdateDateTime.HasValue)
+                {
+                    // Set last update date time
+                    cast.LastUpdateDateTime = DateTime.Now;
+                }
+            }
+
+            // Get entity's entry
+            var entry = DbContext.Entry(entity);
 			
 			if (entry.State == EntityState.Detached)
 			{
@@ -101,10 +96,10 @@ namespace API.Core.DataLayer.Contracts
 			}
 		}
 
-		public Int32 CommitChanges()
+		public int CommitChanges()
 			=> DbContext.SaveChanges();
 
-		public Task<Int32> CommitChangesAsync()
+		public Task<int> CommitChangesAsync()
 			=> DbContext.SaveChangesAsync();
 	}
 }

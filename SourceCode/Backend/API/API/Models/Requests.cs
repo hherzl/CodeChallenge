@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using API.Core.EntityLayer.Warehouse;
 
@@ -8,44 +7,44 @@ namespace API.Models
     public class AddProductRequestModel
     {
         [Key]
-        public Int32? ProductID { get; set; }
+        public int? ProductID { get; set; }
 
         [Required]
         [StringLength(200)]
-        public String ProductName { get; set; }
+        public string ProductName { get; set; }
 
-        public String ProductDescription { get; set; }
+        public string ProductDescription { get; set; }
 
         [Required]
-        public Decimal? Price { get; set; }
+        public decimal? Price { get; set; }
 
         [Required]
         [StringLength(25)]
-        public String User { get; set; }
+        public string User { get; set; }
     }
 
     public class UpdatePriceRequestModel
     {
         [Required]
-        public Decimal? Price { get; set; }
+        public decimal Price { get; set; }
 
         [Required]
         [StringLength(25)]
-        public String User { get; set; }
+        public string User { get; set; }
     }
 
     public class LikeProductRequestModel
     {
         [Required]
         [StringLength(25)]
-        public String User { get; set; }
+        public string User { get; set; }
     }
 
     public class PlaceOrderRequestModel
     {
         [Required]
         [StringLength(25)]
-        public String User { get; set; }
+        public string User { get; set; }
 
         public IEnumerable<PlaceOrderDetailRequestModel> Details { get; set; }
     }
@@ -53,10 +52,10 @@ namespace API.Models
     public class PlaceOrderDetailRequestModel
     {
         [Required]
-        public Int32? ProductID { get; set; }
+        public int? ProductID { get; set; }
 
         [Required]
-        public Int32? Quantity { get; set; }
+        public int? Quantity { get; set; }
     }
 
     public static class RequestsExtensions

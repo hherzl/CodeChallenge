@@ -1,21 +1,19 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using API.Core.EntityLayer.Sales;
 using API.Core.DataLayer.Contracts;
-using API.Core.EntityLayer.Warehouse;
+using API.Core.EntityLayer.Sales;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Core.DataLayer.Repositories
 {
-	public class SalesRepository : Repository, ISalesRepository
+    public class SalesRepository : Repository, ISalesRepository
 	{
 		public SalesRepository(CodeChallengeDbContext dbContext)
 			: base(dbContext)
 		{
 		}
 
-		public IQueryable<OrderDetail> GetOrderDetails(Int32? orderHeaderID = null, Int32? productID = null)
+		public IQueryable<OrderDetail> GetOrderDetails(int? orderHeaderID = null, int? productID = null)
 		{
 			// Get query from DbSet
 			var query = DbContext.Set<OrderDetail>().AsQueryable();

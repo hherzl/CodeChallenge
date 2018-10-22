@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace API.Core.DataLayer.Contracts
 {
-	public interface IRepository : IDisposable
+    public interface IRepository : IDisposable
 	{
 		void Add<TEntity>(TEntity entity) where TEntity : class;
 
@@ -11,8 +11,8 @@ namespace API.Core.DataLayer.Contracts
 
 		void Remove<TEntity>(TEntity entity) where TEntity : class;
 
-		Int32 CommitChanges();
+		int CommitChanges();
 
-		Task<Int32> CommitChangesAsync();
+		Task<int> CommitChangesAsync();
 	}
 }

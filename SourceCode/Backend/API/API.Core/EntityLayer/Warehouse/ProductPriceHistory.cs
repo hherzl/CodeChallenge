@@ -8,27 +8,27 @@ namespace API.Core.EntityLayer.Warehouse
 		{
 		}
 
-		public ProductPriceHistory(Int32? productID)
+		public ProductPriceHistory(int? productID)
 		{
 			ProductID = productID;
 		}
 
-		public Int32? ProductPriceHistoryID { get; set; }
+		public int? ProductPriceHistoryID { get; set; }
 
-		public Int32? ProductID { get; set; }
+		public int? ProductID { get; set; }
 
-		public Decimal? Price { get; set; }
+		public decimal? Price { get; set; }
 
 		public DateTime? StartDate { get; set; }
 
-		public String CreationUser { get; set; }
+		public string CreationUser { get; set; }
 
 		public DateTime? CreationDateTime { get; set; }
 
-		public String LastUpdateUser { get; set; }
+		public string LastUpdateUser { get; set; }
 
 		public DateTime? LastUpdateDateTime { get; set; }
 
-		public Byte[] Timestamp { get; set; }
+		public byte[] Timestamp { get; set; }
 	}
 }
