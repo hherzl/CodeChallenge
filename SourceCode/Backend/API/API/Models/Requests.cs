@@ -72,7 +72,7 @@ namespace API.Models
             };
         }
 
-        public static AddProductRequestModel ToRequestModel(this Product entity)
+        public static AddProductRequestModel ToAddProductRequestModel(this Product entity)
         {
             return new AddProductRequestModel
             {

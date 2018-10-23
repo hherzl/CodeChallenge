@@ -98,7 +98,7 @@ namespace API.Controllers
 
                 await Repository.CommitChangesAsync();
 
-                response.Model = entity.ToRequestModel();
+                response.Model = entity.ToAddProductRequestModel();
 
                 Logger?.LogInformation("The entity was created successfully.");
             }
@@ -196,7 +196,12 @@ namespace API.Controllers
 
                 await Repository.CommitChangesAsync();
 
-                response.Message = string.Format("The product '{0}' has a new like.", entity.ProductName);
+                response.Model = new LikeProductRequestModel
+                {
+                    User = requestModel.User
+                };
+
+                response.Message = string.Format("The product '{0}' has a new like, user: '{1}'.", entity.ProductName, response.Model.User);
 
                 Logger?.LogInformation(response.Message);
             }
