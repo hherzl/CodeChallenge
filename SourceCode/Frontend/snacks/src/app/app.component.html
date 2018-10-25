@@ -2,6 +2,14 @@
 
 <h2>Products</h2>
 
+<form [formGroup]="form">
+  <mat-form-field>
+    <input type="text" placeholder="Buscar por Nombre" matInput formControlName="productName">
+  </mat-form-field>
+
+  <button type="button" mat-raised-button color="primary" [disabled]="!form.valid" (click)="search()">Buscar</button>
+</form>
+
 <table mat-table [dataSource]="response?.model">
   <ng-container matColumnDef="productName">
     <th mat-header-cell *matHeaderCellDef>Name</th>

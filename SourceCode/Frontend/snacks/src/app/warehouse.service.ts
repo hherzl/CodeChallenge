@@ -13,7 +13,9 @@ export class WarehouseService {
     this.baseUrl = 'http://localhost:5700/api/v1/Warehouse';
   }
 
-  public getProducts(): Observable<Object> {
-    return this.httpClient.get([this.baseUrl].join('/'));
+  public getProducts(name: string): Observable<Object> {
+    const url = name == null ? [this.baseUrl, 'Product'].join('/') : [this.baseUrl, 'Product?name=' + name].join('/');
+
+    return this.httpClient.get(url);
   }
 }

@@ -27,6 +27,7 @@ namespace API.Controllers
         }
 
         [HttpGet("Product")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetProductsAsync(int? pageSize = 10, int? pageNumber = 1, string name = "", string sortBy = "")
         {
             Logger?.LogDebug("'{0}' has been invoked", nameof(GetProductsAsync));
