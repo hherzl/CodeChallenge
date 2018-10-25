@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
       'likes',
       'stocks'
     ];
-    this.warehouseSvc.getProducts().subscribe((data: PagedResponse<Product>) => {
+    this.warehouseSvc.getProducts(null).subscribe((data: PagedResponse<Product>) => {
       this.response = data;
     });
   }
