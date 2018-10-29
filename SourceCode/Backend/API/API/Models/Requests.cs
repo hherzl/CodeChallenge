@@ -4,7 +4,7 @@ using API.Core.EntityLayer.Warehouse;
 
 namespace API.Models
 {
-    public class AddProductRequestModel
+    public class AddProductRequest
     {
         [Key]
         public int? ProductID { get; set; }
@@ -33,23 +33,23 @@ namespace API.Models
         public string User { get; set; }
     }
 
-    public class LikeProductRequestModel
+    public class LikeProductRequest
     {
         [Required]
         [StringLength(25)]
         public string User { get; set; }
     }
 
-    public class PlaceOrderRequestModel
+    public class PlaceOrderRequest
     {
         [Required]
         [StringLength(25)]
         public string User { get; set; }
 
-        public IEnumerable<PlaceOrderDetailRequestModel> Details { get; set; }
+        public IEnumerable<PlaceOrderDetailRequest> Details { get; set; }
     }
 
-    public class PlaceOrderDetailRequestModel
+    public class PlaceOrderDetailRequest
     {
         [Required]
         public int? ProductID { get; set; }
@@ -60,9 +60,8 @@ namespace API.Models
 
     public static class RequestsExtensions
     {
-        public static Product ToEntity(this AddProductRequestModel requestModel)
-        {
-            return new Product
+        public static Product ToEntity(this AddProductRequest requestModel)
+            => new Product
             {
                 ProductID = requestModel.ProductID,
                 ProductName = requestModel.ProductName,
@@ -70,11 +69,9 @@ namespace API.Models
                 Price = requestModel.Price,
                 CreationUser = requestModel.User
             };
-        }
 
-        public static AddProductRequestModel ToAddProductRequestModel(this Product entity)
-        {
-            return new AddProductRequestModel
+        public static AddProductRequest ToAddProductRequest(this Product entity)
+            => new AddProductRequest
             {
                 ProductID = entity.ProductID,
                 ProductName = entity.ProductName,
@@ -82,6 +79,5 @@ namespace API.Models
                 Price = entity.Price,
                 User = entity.CreationUser
             };
-        }
     }
 }

@@ -29,7 +29,7 @@ namespace API.Controllers
         }
 
         [HttpPost("PlaceOrder")]
-        public async Task<IActionResult> PlaceOrderAsync([FromBody]PlaceOrderRequestModel requestModel)
+        public async Task<IActionResult> PlaceOrderAsync([FromBody]PlaceOrderRequest requestModel)
         {
             Logger?.LogDebug("'{0}' has been invoked", nameof(PlaceOrderAsync));
 
@@ -37,7 +37,7 @@ namespace API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(requestModel);
 
-            var response = new SingleResponse<PlaceOrderRequestModel>();
+            var response = new SingleResponse<PlaceOrderRequest>();
 
             try
             {

@@ -66,7 +66,7 @@ namespace API.Controllers
         }
 
         [HttpPost("Product")]
-        public async Task<IActionResult> AddProductAsync([FromBody]AddProductRequestModel requestModel)
+        public async Task<IActionResult> AddProductAsync([FromBody]AddProductRequest requestModel)
         {
             Logger?.LogDebug("'{0}' has been invoked", nameof(AddProductAsync));
 
@@ -74,7 +74,7 @@ namespace API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(requestModel);
 
-            var response = new SingleResponse<AddProductRequestModel>();
+            var response = new SingleResponse<AddProductRequest>();
 
             try
             {
@@ -99,7 +99,7 @@ namespace API.Controllers
 
                 await Repository.CommitChangesAsync();
 
-                response.Model = entity.ToAddProductRequestModel();
+                response.Model = entity.ToAddProductRequest();
 
                 Logger?.LogInformation("The entity was created successfully.");
             }
@@ -169,7 +169,7 @@ namespace API.Controllers
         }
 
         [HttpPut("LikeProduct/{id}")]
-        public async Task<IActionResult> LikeProductAsync(int id, [FromBody]LikeProductRequestModel requestModel)
+        public async Task<IActionResult> LikeProductAsync(int id, [FromBody]LikeProductRequest requestModel)
         {
             Logger?.LogDebug("'{0}' has been invoked", nameof(LikeProductAsync));
 
@@ -177,7 +177,7 @@ namespace API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(requestModel);
 
-            var response = new SingleResponse<LikeProductRequestModel>();
+            var response = new SingleResponse<LikeProductRequest>();
 
             try
             {
@@ -197,7 +197,7 @@ namespace API.Controllers
 
                 await Repository.CommitChangesAsync();
 
-                response.Model = new LikeProductRequestModel
+                response.Model = new LikeProductRequest
                 {
                     User = requestModel.User
                 };
