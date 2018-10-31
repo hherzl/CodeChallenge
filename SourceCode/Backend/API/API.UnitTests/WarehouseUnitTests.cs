@@ -14,7 +14,8 @@ namespace API.UnitTests
         public async Task TestGetProductsAsync()
         {
             // Arrange
-            var repository = RepositoryMocker.GetWarehouseRepository(nameof(TestGetProductsAsync));
+            var dbContext = DbContextMocker.GetCodeChallengeDbContext(nameof(TestGetProductsAsync));
+            var repository = RepositoryMocker.GetWarehouseRepository(dbContext);
             var controller = new WarehouseController(repository, null);
 
             // Act
@@ -30,7 +31,8 @@ namespace API.UnitTests
         public async Task TestAddProductAsync()
         {
             // Arrange
-            var repository = RepositoryMocker.GetWarehouseRepository(nameof(TestAddProductAsync));
+            var dbContext = DbContextMocker.GetCodeChallengeDbContext(nameof(TestAddProductAsync));
+            var repository = RepositoryMocker.GetWarehouseRepository(dbContext);
             var controller = new WarehouseController(repository, null);
             var request = new AddProductRequest
             {
@@ -38,7 +40,7 @@ namespace API.UnitTests
                 ProductName = "Coca Cola Zero 24 fl Oz Bottle",
                 ProductDescription = "Enjoy Coca-Cola’s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.",
                 Price = 2.15m,
-                User = "seed"
+                User = "unittests"
             };
 
             // Act
@@ -53,13 +55,14 @@ namespace API.UnitTests
         public async Task TestUpdatePriceAsync()
         {
             // Arrange
-            var repository = RepositoryMocker.GetWarehouseRepository(nameof(TestUpdatePriceAsync));
+            var dbContext = DbContextMocker.GetCodeChallengeDbContext(nameof(TestUpdatePriceAsync));
+            var repository = RepositoryMocker.GetWarehouseRepository(dbContext);
             var controller = new WarehouseController(repository, null);
             var id = 1;
             var request = new UpdatePriceRequest
             {
                 Price = 2.15m,
-                User = "seed"
+                User = "unittests"
             };
 
             // Act
@@ -74,12 +77,13 @@ namespace API.UnitTests
         public async Task TestLikeProductAsync()
         {
             // Arrange
-            var repository = RepositoryMocker.GetWarehouseRepository(nameof(TestLikeProductAsync));
+            var dbContext = DbContextMocker.GetCodeChallengeDbContext(nameof(TestLikeProductAsync));
+            var repository = RepositoryMocker.GetWarehouseRepository(dbContext);
             var controller = new WarehouseController(repository, null);
             var id = 1;
             var request = new LikeProductRequest
             {
-                User = "reviewer"
+                User = "unittests"
             };
 
             // Act
