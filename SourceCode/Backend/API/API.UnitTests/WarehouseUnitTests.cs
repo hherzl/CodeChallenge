@@ -56,7 +56,7 @@ namespace API.UnitTests
             var repository = RepositoryMocker.GetWarehouseRepository(nameof(TestUpdatePriceAsync));
             var controller = new WarehouseController(repository, null);
             var id = 1;
-            var request = new UpdatePriceRequestModel
+            var request = new UpdatePriceRequest
             {
                 Price = 2.15m,
                 User = "seed"
@@ -64,7 +64,7 @@ namespace API.UnitTests
 
             // Act
             var response = await controller.UpdatePriceAsync(id, request) as ObjectResult;
-            var value = response.Value as ISingleResponse<UpdatePriceRequestModel>;
+            var value = response.Value as ISingleResponse<UpdatePriceRequest>;
 
             // Assert
             Assert.False(value.DidError);

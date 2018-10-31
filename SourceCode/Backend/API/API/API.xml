@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>API</name>
+    </assembly>
+    <members>
+        <member name="T:API.Controllers.WarehouseController">
+            <summary>
+            Contains all operations related to Warehouse feature
+            </summary>
+        </member>
+        <member name="M:API.Controllers.WarehouseController.GetProductsAsync(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String)">
+            <summary>
+            Gets the products from store
+            </summary>
+            <param name="pageSize">Page size</param>
+            <param name="pageNumber">Page number</param>
+            <param name="name">Product name</param>
+            <param name="sortBy">Sort by</param>
+            <returns>A list of product oaccording to criteria</returns>
+        </member>
+        <member name="M:API.Controllers.WarehouseController.AddProductAsync(API.Models.AddProductRequest)">
+            <summary>
+            Adds a new product
+            </summary>
+            <param name="requestModel">Request model</param>
+            <returns>A single response with new product info</returns>
+        </member>
+        <member name="M:API.Controllers.WarehouseController.UpdatePriceAsync(System.Int32,API.Models.UpdatePriceRequest)">
+            <summary>
+            Updates the price for existing product
+            </summary>
+            <param name="id">Product ID</param>
+            <param name="requestModel">Request model</param>
+            <returns>A single response for product price update</returns>
+        </member>
+        <member name="M:API.Controllers.WarehouseController.LikeProductAsync(System.Int32,API.Models.LikeProductRequest)">
+            <summary>
+            Likes an existing product
+            </summary>
+            <param name="id">Product ID</param>
+            <param name="requestModel">Request model</param>
+            <returns>A single response as result of like product</returns>
+        </member>
+    </members>
+</doc>

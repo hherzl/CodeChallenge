@@ -1,4 +1,7 @@
-﻿using API.Controllers;
+﻿using System;
+using System.IO;
+using System.Reflection;
+using API.Controllers;
 using API.Core.DataLayer;
 using API.Core.DataLayer.Contracts;
 using API.Core.DataLayer.Repositories;
@@ -8,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace API
 {
@@ -48,6 +52,18 @@ namespace API
                 options.RequireHttpsMetadata = false;
                 options.ApiName = "SnacksApi";
             });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Snacks API", Version = "v1" });
+
+                // Set the comments path for the Swagger JSON and UI.
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+                c.IncludeXmlComments(xmlPath);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,6 +82,13 @@ namespace API
             });
 
             app.UseAuthentication();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Snacks API");
+            });
 
             app.UseMvc();
         }

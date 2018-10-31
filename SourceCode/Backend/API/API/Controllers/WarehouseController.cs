@@ -12,6 +12,9 @@ using Microsoft.Extensions.Logging;
 
 namespace API.Controllers
 {
+    /// <summary>
+    /// Contains all operations related to Warehouse feature
+    /// </summary>
     [Authorize]
     [ApiController]
     [Route("api/v1/[controller]")]
@@ -26,6 +29,14 @@ namespace API.Controllers
             Logger = logger;
         }
 
+        /// <summary>
+        /// Gets the products from store
+        /// </summary>
+        /// <param name="pageSize">Page size</param>
+        /// <param name="pageNumber">Page number</param>
+        /// <param name="name">Product name</param>
+        /// <param name="sortBy">Sort by</param>
+        /// <returns>A list of product oaccording to criteria</returns>
         [HttpGet("Product")]
         [AllowAnonymous]
         public async Task<IActionResult> GetProductsAsync(int? pageSize = 10, int? pageNumber = 1, string name = "", string sortBy = "")
@@ -65,6 +76,11 @@ namespace API.Controllers
             return response.ToHttpResponse();
         }
 
+        /// <summary>
+        /// Adds a new product
+        /// </summary>
+        /// <param name="requestModel">Request model</param>
+        /// <returns>A single response with new product info</returns>
         [HttpPost("Product")]
         public async Task<IActionResult> AddProductAsync([FromBody]AddProductRequest requestModel)
         {
@@ -111,8 +127,14 @@ namespace API.Controllers
             return response.ToHttpResponse();
         }
 
+        /// <summary>
+        /// Updates the price for existing product
+        /// </summary>
+        /// <param name="id">Product ID</param>
+        /// <param name="requestModel">Request model</param>
+        /// <returns>A single response for product price update</returns>
         [HttpPut("Product/{id}")]
-        public async Task<IActionResult> UpdatePriceAsync(int id, [FromBody]UpdatePriceRequestModel requestModel)
+        public async Task<IActionResult> UpdatePriceAsync(int id, [FromBody]UpdatePriceRequest requestModel)
         {
             Logger?.LogDebug("'{0}' has been invoked", nameof(UpdatePriceAsync));
 
@@ -120,7 +142,7 @@ namespace API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(requestModel);
 
-            var response = new SingleResponse<UpdatePriceRequestModel>();
+            var response = new SingleResponse<UpdatePriceRequest>();
 
             try
             {
@@ -168,6 +190,12 @@ namespace API.Controllers
             return response.ToHttpResponse();
         }
 
+        /// <summary>
+        /// Likes an existing product
+        /// </summary>
+        /// <param name="id">Product ID</param>
+        /// <param name="requestModel">Request model</param>
+        /// <returns>A single response as result of like product</returns>
         [HttpPut("LikeProduct/{id}")]
         public async Task<IActionResult> LikeProductAsync(int id, [FromBody]LikeProductRequest requestModel)
         {
