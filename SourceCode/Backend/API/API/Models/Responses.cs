@@ -81,7 +81,7 @@ namespace API.Models
             response.DidError = true;
             response.ErrorMessage = "There was an internal error, please contact to technical support.";
 
-            logger.LogCritical("There was an error on '{0}': {1}", name, ex);
+            logger?.LogCritical("There was an error on '{0}': {1}", name, ex);
         }
 
         public static IActionResult ToHttpResponse<TModel>(this IListResponse<TModel> response)

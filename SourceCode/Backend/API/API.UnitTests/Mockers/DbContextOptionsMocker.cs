@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace API.UnitTests
+namespace API.UnitTests.Mockers
 {
     public static class DbContextOptionsMocker
     {

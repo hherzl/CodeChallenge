@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using API.Controllers;
 using API.Models;
+using API.UnitTests.Mockers;
 using Microsoft.AspNetCore.Mvc;
 using Xunit;
 
@@ -19,7 +20,6 @@ namespace API.UnitTests
             var controller = new SalesController(warehouseRepository, salesRepository, null);
             var request = new PlaceOrderRequest
             {
-                User = "unittests",
                 Details = new List<PlaceOrderDetailRequest>
                 {
                     new PlaceOrderDetailRequest
@@ -30,12 +30,14 @@ namespace API.UnitTests
                 }
             };
 
+            controller.SetControllerContext();
+
             // Act
             var response = await controller.PlaceOrderAsync(request) as ObjectResult;
             var value = response.Value as ISingleResponse<PlaceOrderRequest>;
 
             // Assert
-            Assert.False(value.DidError);
+            Assert.False(value?.DidError);
         }
     }
 }

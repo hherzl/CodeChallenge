@@ -1,6 +1,6 @@
 ﻿using API.Core.DataLayer;
 
-namespace API.UnitTests
+namespace API.UnitTests.Mockers
 {
     public static class DbContextMocker
     {

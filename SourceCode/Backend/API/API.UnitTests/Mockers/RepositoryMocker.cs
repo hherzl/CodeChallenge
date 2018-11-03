@@ -2,7 +2,7 @@
 using API.Core.DataLayer.Contracts;
 using API.Core.DataLayer.Repositories;
 
-namespace API.UnitTests
+namespace API.UnitTests.Mockers
 {
     public static class RepositoryMocker
     {
