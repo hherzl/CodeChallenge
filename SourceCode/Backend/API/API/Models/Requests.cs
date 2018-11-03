@@ -18,7 +18,6 @@ namespace API.Models
         [Required]
         public decimal? Price { get; set; }
 
-        [Required]
         [StringLength(25)]
         public string User { get; set; }
     }
@@ -28,21 +27,18 @@ namespace API.Models
         [Required]
         public decimal Price { get; set; }
 
-        [Required]
         [StringLength(25)]
         public string User { get; set; }
     }
 
     public class LikeProductRequest
     {
-        [Required]
         [StringLength(25)]
         public string User { get; set; }
     }
 
     public class PlaceOrderRequest
     {
-        [Required]
         [StringLength(25)]
         public string User { get; set; }
 
@@ -60,14 +56,14 @@ namespace API.Models
 
     public static class RequestsExtensions
     {
-        public static Product ToEntity(this AddProductRequest requestModel)
+        public static Product ToEntity(this AddProductRequest request)
             => new Product
             {
-                ProductID = requestModel.ProductID,
-                ProductName = requestModel.ProductName,
-                ProductDescription = requestModel.ProductDescription,
-                Price = requestModel.Price,
-                CreationUser = requestModel.User
+                ProductID = request.ProductID,
+                ProductName = request.ProductName,
+                ProductDescription = request.ProductDescription,
+                Price = request.Price,
+                CreationUser = request.User
             };
 
         public static AddProductRequest ToAddProductRequest(this Product entity)

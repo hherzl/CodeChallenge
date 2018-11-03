@@ -4,6 +4,18 @@
         <name>API</name>
     </assembly>
     <members>
+        <member name="T:API.Controllers.SalesController">
+            <summary>
+            Contains all operations related to Sales feature
+            </summary>
+        </member>
+        <member name="M:API.Controllers.SalesController.PlaceOrderAsync(API.Models.PlaceOrderRequest)">
+            <summary>
+            Places a new order
+            </summary>
+            <param name="requestModel">Order request</param>
+            <returns>A single response as for order creation</returns>
+        </member>
         <member name="T:API.Controllers.WarehouseController">
             <summary>
             Contains all operations related to Warehouse feature
@@ -16,14 +28,14 @@
             <param name="pageSize">Page size</param>
             <param name="pageNumber">Page number</param>
             <param name="name">Product name</param>
-            <param name="sortBy">Sort by</param>
-            <returns>A list of product oaccording to criteria</returns>
+            <param name="sortBy">Sort by popularity</param>
+            <returns>A list of product according to criteria</returns>
         </member>
         <member name="M:API.Controllers.WarehouseController.AddProductAsync(API.Models.AddProductRequest)">
             <summary>
             Adds a new product
             </summary>
-            <param name="requestModel">Request model</param>
+            <param name="request">Request for add product</param>
             <returns>A single response with new product info</returns>
         </member>
         <member name="M:API.Controllers.WarehouseController.UpdatePriceAsync(System.Int32,API.Models.UpdatePriceRequest)">
@@ -31,7 +43,7 @@
             Updates the price for existing product
             </summary>
             <param name="id">Product ID</param>
-            <param name="requestModel">Request model</param>
+            <param name="request">Request for update price</param>
             <returns>A single response for product price update</returns>
         </member>
         <member name="M:API.Controllers.WarehouseController.LikeProductAsync(System.Int32,API.Models.LikeProductRequest)">
@@ -39,7 +51,7 @@
             Likes an existing product
             </summary>
             <param name="id">Product ID</param>
-            <param name="requestModel">Request model</param>
+            <param name="request">Request model for </param>
             <returns>A single response as result of like product</returns>
         </member>
     </members>

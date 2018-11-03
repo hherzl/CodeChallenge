@@ -35,8 +35,8 @@ namespace API.Controllers
         /// <param name="pageSize">Page size</param>
         /// <param name="pageNumber">Page number</param>
         /// <param name="name">Product name</param>
-        /// <param name="sortBy">Sort by</param>
-        /// <returns>A list of product oaccording to criteria</returns>
+        /// <param name="sortBy">Sort by popularity</param>
+        /// <returns>A list of product according to criteria</returns>
         [HttpGet("Product")]
         [AllowAnonymous]
         public async Task<IActionResult> GetProductsAsync(int? pageSize = 10, int? pageNumber = 1, string name = "", string sortBy = "")
@@ -79,22 +79,22 @@ namespace API.Controllers
         /// <summary>
         /// Adds a new product
         /// </summary>
-        /// <param name="requestModel">Request model</param>
+        /// <param name="request">Request for add product</param>
         /// <returns>A single response with new product info</returns>
         [HttpPost("Product")]
-        public async Task<IActionResult> AddProductAsync([FromBody]AddProductRequest requestModel)
+        public async Task<IActionResult> AddProductAsync([FromBody]AddProductRequest request)
         {
             Logger?.LogDebug("'{0}' has been invoked", nameof(AddProductAsync));
 
             // Validate request model
             if (!ModelState.IsValid)
-                return BadRequest(requestModel);
+                return BadRequest(request);
 
             var response = new SingleResponse<AddProductRequest>();
 
             try
             {
-                var entity = requestModel.ToEntity();
+                var entity = request.ToEntity();
 
                 // Set default values
                 entity.Likes = 0;
@@ -109,6 +109,8 @@ namespace API.Controllers
                     ModelState.AddModelError("ProductName", "Product name already exists");
                     return BadRequest(ModelState);
                 }
+
+                entity.CreationUser = User.GetClientName();
 
                 // Add entity to database
                 Repository.Add(entity);
@@ -131,16 +133,16 @@ namespace API.Controllers
         /// Updates the price for existing product
         /// </summary>
         /// <param name="id">Product ID</param>
-        /// <param name="requestModel">Request model</param>
+        /// <param name="request">Request for update price</param>
         /// <returns>A single response for product price update</returns>
         [HttpPut("Product/{id}")]
-        public async Task<IActionResult> UpdatePriceAsync(int id, [FromBody]UpdatePriceRequest requestModel)
+        public async Task<IActionResult> UpdatePriceAsync(int id, [FromBody]UpdatePriceRequest request)
         {
             Logger?.LogDebug("'{0}' has been invoked", nameof(UpdatePriceAsync));
 
             // Validate request model
             if (!ModelState.IsValid)
-                return BadRequest(requestModel);
+                return BadRequest(request);
 
             var response = new SingleResponse<UpdatePriceRequest>();
 
@@ -153,9 +155,8 @@ namespace API.Controllers
                     return NotFound();
 
                 // Set changes
-                entity.Price = requestModel.Price;
-                entity.LastUpdateUser = requestModel.User;
-                entity.LastUpdateDateTime = DateTime.Now;
+                entity.Price = request.Price;
+                entity.LastUpdateUser = User.GetClientName();
 
                 // Update entity to database
                 Repository.Update(entity);
@@ -172,8 +173,7 @@ namespace API.Controllers
                     ProductID = entity.ProductID,
                     Price = entity.Price,
                     StartDate = DateTime.Now,
-                    CreationUser = requestModel.User,
-                    CreationDateTime = DateTime.Now
+                    CreationUser = User.GetClientName()
                 };
 
                 Repository.Add(history);
@@ -194,16 +194,16 @@ namespace API.Controllers
         /// Likes an existing product
         /// </summary>
         /// <param name="id">Product ID</param>
-        /// <param name="requestModel">Request model</param>
+        /// <param name="request">Request model for </param>
         /// <returns>A single response as result of like product</returns>
         [HttpPut("LikeProduct/{id}")]
-        public async Task<IActionResult> LikeProductAsync(int id, [FromBody]LikeProductRequest requestModel)
+        public async Task<IActionResult> LikeProductAsync(int id, [FromBody]LikeProductRequest request)
         {
             Logger?.LogDebug("'{0}' has been invoked", nameof(LikeProductAsync));
 
             // Validate request model
             if (!ModelState.IsValid)
-                return BadRequest(requestModel);
+                return BadRequest(request);
 
             var response = new SingleResponse<LikeProductRequest>();
 
@@ -217,8 +217,7 @@ namespace API.Controllers
 
                 // Set changes
                 entity.Likes += 1;
-                entity.LastUpdateUser = requestModel.User;
-                entity.LastUpdateDateTime = DateTime.Now;
+                entity.LastUpdateUser = User.GetClientName();
 
                 // Update entity to database
                 Repository.Update(entity);
@@ -227,7 +226,7 @@ namespace API.Controllers
 
                 response.Model = new LikeProductRequest
                 {
-                    User = requestModel.User
+                    User = entity.LastUpdateUser
                 };
 
                 response.Message = string.Format("The product '{0}' has a new like, user: '{1}'.", entity.ProductName, response.Model.User);

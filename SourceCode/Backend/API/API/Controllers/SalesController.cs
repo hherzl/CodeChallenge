@@ -12,6 +12,9 @@ using Microsoft.Extensions.Logging;
 
 namespace API.Controllers
 {
+    /// <summary>
+    /// Contains all operations related to Sales feature
+    /// </summary>
     [Authorize]
     [ApiController]
     [Route("api/v1/[controller]")]
@@ -28,6 +31,11 @@ namespace API.Controllers
             Logger = logger;
         }
 
+        /// <summary>
+        /// Places a new order
+        /// </summary>
+        /// <param name="requestModel">Order request</param>
+        /// <returns>A single response as for order creation</returns>
         [HttpPost("PlaceOrder")]
         public async Task<IActionResult> PlaceOrderAsync([FromBody]PlaceOrderRequest requestModel)
         {
@@ -45,8 +53,7 @@ namespace API.Controllers
                 {
                     OrderDate = DateTime.Now,
                     Total = 0m,
-                    CreationUser = requestModel.User,
-                    CreationDateTime = DateTime.Now
+                    CreationUser = User.GetClientName()
                 };
 
                 var orderDetails = new List<OrderDetail>();
@@ -74,8 +81,7 @@ namespace API.Controllers
                         UnitPrice = product.Price,
                         Quantity = detail.Quantity,
                         Total = product.Price * detail.Quantity,
-                        CreationUser = requestModel.User,
-                        CreationDateTime = DateTime.Now
+                        CreationUser = User.GetClientName()
                     });
                 }
 
