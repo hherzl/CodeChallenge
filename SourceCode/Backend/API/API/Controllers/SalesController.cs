@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using API.Core.BusinessLayer;
 using API.Core.EntityLayer.Sales;
@@ -49,6 +48,41 @@ namespace API.Controllers
 
             try
             {
+                var orderDetails = new List<OrderDetail>();
+
+                foreach (var detail in request.Details)
+                {
+                    var product = await SalesService.WarehouseRepository.GetProductAsync(new Product(detail.ProductID));
+
+                    if (product == null)
+                    {
+                        ModelState.AddModelError("ProductID", "There is a non existing product in order detail");
+                        return BadRequest(ModelState);
+                    }
+
+                    if (product.Available == false)
+                    {
+                        ModelState.AddModelError("ProductID", "There is a discontinued product in order detail");
+                        return BadRequest(ModelState);
+                    }
+
+                    if (detail.Quantity <= 0)
+                    {
+                        ModelState.AddModelError("Quantity", string.Format("The quantity for product: '{0}' must be greater than zero, current value: '{1}'.", detail.ProductID, detail.Quantity));
+                        return BadRequest(ModelState);
+                    }
+
+                    orderDetails.Add(new OrderDetail
+                    {
+                        ProductID = product.ProductID,
+                        ProductName = product.ProductName,
+                        UnitPrice = product.Price,
+                        Quantity = detail.Quantity,
+                        Total = product.Price * detail.Quantity,
+                        CreationUser = User.GetClientName()
+                    });
+                }
+
                 var header = new OrderHeader
                 {
                     OrderDate = DateTime.Now,
@@ -56,65 +90,11 @@ namespace API.Controllers
                     CreationUser = User.GetClientName()
                 };
 
-                var orderDetails = new List<OrderDetail>();
+                await SalesService.PlaceOrderAsync(header, orderDetails);
 
-                using (var txn = await SalesService.DbContext.Database.BeginTransactionAsync())
-                {
-                    foreach (var detail in request.Details)
-                    {
-                        var product = await SalesService.WarehouseRepository.GetProductAsync(new Product(detail.ProductID));
+                response.Message = string.Format("The order was placed successfully, ID: {0}.", header.OrderHeaderID);
 
-                        if (product == null)
-                        {
-                            ModelState.AddModelError("ProductID", "There is a non existing product in order detail");
-                            return BadRequest(ModelState);
-                        }
-
-                        if (product.Available == false)
-                        {
-                            ModelState.AddModelError("ProductID", "There is a discontinued product in order detail");
-                            return BadRequest(ModelState);
-                        }
-
-                        orderDetails.Add(new OrderDetail
-                        {
-                            ProductID = product.ProductID,
-                            ProductName = product.ProductName,
-                            UnitPrice = product.Price,
-                            Quantity = detail.Quantity,
-                            Total = product.Price * detail.Quantity,
-                            CreationUser = User.GetClientName()
-                        });
-                    }
-
-                    header.Total = orderDetails.Sum(item => item.Total);
-
-                    SalesService.SalesRepository.Add(header);
-
-                    await SalesService.CommitChangesAsync();
-
-                    foreach (var item in orderDetails)
-                    {
-                        item.OrderHeaderID = header.OrderHeaderID;
-
-                        SalesService.SalesRepository.Add(item);
-                    }
-
-                    await SalesService.CommitChangesAsync();
-
-                    foreach (var detail in request.Details)
-                    {
-                        var product = await SalesService.WarehouseRepository.GetProductAsync(new Product(detail.ProductID));
-
-                        product.Stocks -= 1;
-                    }
-
-                    await SalesService.CommitChangesAsync();
-
-                    response.Message = string.Format("The order was placed successfully, ID: {0}.", header.OrderHeaderID);
-
-                    Logger?.LogInformation(response.Message);
-                }
+                Logger?.LogInformation(response.Message);
             }
             catch (Exception ex)
             {
