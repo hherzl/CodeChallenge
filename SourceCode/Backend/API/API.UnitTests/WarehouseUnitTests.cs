@@ -23,6 +23,8 @@ namespace API.UnitTests
             var response = await controller.GetProductsAsync() as ObjectResult;
             var value = response.Value as IPagedResponse<Product>;
 
+            service.Dispose();
+
             // Assert
             Assert.False(value.DidError);
             Assert.True(value.Model.Count() > 0);
@@ -40,7 +42,7 @@ namespace API.UnitTests
             {
                 ProductID = 100,
                 ProductName = "Coca Cola Zero 24 fl Oz Bottle Special Edition",
-                ProductDescription = "Enjoy Coca-Cola’s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.",
+                ProductDescription = "Enjoy Coca-Cola’s crisp.",
                 Price = 2.15m
             };
 
@@ -49,6 +51,8 @@ namespace API.UnitTests
             // Act
             var response = await controller.AddProductAsync(request) as ObjectResult;
             var value = response.Value as ISingleResponse<AddProductRequest>;
+
+            service.Dispose();
 
             // Assert
             Assert.False(value?.DidError);
@@ -73,6 +77,8 @@ namespace API.UnitTests
             var response = await controller.UpdatePriceAsync(id, request) as ObjectResult;
             var value = response.Value as ISingleResponse<UpdatePriceRequest>;
 
+            service.Dispose();
+
             // Assert
             Assert.False(value?.DidError);
         }
@@ -92,6 +98,8 @@ namespace API.UnitTests
             // Act
             var response = await controller.LikeProductAsync(id, request) as ObjectResult;
             var value = response.Value as ISingleResponse<LikeProductRequest>;
+
+            service.Dispose();
 
             // Assert
             Assert.False(value?.DidError);

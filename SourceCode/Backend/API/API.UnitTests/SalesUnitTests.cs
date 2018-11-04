@@ -35,6 +35,8 @@ namespace API.UnitTests
             var response = await controller.PlaceOrderAsync(request) as ObjectResult;
             var value = response.Value as ISingleResponse<PlaceOrderRequest>;
 
+            service.Dispose();
+
             // Assert
             Assert.False(value?.DidError);
         }
