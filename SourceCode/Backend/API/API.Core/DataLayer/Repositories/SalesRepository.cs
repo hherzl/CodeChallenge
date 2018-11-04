@@ -8,7 +8,7 @@ namespace API.Core.DataLayer.Repositories
 {
     public class SalesRepository : Repository, ISalesRepository
 	{
-		public SalesRepository(CodeChallengeDbContext dbContext)
+		public SalesRepository(StoreDbContext dbContext)
 			: base(dbContext)
 		{
 		}

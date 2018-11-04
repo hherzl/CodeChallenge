@@ -10,7 +10,7 @@ namespace API.Core.BusinessLayer
         private IWarehouseRepository m_warehouseRepository;
         private ISalesRepository m_salesRepository;
 
-        public Service(CodeChallengeDbContext dbContext)
+        public Service(StoreDbContext dbContext)
         {
             DbContext = dbContext;
         }
@@ -25,7 +25,7 @@ namespace API.Core.BusinessLayer
             }
         }
 
-        public CodeChallengeDbContext DbContext { get; }
+        public StoreDbContext DbContext { get; }
 
         public IWarehouseRepository WarehouseRepository
         {

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Core.DataLayer
 {
-    public class CodeChallengeDbContext : DbContext
+    public class StoreDbContext : DbContext
     {
-        public CodeChallengeDbContext(DbContextOptions<CodeChallengeDbContext> options)
+        public StoreDbContext(DbContextOptions<StoreDbContext> options)
             : base(options)
         {
         }

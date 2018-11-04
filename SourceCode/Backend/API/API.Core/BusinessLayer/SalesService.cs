@@ -4,7 +4,7 @@ namespace API.Core.BusinessLayer
 {
     public class SalesService : Service, ISalesService
     {
-        public SalesService(CodeChallengeDbContext dbContext)
+        public SalesService(StoreDbContext dbContext)
             : base(dbContext)
         {
         }

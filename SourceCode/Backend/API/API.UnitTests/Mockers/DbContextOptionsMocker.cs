@@ -6,8 +6,8 @@ namespace API.UnitTests.Mockers
 {
     public static class DbContextOptionsMocker
     {
-        public static DbContextOptions<CodeChallengeDbContext> GetDbOptions(string dbName)
-            => new DbContextOptionsBuilder<CodeChallengeDbContext>()
+        public static DbContextOptions<StoreDbContext> GetDbOptions(string dbName)
+            => new DbContextOptionsBuilder<StoreDbContext>()
                 .UseInMemoryDatabase(databaseName: dbName)
                 .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                 .Options;

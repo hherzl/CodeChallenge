@@ -5,10 +5,10 @@ namespace API.UnitTests.Mockers
 {
     public class ServiceMocker
     {
-        public static IWarehouseService GetWarehouseService(CodeChallengeDbContext dbContext)
+        public static IWarehouseService GetWarehouseService(StoreDbContext dbContext)
             => new WarehouseService(dbContext);
 
-        public static ISalesService GetSalesService(CodeChallengeDbContext dbContext)
+        public static ISalesService GetSalesService(StoreDbContext dbContext)
             => new SalesService(dbContext);
     }
 }

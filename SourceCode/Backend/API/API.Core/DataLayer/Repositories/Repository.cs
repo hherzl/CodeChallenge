@@ -6,12 +6,12 @@ namespace API.Core.DataLayer.Contracts
 {
     public class Repository
     {
-        public Repository(CodeChallengeDbContext dbContext)
+        public Repository(StoreDbContext dbContext)
         {
             DbContext = dbContext;
         }
 
-        protected CodeChallengeDbContext DbContext { get; }
+        protected StoreDbContext DbContext { get; }
 
         public virtual void Add<TEntity>(TEntity entity) where TEntity : class
         {

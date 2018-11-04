@@ -8,7 +8,7 @@ namespace API.Core.DataLayer.Repositories
 {
     public class WarehouseRepository : Repository, IWarehouseRepository
 	{
-		public WarehouseRepository(CodeChallengeDbContext dbContext)
+		public WarehouseRepository(StoreDbContext dbContext)
 			: base(dbContext)
 		{
 		}

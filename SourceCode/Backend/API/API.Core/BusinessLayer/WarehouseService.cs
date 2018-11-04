@@ -4,7 +4,7 @@ namespace API.Core.BusinessLayer
 {
     public class WarehouseService : Service, IWarehouseService
     {
-        public WarehouseService(CodeChallengeDbContext dbContext)
+        public WarehouseService(StoreDbContext dbContext)
             : base(dbContext)
         {
         }

@@ -30,7 +30,7 @@ namespace API
         {
             // Add configuration for DbContext
             // Use connection string from appsettings.json file
-            services.AddDbContext<CodeChallengeDbContext>(options =>
+            services.AddDbContext<StoreDbContext>(options =>
             {
                 options.UseSqlServer(Configuration["AppSettings:ConnectionString"]);
             });

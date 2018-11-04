@@ -6,7 +6,7 @@ namespace API.UnitTests.Mockers
 {
     public static class CodeChallengeDbContextExtensions
     {
-        public static void SeedInMemory(this CodeChallengeDbContext dbContext)
+        public static void SeedInMemory(this StoreDbContext dbContext)
         {
             dbContext.Set<Product>().Add(new Product
             {

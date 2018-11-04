@@ -6,7 +6,7 @@ namespace API.Core.BusinessLayer
 {
     public interface IService : IDisposable
     {
-        CodeChallengeDbContext DbContext { get; }
+        StoreDbContext DbContext { get; }
 
         IWarehouseRepository WarehouseRepository { get; }
 
