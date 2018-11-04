@@ -36,6 +36,7 @@ namespace API.Controllers
         /// <param name="request">Order request</param>
         /// <returns>A single response as for order creation</returns>
         [HttpPost("PlaceOrder")]
+        [Authorize(Policy = "CustomerPolicy")]
         public async Task<IActionResult> PlaceOrderAsync([FromBody]PlaceOrderRequest request)
         {
             Logger?.LogDebug("'{0}' has been invoked", nameof(PlaceOrderAsync));

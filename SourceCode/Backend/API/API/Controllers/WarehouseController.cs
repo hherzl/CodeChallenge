@@ -83,6 +83,7 @@ namespace API.Controllers
         /// <param name="request">Request for add product</param>
         /// <returns>A single response with new product info</returns>
         [HttpPost("Product")]
+        [Authorize(Policy = "AdministratorPolicy")]
         public async Task<IActionResult> AddProductAsync([FromBody]AddProductRequest request)
         {
             Logger?.LogDebug("'{0}' has been invoked", nameof(AddProductAsync));
@@ -137,6 +138,7 @@ namespace API.Controllers
         /// <param name="request">Request for update price</param>
         /// <returns>A single response for product price update</returns>
         [HttpPut("Product/{id}")]
+        [Authorize(Policy = "AdministratorPolicy")]
         public async Task<IActionResult> UpdatePriceAsync(int id, [FromBody]UpdatePriceRequest request)
         {
             Logger?.LogDebug("'{0}' has been invoked", nameof(UpdatePriceAsync));
@@ -198,6 +200,7 @@ namespace API.Controllers
         /// <param name="request">Request model for </param>
         /// <returns>A single response as result of like product</returns>
         [HttpPut("LikeProduct/{id}")]
+        [Authorize(Policy = "CustomerPolicy")]
         public async Task<IActionResult> LikeProductAsync(int id, [FromBody]LikeProductRequest request)
         {
             Logger?.LogDebug("'{0}' has been invoked", nameof(LikeProductAsync));
