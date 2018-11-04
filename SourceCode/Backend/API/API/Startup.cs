@@ -1,14 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using API.Controllers;
 using API.Core.BusinessLayer;
 using API.Core.DataLayer;
 using API.Core.DataLayer.Contracts;
 using API.Core.DataLayer.Repositories;
-using Microsoft.AspNetCore.Authorization;
+using API.PolicyRequirements;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -56,7 +54,6 @@ namespace API
                 .AddAuthorization(options =>
                 {
                     options.AddPolicy("CustomerPolicy", policy => policy.Requirements.Add(new CustomerPolicyRequirement()));
-
                     options.AddPolicy("AdministratorPolicy", policy => policy.Requirements.Add(new AdministratorPolicyRequirement()));
                 })
                 .AddJsonFormatters();
@@ -106,32 +103,6 @@ namespace API
             });
 
             app.UseMvc();
-        }
-    }
-
-    public class CustomerPolicyRequirement : AuthorizationHandler<CustomerPolicyRequirement>, IAuthorizationRequirement
-    {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, CustomerPolicyRequirement requirement)
-        {
-            if (context.User.HasClaim(c => c.Type == "client_role" && c.Value == "Customer"))
-                context.Succeed(requirement);
-            else
-                context.Fail();
-
-            return Task.FromResult(0);
-        }
-    }
-
-    public class AdministratorPolicyRequirement : AuthorizationHandler<AdministratorPolicyRequirement>, IAuthorizationRequirement
-    {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AdministratorPolicyRequirement requirement)
-        {
-            if (context.User.HasClaim(c => c.Type == "client_role" && c.Value == "Administrator"))
-                context.Succeed(requirement);
-            else
-                context.Fail();
-
-            return Task.FromResult(0);
         }
     }
 }
