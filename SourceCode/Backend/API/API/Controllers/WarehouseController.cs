@@ -199,14 +199,7 @@ namespace API.Controllers
                 if (entity == null)
                     return NotFound();
 
-                // Set changes
-                entity.Likes += 1;
-                entity.LastUpdateUser = User.GetClientName();
-
-                // Update entity to database
-                Service.WarehouseRepository.Update(entity);
-
-                await Service.CommitChangesAsync();
+                await Service.LikeProductAsync(entity, User.GetClientName());
 
                 response.Model = new LikeProductRequest
                 {

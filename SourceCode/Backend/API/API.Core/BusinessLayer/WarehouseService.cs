@@ -36,5 +36,17 @@ namespace API.Core.BusinessLayer
 
             await CommitChangesAsync();
         }
+
+        public async Task LikeProductAsync(Product entity, string client)
+        {
+            // Set changes
+            entity.Likes += 1;
+            entity.LastUpdateUser = client;
+
+            // Update entity to database
+            WarehouseRepository.Update(entity);
+
+            await CommitChangesAsync();
+        }
     }
 }
