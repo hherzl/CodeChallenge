@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Core.DataLayer.Contracts;
+using API.Core.BusinessLayer;
 using API.Core.EntityLayer.Sales;
 using API.Core.EntityLayer.Warehouse;
 using API.Models;
@@ -20,30 +20,28 @@ namespace API.Controllers
     [Route("api/v1/[controller]")]
     public class SalesController : ControllerBase
     {
-        protected readonly IWarehouseRepository WarehouseRepository;
-        protected readonly ISalesRepository SalesRepository;
+        protected readonly ISalesService SalesService;
         protected ILogger Logger;
 
-        public SalesController(IWarehouseRepository warehouseRepository, ISalesRepository salesRepository, ILogger<WarehouseController> logger)
+        public SalesController(ISalesService salesService, ILogger<WarehouseController> logger)
         {
-            WarehouseRepository = warehouseRepository;
-            SalesRepository = salesRepository;
+            SalesService = salesService;
             Logger = logger;
         }
 
         /// <summary>
         /// Places a new order
         /// </summary>
-        /// <param name="requestModel">Order request</param>
+        /// <param name="request">Order request</param>
         /// <returns>A single response as for order creation</returns>
         [HttpPost("PlaceOrder")]
-        public async Task<IActionResult> PlaceOrderAsync([FromBody]PlaceOrderRequest requestModel)
+        public async Task<IActionResult> PlaceOrderAsync([FromBody]PlaceOrderRequest request)
         {
             Logger?.LogDebug("'{0}' has been invoked", nameof(PlaceOrderAsync));
 
             // Validate request model
             if (!ModelState.IsValid)
-                return BadRequest(requestModel);
+                return BadRequest(request);
 
             var response = new SingleResponse<PlaceOrderRequest>();
 
@@ -58,60 +56,63 @@ namespace API.Controllers
 
                 var orderDetails = new List<OrderDetail>();
 
-                foreach (var detail in requestModel.Details)
+                using (var txn = await SalesService.DbContext.Database.BeginTransactionAsync())
                 {
-                    var product = await WarehouseRepository.GetProductAsync(new Product(detail.ProductID));
-
-                    if (product == null)
+                    foreach (var detail in request.Details)
                     {
-                        ModelState.AddModelError("ProductID", "There is a non existing product in order detail");
-                        return BadRequest(ModelState);
+                        var product = await SalesService.WarehouseRepository.GetProductAsync(new Product(detail.ProductID));
+
+                        if (product == null)
+                        {
+                            ModelState.AddModelError("ProductID", "There is a non existing product in order detail");
+                            return BadRequest(ModelState);
+                        }
+
+                        if (product.Available == false)
+                        {
+                            ModelState.AddModelError("ProductID", "There is a discontinued product in order detail");
+                            return BadRequest(ModelState);
+                        }
+
+                        orderDetails.Add(new OrderDetail
+                        {
+                            ProductID = product.ProductID,
+                            ProductName = product.ProductName,
+                            UnitPrice = product.Price,
+                            Quantity = detail.Quantity,
+                            Total = product.Price * detail.Quantity,
+                            CreationUser = User.GetClientName()
+                        });
                     }
 
-                    if (product.Available == false)
+                    header.Total = orderDetails.Sum(item => item.Total);
+
+                    SalesService.SalesRepository.Add(header);
+
+                    await SalesService.SalesRepository.CommitChangesAsync();
+
+                    foreach (var item in orderDetails)
                     {
-                        ModelState.AddModelError("ProductID", "There is a discontinued product in order detail");
-                        return BadRequest(ModelState);
+                        item.OrderHeaderID = header.OrderHeaderID;
+
+                        SalesService.SalesRepository.Add(item);
                     }
 
-                    orderDetails.Add(new OrderDetail
+                    await SalesService.SalesRepository.CommitChangesAsync();
+
+                    foreach (var detail in request.Details)
                     {
-                        ProductID = product.ProductID,
-                        ProductName = product.ProductName,
-                        UnitPrice = product.Price,
-                        Quantity = detail.Quantity,
-                        Total = product.Price * detail.Quantity,
-                        CreationUser = User.GetClientName()
-                    });
+                        var product = await SalesService.WarehouseRepository.GetProductAsync(new Product(detail.ProductID));
+
+                        product.Stocks -= 1;
+                    }
+
+                    await SalesService.SalesRepository.CommitChangesAsync();
+
+                    response.Message = string.Format("The order was placed successfully, ID: {0}.", header.OrderHeaderID);
+
+                    Logger?.LogInformation(response.Message);
                 }
-
-                header.Total = orderDetails.Sum(item => item.Total);
-
-                SalesRepository.Add(header);
-
-                await SalesRepository.CommitChangesAsync();
-
-                foreach (var item in orderDetails)
-                {
-                    item.OrderHeaderID = header.OrderHeaderID;
-
-                    SalesRepository.Add(item);
-                }
-
-                await SalesRepository.CommitChangesAsync();
-
-                foreach (var detail in requestModel.Details)
-                {
-                    var product = await WarehouseRepository.GetProductAsync(new Product(detail.ProductID));
-
-                    product.Stocks -= 1;
-                }
-
-                await SalesRepository.CommitChangesAsync();
-
-                response.Message = string.Format("The order was placed successfully, ID: {0}", header.OrderHeaderID);
-
-                Logger?.LogInformation(response.Message);
             }
             catch (Exception ex)
             {

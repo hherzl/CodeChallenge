@@ -6,23 +6,12 @@ namespace API.Core.DataLayer.Contracts
 {
     public class Repository
     {
-        protected bool Disposed;
-        protected CodeChallengeDbContext DbContext;
-
         public Repository(CodeChallengeDbContext dbContext)
         {
             DbContext = dbContext;
         }
 
-        public void Dispose()
-        {
-            if (!Disposed)
-            {
-                DbContext?.Dispose();
-
-                Disposed = true;
-            }
-        }
+        protected CodeChallengeDbContext DbContext { get; }
 
         public virtual void Add<TEntity>(TEntity entity) where TEntity : class
         {

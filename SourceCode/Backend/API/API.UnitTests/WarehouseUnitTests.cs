@@ -16,8 +16,8 @@ namespace API.UnitTests
         {
             // Arrange
             var dbContext = DbContextMocker.GetCodeChallengeDbContext(nameof(TestGetProductsAsync));
-            var repository = RepositoryMocker.GetWarehouseRepository(dbContext);
-            var controller = new WarehouseController(repository, null);
+            var service = ServiceMocker.GetWarehouseService(dbContext);
+            var controller = new WarehouseController(service, null);
 
             // Act
             var response = await controller.GetProductsAsync() as ObjectResult;
@@ -33,8 +33,8 @@ namespace API.UnitTests
         {
             // Arrange
             var dbContext = DbContextMocker.GetCodeChallengeDbContext(nameof(TestAddProductAsync));
-            var repository = RepositoryMocker.GetWarehouseRepository(dbContext);
-            var controller = new WarehouseController(repository, null);
+            var service = ServiceMocker.GetWarehouseService(dbContext);
+            var controller = new WarehouseController(service, null);
 
             var request = new AddProductRequest
             {
@@ -59,8 +59,8 @@ namespace API.UnitTests
         {
             // Arrange
             var dbContext = DbContextMocker.GetCodeChallengeDbContext(nameof(TestUpdatePriceAsync));
-            var repository = RepositoryMocker.GetWarehouseRepository(dbContext);
-            var controller = new WarehouseController(repository, null);
+            var service = ServiceMocker.GetWarehouseService(dbContext);
+            var controller = new WarehouseController(service, null);
             var id = 1;
             var request = new UpdatePriceRequest
             {
@@ -82,8 +82,8 @@ namespace API.UnitTests
         {
             // Arrange
             var dbContext = DbContextMocker.GetCodeChallengeDbContext(nameof(TestLikeProductAsync));
-            var repository = RepositoryMocker.GetWarehouseRepository(dbContext);
-            var controller = new WarehouseController(repository, null);
+            var service = ServiceMocker.GetWarehouseService(dbContext);
+            var controller = new WarehouseController(service, null);
             var id = 1;
             var request = new LikeProductRequest();
 

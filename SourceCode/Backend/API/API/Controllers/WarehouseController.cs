@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Core.DataLayer.Contracts;
+using API.Core.BusinessLayer;
 using API.Core.DataLayer.Repositories;
 using API.Core.EntityLayer.Warehouse;
 using API.Models;
@@ -20,12 +20,12 @@ namespace API.Controllers
     [Route("api/v1/[controller]")]
     public class WarehouseController : ControllerBase
     {
-        protected readonly IWarehouseRepository Repository;
+        protected readonly IWarehouseService Service;
         protected ILogger Logger;
 
-        public WarehouseController(IWarehouseRepository repository, ILogger<WarehouseController> logger)
+        public WarehouseController(IWarehouseService warehouseService, ILogger<WarehouseController> logger)
         {
-            Repository = repository;
+            Service = warehouseService;
             Logger = logger;
         }
 
@@ -48,7 +48,7 @@ namespace API.Controllers
             try
             {
                 // Get query from repository
-                var query = Repository.GetProducts(name);
+                var query = Service.WarehouseRepository.GetProducts(name);
 
                 // Sorting list
                 if (sortBy == "popularity")
@@ -102,7 +102,7 @@ namespace API.Controllers
                 entity.Available = true;
 
                 // Check if entity exists
-                var existingProduct = await Repository.GetProductByProductNameAsync(entity);
+                var existingProduct = await Service.WarehouseRepository.GetProductByProductNameAsync(entity);
 
                 if (existingProduct != null)
                 {
@@ -113,9 +113,9 @@ namespace API.Controllers
                 entity.CreationUser = User.GetClientName();
 
                 // Add entity to database
-                Repository.Add(entity);
+                Service.WarehouseRepository.Add(entity);
 
-                await Repository.CommitChangesAsync();
+                await Service.WarehouseRepository.CommitChangesAsync();
 
                 response.Model = entity.ToAddProductRequest();
 
@@ -149,7 +149,7 @@ namespace API.Controllers
             try
             {
                 // Get entity by id
-                var entity = await Repository.GetProductAsync(new Product(id));
+                var entity = await Service.WarehouseRepository.GetProductAsync(new Product(id));
 
                 if (entity == null)
                     return NotFound();
@@ -159,9 +159,9 @@ namespace API.Controllers
                 entity.LastUpdateUser = User.GetClientName();
 
                 // Update entity to database
-                Repository.Update(entity);
+                Service.WarehouseRepository.Update(entity);
 
-                await Repository.CommitChangesAsync();
+                await Service.WarehouseRepository.CommitChangesAsync();
 
                 response.Message = "The price for product was changed successfully.";
 
@@ -176,9 +176,9 @@ namespace API.Controllers
                     CreationUser = User.GetClientName()
                 };
 
-                Repository.Add(history);
+                Service.WarehouseRepository.Add(history);
 
-                await Repository.CommitChangesAsync();
+                await Service.WarehouseRepository.CommitChangesAsync();
 
                 Logger?.LogInformation("The price for product was saved in history successfully.");
             }
@@ -210,7 +210,7 @@ namespace API.Controllers
             try
             {
                 // Get entity by id
-                var entity = await Repository.GetProductAsync(new Product(id));
+                var entity = await Service.WarehouseRepository.GetProductAsync(new Product(id));
 
                 if (entity == null)
                     return NotFound();
@@ -220,9 +220,9 @@ namespace API.Controllers
                 entity.LastUpdateUser = User.GetClientName();
 
                 // Update entity to database
-                Repository.Update(entity);
+                Service.WarehouseRepository.Update(entity);
 
-                await Repository.CommitChangesAsync();
+                await Service.WarehouseRepository.CommitChangesAsync();
 
                 response.Model = new LikeProductRequest
                 {

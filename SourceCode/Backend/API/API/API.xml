@@ -13,7 +13,7 @@
             <summary>
             Places a new order
             </summary>
-            <param name="requestModel">Order request</param>
+            <param name="request">Order request</param>
             <returns>A single response as for order creation</returns>
         </member>
         <member name="T:API.Controllers.WarehouseController">

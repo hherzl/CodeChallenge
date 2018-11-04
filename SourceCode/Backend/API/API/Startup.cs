@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using API.Controllers;
+using API.Core.BusinessLayer;
 using API.Core.DataLayer;
 using API.Core.DataLayer.Contracts;
 using API.Core.DataLayer.Repositories;
@@ -41,6 +42,9 @@ namespace API
             // Set up dependency injection for repository
             services.AddScoped<IWarehouseRepository, WarehouseRepository>();
             services.AddScoped<ISalesRepository, SalesRepository>();
+
+            services.AddScoped<IWarehouseService, WarehouseService>();
+            services.AddScoped<ISalesService, SalesService>();
 
             services.AddMvc();
 
