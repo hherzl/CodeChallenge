@@ -26,7 +26,7 @@ namespace API.Core.BusinessLayer
             }
         }
 
-        public StoreDbContext DbContext { get; }
+        protected StoreDbContext DbContext { get; }
 
         public IWarehouseRepository WarehouseRepository
         {

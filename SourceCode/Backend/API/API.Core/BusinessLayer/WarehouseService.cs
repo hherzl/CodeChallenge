@@ -16,29 +16,38 @@ namespace API.Core.BusinessLayer
         {
             using (var txn = await DbContext.Database.BeginTransactionAsync())
             {
-                // Set changes
-                entity.Price = entity.Price;
-                entity.LastUpdateUser = client;
-
-                // Update entity to database
-                WarehouseRepository.Update(entity);
-
-                await CommitChangesAsync();
-
-                // Add product price to history
-                var history = new ProductPriceHistory
+                try
                 {
-                    ProductID = entity.ProductID,
-                    Price = entity.Price,
-                    StartDate = DateTime.Now,
-                    CreationUser = client
-                };
+                    // Set changes
+                    entity.Price = entity.Price;
+                    entity.LastUpdateUser = client;
 
-                WarehouseRepository.Add(history);
+                    // Update entity to database
+                    WarehouseRepository.Update(entity);
 
-                await CommitChangesAsync();
+                    await CommitChangesAsync();
 
-                txn.Commit();
+                    // Add product price to history
+                    var history = new ProductPriceHistory
+                    {
+                        ProductID = entity.ProductID,
+                        Price = entity.Price,
+                        StartDate = DateTime.Now,
+                        CreationUser = client
+                    };
+
+                    WarehouseRepository.Add(history);
+
+                    await CommitChangesAsync();
+
+                    txn.Commit();
+                }
+                catch (Exception ex)
+                {
+                    txn.Rollback();
+
+                    throw ex;
+                }
             }
         }
 

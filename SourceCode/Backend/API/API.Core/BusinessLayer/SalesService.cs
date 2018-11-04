@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Core.DataLayer;
@@ -18,29 +19,40 @@ namespace API.Core.BusinessLayer
         {
             using (var txn = await DbContext.Database.BeginTransactionAsync())
             {
-                header.Total = details.Sum(item => item.Total);
-
-                SalesRepository.Add(header);
-
-                await CommitChangesAsync();
-
-                foreach (var item in details)
+                try
                 {
-                    item.OrderHeaderID = header.OrderHeaderID;
+                    header.Total = details.Sum(item => item.Total);
 
-                    SalesRepository.Add(item);
+                    SalesRepository.Add(header);
+
+                    await CommitChangesAsync();
+
+                    foreach (var item in details)
+                    {
+                        item.OrderHeaderID = header.OrderHeaderID;
+
+                        SalesRepository.Add(item);
+                    }
+
+                    await CommitChangesAsync();
+
+                    foreach (var detail in details)
+                    {
+                        var product = await WarehouseRepository.GetProductAsync(new Product(detail.ProductID));
+
+                        product.Stocks -= 1;
+                    }
+
+                    await CommitChangesAsync();
+
+                    txn.Commit();
                 }
-
-                await CommitChangesAsync();
-
-                foreach (var detail in details)
+                catch (Exception ex)
                 {
-                    var product = await WarehouseRepository.GetProductAsync(new Product(detail.ProductID));
+                    txn.Rollback();
 
-                    product.Stocks -= 1;
+                    throw ex;
                 }
-
-                await CommitChangesAsync();
             }
         }
     }
