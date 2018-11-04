@@ -6,7 +6,7 @@ namespace API.UnitTests.Mockers
 {
     public static class ControllerExtensions
     {
-        public static void SetControllerContext(this ControllerBase controller)
+        public static void MockControllerContext(this ControllerBase controller)
         {
             controller.ControllerContext = new ControllerContext
             {

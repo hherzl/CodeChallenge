@@ -29,7 +29,7 @@ namespace API.UnitTests
                 }
             };
 
-            controller.SetControllerContext();
+            controller.MockControllerContext();
 
             // Act
             var response = await controller.PlaceOrderAsync(request) as ObjectResult;

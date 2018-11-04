@@ -44,7 +44,7 @@ namespace API.UnitTests
                 Price = 2.15m
             };
 
-            controller.SetControllerContext();
+            controller.MockControllerContext();
 
             // Act
             var response = await controller.AddProductAsync(request) as ObjectResult;
@@ -67,7 +67,7 @@ namespace API.UnitTests
                 Price = 2.15m
             };
 
-            controller.SetControllerContext();
+            controller.MockControllerContext();
 
             // Act
             var response = await controller.UpdatePriceAsync(id, request) as ObjectResult;
@@ -87,7 +87,7 @@ namespace API.UnitTests
             var id = 1;
             var request = new LikeProductRequest();
 
-            controller.SetControllerContext();
+            controller.MockControllerContext();
 
             // Act
             var response = await controller.LikeProductAsync(id, request) as ObjectResult;
