@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using API.Core.EntityLayer;
 
 namespace API.Core.DataLayer.Contracts
@@ -40,11 +39,5 @@ namespace API.Core.DataLayer.Contracts
         {
             DbContext.Set<TEntity>().Remove(entity);
         }
-
-        public int CommitChanges()
-            => DbContext.SaveChanges();
-
-        public Task<int> CommitChangesAsync()
-            => DbContext.SaveChangesAsync();
     }
 }

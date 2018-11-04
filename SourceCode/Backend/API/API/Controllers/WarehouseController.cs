@@ -117,7 +117,7 @@ namespace API.Controllers
                 // Add entity to database
                 Service.WarehouseRepository.Add(entity);
 
-                await Service.WarehouseRepository.CommitChangesAsync();
+                await Service.CommitChangesAsync();
 
                 response.Model = entity.ToAddProductRequest();
 
@@ -164,7 +164,7 @@ namespace API.Controllers
                 // Update entity to database
                 Service.WarehouseRepository.Update(entity);
 
-                await Service.WarehouseRepository.CommitChangesAsync();
+                await Service.CommitChangesAsync();
 
                 response.Message = "The price for product was changed successfully.";
 
@@ -181,7 +181,7 @@ namespace API.Controllers
 
                 Service.WarehouseRepository.Add(history);
 
-                await Service.WarehouseRepository.CommitChangesAsync();
+                await Service.CommitChangesAsync();
 
                 Logger?.LogInformation("The price for product was saved in history successfully.");
             }
@@ -226,7 +226,7 @@ namespace API.Controllers
                 // Update entity to database
                 Service.WarehouseRepository.Update(entity);
 
-                await Service.WarehouseRepository.CommitChangesAsync();
+                await Service.CommitChangesAsync();
 
                 response.Model = new LikeProductRequest
                 {

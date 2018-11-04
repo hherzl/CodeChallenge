@@ -1,4 +1,5 @@
-﻿using API.Core.DataLayer;
+﻿using System.Threading.Tasks;
+using API.Core.DataLayer;
 using API.Core.DataLayer.Contracts;
 using API.Core.DataLayer.Repositories;
 
@@ -36,5 +37,11 @@ namespace API.Core.BusinessLayer
         {
             get => m_salesRepository = new SalesRepository(DbContext);
         }
+
+        public int CommitChanges()
+            => DbContext.SaveChanges();
+
+        public Task<int> CommitChangesAsync()
+            => DbContext.SaveChangesAsync();
     }
 }

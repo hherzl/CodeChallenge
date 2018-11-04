@@ -91,7 +91,7 @@ namespace API.Controllers
 
                     SalesService.SalesRepository.Add(header);
 
-                    await SalesService.SalesRepository.CommitChangesAsync();
+                    await SalesService.CommitChangesAsync();
 
                     foreach (var item in orderDetails)
                     {
@@ -100,7 +100,7 @@ namespace API.Controllers
                         SalesService.SalesRepository.Add(item);
                     }
 
-                    await SalesService.SalesRepository.CommitChangesAsync();
+                    await SalesService.CommitChangesAsync();
 
                     foreach (var detail in request.Details)
                     {
@@ -109,7 +109,7 @@ namespace API.Controllers
                         product.Stocks -= 1;
                     }
 
-                    await SalesService.SalesRepository.CommitChangesAsync();
+                    await SalesService.CommitChangesAsync();
 
                     response.Message = string.Format("The order was placed successfully, ID: {0}.", header.OrderHeaderID);
 

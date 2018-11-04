@@ -1,5 +1,3 @@
-using System.Threading.Tasks;
-
 namespace API.Core.DataLayer.Contracts
 {
     public interface IRepository
@@ -9,9 +7,5 @@ namespace API.Core.DataLayer.Contracts
         void Update<TEntity>(TEntity entity) where TEntity : class;
 
         void Remove<TEntity>(TEntity entity) where TEntity : class;
-
-        int CommitChanges();
-
-        Task<int> CommitChangesAsync();
     }
 }
