@@ -15,7 +15,7 @@ namespace API.UnitTests
         public async Task TestGetProductsAsync()
         {
             // Arrange
-            var dbContext = DbContextMocker.GetCodeChallengeDbContext(nameof(TestGetProductsAsync));
+            var dbContext = DbContextMocker.GetStoreDbContext(nameof(TestGetProductsAsync));
             var service = ServiceMocker.GetWarehouseService(dbContext);
             var controller = new WarehouseController(service, null);
 
@@ -32,7 +32,7 @@ namespace API.UnitTests
         public async Task TestAddProductAsync()
         {
             // Arrange
-            var dbContext = DbContextMocker.GetCodeChallengeDbContext(nameof(TestAddProductAsync));
+            var dbContext = DbContextMocker.GetStoreDbContext(nameof(TestAddProductAsync));
             var service = ServiceMocker.GetWarehouseService(dbContext);
             var controller = new WarehouseController(service, null);
 
@@ -58,7 +58,7 @@ namespace API.UnitTests
         public async Task TestUpdatePriceAsync()
         {
             // Arrange
-            var dbContext = DbContextMocker.GetCodeChallengeDbContext(nameof(TestUpdatePriceAsync));
+            var dbContext = DbContextMocker.GetStoreDbContext(nameof(TestUpdatePriceAsync));
             var service = ServiceMocker.GetWarehouseService(dbContext);
             var controller = new WarehouseController(service, null);
             var id = 1;
@@ -81,7 +81,7 @@ namespace API.UnitTests
         public async Task TestLikeProductAsync()
         {
             // Arrange
-            var dbContext = DbContextMocker.GetCodeChallengeDbContext(nameof(TestLikeProductAsync));
+            var dbContext = DbContextMocker.GetStoreDbContext(nameof(TestLikeProductAsync));
             var service = ServiceMocker.GetWarehouseService(dbContext);
             var controller = new WarehouseController(service, null);
             var id = 1;

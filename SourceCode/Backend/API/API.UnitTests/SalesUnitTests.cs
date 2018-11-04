@@ -14,7 +14,7 @@ namespace API.UnitTests
         public async Task TestPlaceOrderAsync()
         {
             // Arrange
-            var dbContext = DbContextMocker.GetCodeChallengeDbContext(nameof(TestPlaceOrderAsync));
+            var dbContext = DbContextMocker.GetStoreDbContext(nameof(TestPlaceOrderAsync));
             var service = ServiceMocker.GetSalesService(dbContext);
             var controller = new SalesController(service, null);
             var request = new PlaceOrderRequest

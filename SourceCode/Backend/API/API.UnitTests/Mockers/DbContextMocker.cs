@@ -4,7 +4,7 @@ namespace API.UnitTests.Mockers
 {
     public static class DbContextMocker
     {
-        public static StoreDbContext GetCodeChallengeDbContext(string dbName)
+        public static StoreDbContext GetStoreDbContext(string dbName)
         {
             var dbContext = new StoreDbContext(DbContextOptionsMocker.GetDbOptions(dbName));
 
