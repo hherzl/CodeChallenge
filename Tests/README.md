@@ -34,11 +34,11 @@ To get a token for *Customer* role, use these values once you have running **Aut
 
 ## Get Token for Administrator
 
-To get a token for *Customer* role, use these values once you have running **Auth API**:
+To get a token for *Administrator* role, use these values once you have running **Auth API**:
 
 |Parameter|Value|
 |---------|-----|
-|Token Name|SnacksCustomerToken|
+|Token Name|SnacksAdministratorToken|
 |Grant Type|Client Credentials|
 |Access Token URL|http://localhost:5600/connect/token|
 |Client ID|snacksadministrator|
