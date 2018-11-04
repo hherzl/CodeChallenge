@@ -157,31 +157,11 @@ namespace API.Controllers
                 if (entity == null)
                     return NotFound();
 
-                // Set changes
-                entity.Price = request.Price;
-                entity.LastUpdateUser = User.GetClientName();
+                await Service.UpdatePriceProductAsync(entity, User.GetClientName());
 
-                // Update entity to database
-                Service.WarehouseRepository.Update(entity);
+                response.Message = string.Format("The price for product: {0} was changed successfully.", entity.ProductID);
 
-                await Service.CommitChangesAsync();
-
-                response.Message = "The price for product was changed successfully.";
-
-                Logger?.LogInformation(response.Message);
-
-                // Add product price to history
-                var history = new ProductPriceHistory
-                {
-                    ProductID = entity.ProductID,
-                    Price = entity.Price,
-                    StartDate = DateTime.Now,
-                    CreationUser = User.GetClientName()
-                };
-
-                Service.WarehouseRepository.Add(history);
-
-                await Service.CommitChangesAsync();
+                Logger?.LogInformation("The price was saved successfully.");
 
                 Logger?.LogInformation("The price for product was saved in history successfully.");
             }
