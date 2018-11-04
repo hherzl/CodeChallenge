@@ -2,7 +2,7 @@
 
 Execute **deploy.bat** file to create database in SQL Server.
 
-Make sure you have running your local instance for SQL Server or you can adjust server in bat file.
+Make sure you have access to a SQL Server instance: local or remote.
 
 These are the tables for this code challenge:
 
@@ -12,3 +12,5 @@ These are the tables for this code challenge:
 |Warehouse.ProductPriceHistory|History for changes in products prices|
 |Sales.OrderHeader|Order header|
 |Sales.OrderDetail|Order details for order header|
+
+If you want to change SQL Server instance, set value for *server* varible in **deploy.bat** file.
