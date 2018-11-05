@@ -85,8 +85,6 @@ namespace API.Controllers
 
                 var header = new OrderHeader
                 {
-                    OrderDate = DateTime.Now,
-                    Total = 0m,
                     CreationUser = User.GetClientName()
                 };
 

@@ -98,11 +98,6 @@ namespace API.Controllers
             {
                 var entity = request.ToEntity();
 
-                // Set default values
-                entity.Likes = 0;
-                entity.Stocks = 0;
-                entity.Available = true;
-
                 // Check if entity exists
                 var existingProduct = await Service.WarehouseRepository.GetProductByProductNameAsync(entity);
 
@@ -114,10 +109,7 @@ namespace API.Controllers
 
                 entity.CreationUser = User.GetClientName();
 
-                // Add entity to database
-                Service.WarehouseRepository.Add(entity);
-
-                await Service.CommitChangesAsync();
+                await Service.CreateProductAsync(entity);
 
                 response.Model = entity.ToAddProductRequest();
 
@@ -157,7 +149,9 @@ namespace API.Controllers
                 if (entity == null)
                     return NotFound();
 
-                await Service.UpdatePriceProductAsync(entity, User.GetClientName());
+                entity.CreationUser = User.GetClientName();
+
+                await Service.UpdatePriceProductAsync(entity);
 
                 response.Message = string.Format("The price for product: {0} was changed successfully.", entity.ProductID);
 
@@ -199,12 +193,11 @@ namespace API.Controllers
                 if (entity == null)
                     return NotFound();
 
-                await Service.LikeProductAsync(entity, User.GetClientName());
+                entity.LastUpdateUser = User.GetClientName();
 
-                response.Model = new LikeProductRequest
-                {
-                    User = entity.LastUpdateUser
-                };
+                await Service.LikeProductAsync(entity);
+
+                response.Model = new LikeProductRequest { User = entity.LastUpdateUser };
 
                 response.Message = string.Format("The product '{0}' has a new like, user: '{1}'.", entity.ProductName, response.Model.User);
 

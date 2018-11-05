@@ -12,7 +12,19 @@ namespace API.Core.BusinessLayer
         {
         }
 
-        public async Task UpdatePriceProductAsync(Product entity, string client)
+        public async Task CreateProductAsync(Product entity)
+        {
+            // Set default values
+            entity.Likes = 0;
+            entity.Stocks = 0;
+            entity.Available = true;
+
+            WarehouseRepository.Add(entity);
+
+            await CommitChangesAsync();
+        }
+
+        public async Task UpdatePriceProductAsync(Product entity)
         {
             using (var txn = await DbContext.Database.BeginTransactionAsync())
             {
@@ -20,9 +32,7 @@ namespace API.Core.BusinessLayer
                 {
                     // Set changes
                     entity.Price = entity.Price;
-                    entity.LastUpdateUser = client;
 
-                    // Update entity to database
                     WarehouseRepository.Update(entity);
 
                     await CommitChangesAsync();
@@ -33,7 +43,7 @@ namespace API.Core.BusinessLayer
                         ProductID = entity.ProductID,
                         Price = entity.Price,
                         StartDate = DateTime.Now,
-                        CreationUser = client
+                        CreationUser = entity.LastUpdateUser
                     };
 
                     WarehouseRepository.Add(history);
@@ -51,13 +61,11 @@ namespace API.Core.BusinessLayer
             }
         }
 
-        public async Task LikeProductAsync(Product entity, string client)
+        public async Task LikeProductAsync(Product entity)
         {
             // Set changes
             entity.Likes += 1;
-            entity.LastUpdateUser = client;
 
-            // Update entity to database
             WarehouseRepository.Update(entity);
 
             await CommitChangesAsync();

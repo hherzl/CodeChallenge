@@ -21,6 +21,9 @@ namespace API.Core.BusinessLayer
             {
                 try
                 {
+                    // Set default values for order header
+                    header.OrderDate = DateTime.Now;
+                    header.Total = 0m;
                     header.Total = details.Sum(item => item.Total);
 
                     SalesRepository.Add(header);
@@ -40,6 +43,7 @@ namespace API.Core.BusinessLayer
                     {
                         var product = await WarehouseRepository.GetProductAsync(new Product(detail.ProductID));
 
+                        // Update stocks for product
                         product.Stocks -= 1;
                     }
 
