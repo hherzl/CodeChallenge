@@ -4,9 +4,9 @@ set authApiPath=%initialPath%\Backend\API\AuthAPI
 set apiPath=%initialPath%\Backend\API\API
 set clientPath=%initialPath%\Frontend\snacks
 cd %authApiPath%
-start dotnet run
+start dotnet restore
 cd %apiPath%
-start dotnet run
+start dotnet restore
 cd %clientPath%
-start ng serve
+start npm install
 cd %initialPath%
