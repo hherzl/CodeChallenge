@@ -11,7 +11,9 @@ namespace API
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+            WebHost
+            .CreateDefaultBuilder(args)
+            .UseUrls("http://localhost:5700")
+            .UseStartup<Startup>();
     }
 }

@@ -11,7 +11,9 @@ namespace AuthAPI
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+            WebHost
+            .CreateDefaultBuilder(args)
+            .UseUrls("http://localhost:5600")
+            .UseStartup<Startup>();
     }
 }
