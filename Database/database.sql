@@ -134,22 +134,22 @@ values
 insert into [Warehouse].[Product]
 	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
 values
-	('Dr Peper 24 fl Oz Bottle', 'Enjoy Dr Pepper. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
+	('Dr Pepper 24 fl Oz Bottle', 'Enjoy Dr Pepper. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
 	
 insert into [Warehouse].[Product]
 	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
 values
-	('Diet Peper 24 fl Oz Bottle', 'Enjoy Diet Dr Pepper. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
+	('Diet Pepper 24 fl Oz Bottle', 'Enjoy Diet Dr Pepper. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
 
 insert into [Warehouse].[Product]
 	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
 values
-	('Dr Peper 24 fl Oz Bottle - Batman ^ Superman Edition', 'Enjoy Dr Pepper. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
+	('Dr Pepper 24 fl Oz Bottle - Batman ^ Superman Edition', 'Enjoy Dr Pepper. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
 	
 insert into [Warehouse].[Product]
 	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
 values
-	('Diet Peper 24 fl Oz Bottle - Batman ^ Superman Edition', 'Enjoy Diet Dr Pepper. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
+	('Diet Pepper 24 fl Oz Bottle - Batman ^ Superman Edition', 'Enjoy Diet Dr Pepper. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
 
 insert into [Warehouse].[Product]
 	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])

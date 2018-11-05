@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { WarehouseService } from './warehouse.service';
 import { PagedResponse, Product } from './models';
-import { SelectorMatcher } from '@angular/compiler';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +16,8 @@ export class AppComponent implements OnInit {
   form: FormGroup;
   response: PagedResponse<Product>;
   columnsForProducts: string[];
+  isPreviousDisabled: boolean;
+  isNextDisabled: boolean;
 
   ngOnInit() {
     this.title = 'Welcome to Snacks Store!';
@@ -25,19 +26,35 @@ export class AppComponent implements OnInit {
     });
     this.columnsForProducts = [
       'productName',
-      'productDescription',
       'price',
       'likes',
-      'stocks'
+      'stocks',
+      'productDescription'
     ];
-    this.warehouseSvc.getProducts(null).subscribe((data: PagedResponse<Product>) => {
-      this.response = data;
-    });
+    this.response = new PagedResponse<Product>();
+    this.response.pageSize = 10;
+    this.response.pageNumber = 1;
+    this.search();
   }
 
   search(): void {
-    this.warehouseSvc.getProducts(this.form.get('productName').value).subscribe((data: PagedResponse<Product>) => {
-      this.response = data;
-    });
+    this
+      .warehouseSvc
+      .getProducts(this.response.pageSize, this.response.pageNumber, this.form.get('productName').value)
+      .subscribe((data: PagedResponse<Product>) => {
+        this.response = data;
+        this.isPreviousDisabled = this.response.pageNumber === 1;
+        this.isNextDisabled = this.response.pageNumber >= this.response.pageCount;
+      });
+  }
+
+  previous(): void {
+    this.response.pageNumber -= 1;
+    this.search();
+  }
+
+  next(): void {
+    this.response.pageNumber += 1;
+    this.search();
   }
 }

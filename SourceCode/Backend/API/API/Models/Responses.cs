@@ -29,7 +29,7 @@ namespace API.Models
     {
         int ItemsCount { get; set; }
 
-        int PageCount { get; }
+        double PageCount { get; }
     }
 
     public class SingleResponse<TModel> : ISingleResponse<TModel>
@@ -70,8 +70,8 @@ namespace API.Models
 
         public int ItemsCount { get; set; }
 
-        public int PageCount =>
-            PageSize == 0 ? 1 : ItemsCount / PageSize;
+        public double PageCount
+            => ItemsCount < PageSize ? 1 : Math.Round(((double)ItemsCount / PageSize));
     }
 
     public static class ResponseExtensions

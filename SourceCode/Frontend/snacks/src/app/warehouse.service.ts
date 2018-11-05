@@ -13,8 +13,26 @@ export class WarehouseService {
     this.baseUrl = 'http://localhost:5700/api/v1/Warehouse';
   }
 
-  public getProducts(name: string): Observable<Object> {
-    const url = name == null ? [this.baseUrl, 'Product'].join('/') : [this.baseUrl, 'Product?name=' + name].join('/');
+  public getProducts(pageSize: number, pageNumber: number, name: string): Observable<Object> {
+    if (pageSize == null) {
+      pageSize = 10;
+    }
+
+    if (pageNumber == null) {
+      pageNumber = 1;
+    }
+
+    const parameters = [];
+
+    parameters.push('pageSize=' + pageSize.toString());
+    parameters.push('pageNumber=' + pageNumber.toString());
+    if (name != null) {
+      parameters.push('name=' + name.toString());
+    }
+
+    const url: string = [this.baseUrl, 'Product'].join('/') + '?' + parameters.join('&');
+
+    console.log(url);
 
     return this.httpClient.get(url);
   }

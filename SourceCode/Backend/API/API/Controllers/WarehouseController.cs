@@ -71,7 +71,7 @@ namespace API.Controllers
                 // Retrieve items by page size and page number, set model for response
                 response.Model = await query.Paging(response.PageSize, response.PageNumber).ToListAsync();
 
-                response.Message = string.Format("Page {0} of {1}, Total of rows: {2}.", pageNumber, response.PageCount, response.ItemsCount);
+                response.Message = string.Format("Page {0} of {1}, Total of products: {2}.", pageNumber, response.PageCount, response.ItemsCount);
 
                 Logger?.LogInformation(response.Message);
             }
