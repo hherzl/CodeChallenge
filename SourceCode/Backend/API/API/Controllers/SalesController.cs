@@ -96,6 +96,8 @@ namespace API.Controllers
 
                 await SalesService.PlaceOrderAsync(header, orderDetails);
 
+                response.Model = new PlaceOrderRequest { };
+
                 response.Message = string.Format("The order was placed successfully, ID: {0}.", header.OrderHeaderID);
 
                 Logger?.LogInformation(response.Message);

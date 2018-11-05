@@ -66,6 +66,8 @@ namespace API.Core.BusinessLayer
             // Set changes
             entity.Likes += 1;
 
+            // todo: Save who likes the product in history
+
             WarehouseRepository.Update(entity);
 
             await CommitChangesAsync();

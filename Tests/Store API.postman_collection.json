@@ -1,192 +1,248 @@
 {
-	"id": "b0c8e7c4-c441-d1e6-e99f-fe1cb4b4e295",
-	"name": "Store API",
-	"description": "Tests for Store API",
-	"order": [
-		"e3e7b8a4-acfc-78b2-8ae1-f0cb967016da",
-		"e69362f0-ae9d-4ac6-6c09-7af0fa24b31d",
-		"5c2452e4-82f2-d75c-c6e1-4f3c0a7c683d",
-		"bd95ed2f-f7fc-aeb1-a758-0d99a720aaa7",
-		"7b8e28f5-bbc0-5efc-8741-ef307056306c",
-		"0d5dcc01-dcb9-7fc7-ffee-22d67fcbcdd8"
-	],
-	"folders": [],
-	"folders_order": [],
-	"timestamp": 1539581635311,
-	"owner": "5604854",
-	"public": false,
-	"requests": [
+	"info": {
+		"_postman_id": "3428b317-1fce-4085-8b34-4bdd1645108d",
+		"name": "Store API",
+		"description": "Tests for Store API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
 		{
-			"id": "0d5dcc01-dcb9-7fc7-ffee-22d67fcbcdd8",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:5700/api/v1/Sales/PlaceOrder",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1539589793689,
-			"name": "Place Order",
-			"description": "",
-			"collectionId": "b0c8e7c4-c441-d1e6-e99f-fe1cb4b4e295",
-			"responses": [],
-			"rawModeData": "{\n\t\"User\": \"postman\",\n\t\"Details\": [\n\t\t{\n\t\t\t\"ProductID\": \"1000\",\n\t\t\t\"Quantity\": \"1\"\n\t\t}\n\t]\n}\n"
-		},
-		{
-			"id": "5c2452e4-82f2-d75c-c6e1-4f3c0a7c683d",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:5700/api/v1/Warehouse/Product",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1539589676665,
-			"name": "Add Product",
-			"description": "Adding a new product",
-			"collectionId": "b0c8e7c4-c441-d1e6-e99f-fe1cb4b4e295",
-			"responses": [],
-			"rawModeData": "{\n\t\"ProductName\": \"Dr Pepper Bottle 24 fl oz (test)\",\n\t\"ProductDescription\": \"Dr Pepper Bottle 24 fl oz (test)\",\n\t\"Price\": \"1.90\",\n\t\"User\": \"postman\"\n}\n"
-		},
-		{
-			"id": "7b8e28f5-bbc0-5efc-8741-ef307056306c",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:5700/api/v1/Warehouse/LikeProduct/2000",
-			"queryParams": [],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"preRequestScript": null,
-			"method": "PUT",
-			"collectionId": "b0c8e7c4-c441-d1e6-e99f-fe1cb4b4e295",
-			"data": [],
-			"dataMode": "raw",
-			"name": "Like Product",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1539588740573,
-			"version": 2,
-			"responses": [],
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"rawModeData": "{\n\t\"User\": \"postmanreview\"\n}"
-		},
-		{
-			"id": "bd95ed2f-f7fc-aeb1-a758-0d99a720aaa7",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:5700/api/v1/Warehouse/Product/1000",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "PUT",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1539589674541,
-			"name": "Update Price for Product",
-			"description": "",
-			"collectionId": "b0c8e7c4-c441-d1e6-e99f-fe1cb4b4e295",
-			"responses": [],
-			"rawModeData": "{\n\t\"Price\": \"2.15\",\n\t\"User\": \"postman\"\n}\n"
-		},
-		{
-			"id": "e3e7b8a4-acfc-78b2-8ae1-f0cb967016da",
-			"headers": "",
-			"headerData": [],
-			"url": "http://localhost:5700/api/v1/Warehouse",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": null,
-			"dataMode": "params",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1539586412212,
 			"name": "Get Products",
-			"description": "Retrieve products from snacks store",
-			"collectionId": "b0c8e7c4-c441-d1e6-e99f-fe1cb4b4e295",
-			"responses": []
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{snacksApiUrl}}/Warehouse/Product",
+					"host": [
+						"{{snacksApiUrl}}"
+					],
+					"path": [
+						"Warehouse",
+						"Product"
+					]
+				},
+				"description": "Retrieve products from snacks store"
+			},
+			"response": []
 		},
 		{
-			"id": "e69362f0-ae9d-4ac6-6c09-7af0fa24b31d",
-			"headers": "",
-			"headerData": [],
-			"url": "http://localhost:5700/api/v1/Warehouse/?name=pepper",
-			"queryParams": [
-				{
-					"key": "name",
-					"value": "pepper",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				}
-			],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"preRequestScript": null,
-			"method": "GET",
-			"collectionId": "b0c8e7c4-c441-d1e6-e99f-fe1cb4b4e295",
-			"data": null,
-			"dataMode": "params",
 			"name": "Get Products by Name",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1539585511423,
-			"version": 2,
-			"responses": [],
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {}
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{snacksApiUrl}}/Warehouse/Product?name=coca",
+					"host": [
+						"{{snacksApiUrl}}"
+					],
+					"path": [
+						"Warehouse",
+						"Product"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "coca"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImIzMTg3N2I0NmQ5Njc5OThkZDVhNmFjYWRmMzZiM2U2IiwidHlwIjoiSldUIn0.eyJuYmYiOjE1NDE0MDQxMDksImV4cCI6MTU0MTQwNzcwOSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1NjAwIiwiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3Q6NTYwMC9yZXNvdXJjZXMiLCJTbmFja3NBcGkiXSwiY2xpZW50X2lkIjoic25hY2tzYWRtaW5pc3RyYXRvciIsImNsaWVudF9yb2xlIjoiQWRtaW5pc3RyYXRvciIsInNjb3BlIjpbIlNuYWNrc0FwaSJdfQ.KV3mATEprMn3JNaq32dL6SLm9FA-VUev5dvs7moiHvje-JO2ZlpSwLnPd3rZ5xulw42REQZuEiTmTGk-cj40QzTI_PIiqGb-EmgnxmHhm_LgBW7LoPMbgZLoDgiS05aY8OFcYRzBeeixR8mJosNN0_tT68jcW1tF4AwUPR5o5cC9UL7EUP8uDfpMk3YbP3iPikYlA5IAlJGUXpuKvn2c7vW_oMmBsFeD1DgK_fSCva6sNp2KjNJQO-yeJl57LWl_On0QoMYlKMheGq_jAdajwd1FA4M2v0kHvkf1PdHXOHcWww1SyHgVu-Af1V3Gt2AtLQKCfYFM1ccDBl_LioEXPA",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"ProductName\": \"Ramune Original Bottle\",\n\t\"ProductDescription\": \"Ramune Original Bottle (postman)\",\n\t\"Price\": \"2.50\"\n}\n"
+				},
+				"url": {
+					"raw": "{{snacksApiUrl}}/Warehouse/Product",
+					"host": [
+						"{{snacksApiUrl}}"
+					],
+					"path": [
+						"Warehouse",
+						"Product"
+					]
+				},
+				"description": "Adding a new product"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Price for Product",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImIzMTg3N2I0NmQ5Njc5OThkZDVhNmFjYWRmMzZiM2U2IiwidHlwIjoiSldUIn0.eyJuYmYiOjE1NDE0MDQxMDksImV4cCI6MTU0MTQwNzcwOSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1NjAwIiwiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3Q6NTYwMC9yZXNvdXJjZXMiLCJTbmFja3NBcGkiXSwiY2xpZW50X2lkIjoic25hY2tzYWRtaW5pc3RyYXRvciIsImNsaWVudF9yb2xlIjoiQWRtaW5pc3RyYXRvciIsInNjb3BlIjpbIlNuYWNrc0FwaSJdfQ.KV3mATEprMn3JNaq32dL6SLm9FA-VUev5dvs7moiHvje-JO2ZlpSwLnPd3rZ5xulw42REQZuEiTmTGk-cj40QzTI_PIiqGb-EmgnxmHhm_LgBW7LoPMbgZLoDgiS05aY8OFcYRzBeeixR8mJosNN0_tT68jcW1tF4AwUPR5o5cC9UL7EUP8uDfpMk3YbP3iPikYlA5IAlJGUXpuKvn2c7vW_oMmBsFeD1DgK_fSCva6sNp2KjNJQO-yeJl57LWl_On0QoMYlKMheGq_jAdajwd1FA4M2v0kHvkf1PdHXOHcWww1SyHgVu-Af1V3Gt2AtLQKCfYFM1ccDBl_LioEXPA",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Price\": \"3.50\"\n}\n"
+				},
+				"url": {
+					"raw": "{{snacksApiUrl}}/Warehouse/UpdateProductPrice/1000",
+					"host": [
+						"{{snacksApiUrl}}"
+					],
+					"path": [
+						"Warehouse",
+						"UpdateProductPrice",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Like Product",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImIzMTg3N2I0NmQ5Njc5OThkZDVhNmFjYWRmMzZiM2U2IiwidHlwIjoiSldUIn0.eyJuYmYiOjE1NDE0MDQ1MDksImV4cCI6MTU0MTQwODEwOSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1NjAwIiwiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3Q6NTYwMC9yZXNvdXJjZXMiLCJTbmFja3NBcGkiXSwiY2xpZW50X2lkIjoic25hY2tzY3VzdG9tZXIiLCJjbGllbnRfcm9sZSI6IkN1c3RvbWVyIiwic2NvcGUiOlsiU25hY2tzQXBpIl19.F9OT7dcmyXPV6NGwSCFICFbiEHWwF5TR22hKgrT1AUpksS3tT5nvRbZltTsYvckYODByBqdmrbK9zNz8CHoNlXZRI9_8BNuhXcnhs6X6g3l_mKT7rFKCNtnlunOeexvClDluE_GJy2G91eWVRQmlKvXrprg2N-0wCdM70HN7n0HjWo2eNLoeXKxRF3fkQ1rlFoOOnlHs2nXnoIEiwHB_KF9vyk-zIXSod3mTHPCfTCzPicB-QbALCI0NjWoNIMzlC1W5LjMCo4d_l4jTsC_HtiQQa_G1yodEyMdiAkSO1Z_MA3Ov52T2L_NeszTcM2vnwGSZCCvzj_5UV8KlDFsMwA",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n}"
+				},
+				"url": {
+					"raw": "{{snacksApiUrl}}/Warehouse/LikeProduct/2000",
+					"host": [
+						"{{snacksApiUrl}}"
+					],
+					"path": [
+						"Warehouse",
+						"LikeProduct",
+						"2000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Place Order",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImIzMTg3N2I0NmQ5Njc5OThkZDVhNmFjYWRmMzZiM2U2IiwidHlwIjoiSldUIn0.eyJuYmYiOjE1NDE0MDQ1MDksImV4cCI6MTU0MTQwODEwOSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1NjAwIiwiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3Q6NTYwMC9yZXNvdXJjZXMiLCJTbmFja3NBcGkiXSwiY2xpZW50X2lkIjoic25hY2tzY3VzdG9tZXIiLCJjbGllbnRfcm9sZSI6IkN1c3RvbWVyIiwic2NvcGUiOlsiU25hY2tzQXBpIl19.F9OT7dcmyXPV6NGwSCFICFbiEHWwF5TR22hKgrT1AUpksS3tT5nvRbZltTsYvckYODByBqdmrbK9zNz8CHoNlXZRI9_8BNuhXcnhs6X6g3l_mKT7rFKCNtnlunOeexvClDluE_GJy2G91eWVRQmlKvXrprg2N-0wCdM70HN7n0HjWo2eNLoeXKxRF3fkQ1rlFoOOnlHs2nXnoIEiwHB_KF9vyk-zIXSod3mTHPCfTCzPicB-QbALCI0NjWoNIMzlC1W5LjMCo4d_l4jTsC_HtiQQa_G1yodEyMdiAkSO1Z_MA3Ov52T2L_NeszTcM2vnwGSZCCvzj_5UV8KlDFsMwA",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Details\": [\n\t\t{\n\t\t\t\"ProductID\": \"5000\",\n\t\t\t\"Quantity\": \"1\"\n\t\t}\n\t]\n}\n"
+				},
+				"url": {
+					"raw": "{{snacksApiUrl}}/Sales/PlaceOrder",
+					"host": [
+						"{{snacksApiUrl}}"
+					],
+					"path": [
+						"Sales",
+						"PlaceOrder"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

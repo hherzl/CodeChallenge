@@ -169,7 +169,7 @@ namespace API.Controllers
                 if (entity == null)
                     return NotFound();
 
-                entity.CreationUser = User.GetClientName();
+                entity.LastUpdateUser = User.GetClientName();
 
                 await Service.UpdatePriceProductAsync(entity);
 

@@ -38,9 +38,9 @@ Then execute *deploy.bat* file from *Database* directory.
 
 Execute *run.bat* file inside of *SourceCode* directory.
 
-**AuthAPI** project runs on *5600* port.
-**API** project runs on *5700* port.
-Angular client runs on *4200* port.
+* **AuthAPI** project runs on *5600* port.
+* **API** project runs on *5700* port.
+* Angular client runs on *4200* port.
 
 #### API Help Page
 
@@ -56,4 +56,4 @@ Open *http://localhost:4200/* url in browser:
 
 ### Tests
 
-There is a collection tests for Postman Inside of *Tests* directory.
+There is a collection for Postman Inside of *Tests* directory.

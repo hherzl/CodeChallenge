@@ -26,9 +26,6 @@ namespace API.Models
     {
         [Required]
         public decimal Price { get; set; }
-
-        [StringLength(25)]
-        public string User { get; set; }
     }
 
     public class LikeProductRequest
