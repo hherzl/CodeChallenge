@@ -130,3 +130,48 @@ insert into [Warehouse].[Product]
 	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
 values
 	('Diet Coca Cola Zero 24 fl Oz Bottle', 'Enjoy Coca-Cola’s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
+	
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
+	('Dr Peper 24 fl Oz Bottle', 'Enjoy Dr Pepper. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
+	
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
+	('Diet Peper 24 fl Oz Bottle', 'Enjoy Diet Dr Pepper. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
+
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
+	('Dr Peper 24 fl Oz Bottle - Batman ^ Superman Edition', 'Enjoy Dr Pepper. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
+	
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
+	('Diet Peper 24 fl Oz Bottle - Batman ^ Superman Edition', 'Enjoy Diet Dr Pepper. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
+
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
+	('Pepsi 24 fl Oz Bottle', 'Enjoy Pepsi. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
+	
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
+	('Diet Pepsi 24 fl Oz Bottle', 'Enjoy Pepsi. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
+	
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
+	('Chips Ahoy! - 13oz', 'Original Chocolate Chip Cookies', 0.99, 0, 200, 1, 'seed', getdate())
+
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
+	('Oreo - 14.3oz', 'Original Chocolate Sandwich Cookies', 0.99, 0, 200, 1, 'seed', getdate())
+
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
+	('Cristal Water 24 oz Bottle', 'Natural water', 1.50, 0, 300, 1, 'seed', getdate())
