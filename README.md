@@ -1,30 +1,59 @@
 # CodeChallenge
 
-This is the repository for Snacks API Code Challenge.
+This is the repository for *Snacks API* Code Challenge.
 
-This solution is built with these technologies:
+## Technologies
 
-## Back-end
+This solution is built with the following technologies:
 
-* .NET Core
+### Back-end
+
 * ASP.NET Core
 * Entity Framework Core
 
-## Front-end
+### Front-end
 
-* NodeJS
 * Angular 6
 * Angular Material 6
 
 ## Executing Solution
 
-To execute this solution, follow these steps:
+## Prerequisites
 
-* Execute *deploy.bat* file from *Database* directory
-* Execute *dotnet run* in *SourceCode\Backend\API\AuthAPI* directory
-* Execute *dotnet run* in *SourceCode\Backend\API\API* directory
-* Execute *ng serve* in *SourceCode\Frontend\snacks* directory to execute Angular client
+In order to run this solution, install the following components:
 
-**AuthAPI** project runs in *5600* port
-**API** project runs in *5700* port
-Angular client runs in *4200* port
+* .NET Core
+* NodeJS
+* Angular CLI
+
+### First Run
+
+If is the first run, execute *build.bat* file inside of *SourceCode* directory.
+
+Then execute *deploy.bat* file from *Database* directory.
+
+*To deploy database script, you need access to SQL Server instance.*
+
+### Running Solution
+
+Execute *run.bat* file inside of *SourceCode* directory.
+
+**AuthAPI** project runs on *5600* port.
+**API** project runs on *5700* port.
+Angular client runs on *4200* port.
+
+#### API Help Page
+
+Open *http://localhost:5700/swagger/index.html* url in browser:
+
+![Help Api Page](HelpApiPage.jpg)
+
+#### Client
+
+Open *http://localhost:4200/* url in browser:
+
+![Client Running](ClientRunning.jpg)
+
+### Tests
+
+There is a collection tests for Postman Inside of *Tests* directory.
