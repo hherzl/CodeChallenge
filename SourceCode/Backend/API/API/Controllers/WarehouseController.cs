@@ -90,11 +90,15 @@ namespace API.Controllers
         /// <returns>A single response with new product info</returns>
         /// <response code="200">Returns the newly created product</response>
         /// <response code="400">For bad request</response>
+        /// <response code="401">For unauthorized clients</response>
+        /// <response code="403">If client doesn't have rights to add product</response>
         /// <response code="500">If there was an error</response>
         [Authorize(Policy = "AdministratorPolicy")]
         [HttpPost("Product")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(403)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> AddProductAsync([FromBody]AddProductRequest request)
         {
@@ -143,12 +147,16 @@ namespace API.Controllers
         /// <returns>A single response for product price update</returns>
         /// <response code="200">If update for product price it was success</response>
         /// <response code="400">For bad request</response>
+        /// <response code="401">For unauthorized clients</response>
+        /// <response code="403">If client doesn't have rights to update product's price</response>
         /// <response code="404">If product not exists</response>
         /// <response code="500">If there was an error</response>
         [Authorize(Policy = "AdministratorPolicy")]
         [HttpPut("UpdateProductPrice/{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(403)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> UpdateProductPriceAsync(int id, [FromBody]UpdateProductPriceRequest request)
@@ -195,12 +203,16 @@ namespace API.Controllers
         /// <returns>A single response as result of like product</returns>
         /// <response code="200">If like for product it was success</response>
         /// <response code="400">For bad request</response>
+        /// <response code="401">For unauthorized clients</response>
+        /// <response code="403">If client doesn't have rights to like product</response>
         /// <response code="404">If product not exists</response>
         /// <response code="500">If there was an error</response>
         [Authorize(Policy = "CustomerPolicy")]
         [HttpPut("LikeProduct/{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(403)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> LikeProductAsync(int id, [FromBody]LikeProductRequest request)

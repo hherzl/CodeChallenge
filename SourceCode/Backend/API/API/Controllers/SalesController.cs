@@ -36,11 +36,15 @@ namespace API.Controllers
         /// <returns>A single response as for order creation</returns>
         /// <response code="200">Returns the newly created order</response>
         /// <response code="400">For bad request</response>
+        /// <response code="401">For unauthorized clients</response>
+        /// <response code="403">If client doesn't have rights to add product</response>
         /// <response code="500">If there was an error</response>
         [Authorize(Policy = "CustomerPolicy")]
         [HttpPost("PlaceOrder")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(403)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> PlaceOrderAsync([FromBody]PlaceOrderRequest request)
         {
