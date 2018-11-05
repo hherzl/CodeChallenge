@@ -9,3 +9,7 @@ tr.element-row:hover {
 tr.element-row:active {
     background: #efefef;
 }
+
+.form-field {
+    width: 100%;
+}

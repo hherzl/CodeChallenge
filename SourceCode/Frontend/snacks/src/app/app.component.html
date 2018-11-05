@@ -3,12 +3,14 @@
 <h2>Products</h2>
 
 <form [formGroup]="form">
-  <mat-form-field>
+  <mat-form-field class="form-field">
     <input type="text" placeholder="Name" matInput formControlName="productName">
   </mat-form-field>
 
   <button type="button" mat-raised-button color="primary" [disabled]="!form.valid" (click)="search()">Search</button>
 </form>
+
+<br/>
 
 <table mat-table [dataSource]="response?.model">
   <ng-container matColumnDef="productName">
@@ -51,5 +53,3 @@
     <mat-icon aria-label="Next">skip_next</mat-icon>
   </button>
 </div>
-
-<pre>{{ response | json }}</pre>

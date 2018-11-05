@@ -14,20 +14,13 @@ export class WarehouseService {
   }
 
   public getProducts(pageSize: number, pageNumber: number, name: string): Observable<Object> {
-    if (pageSize == null) {
-      pageSize = 10;
-    }
+    const parameters = [
+      'pageSize=' + (pageSize == null ? '10' : pageSize.toString()),
+      'pageNumber=' + (pageNumber == null ? '1' : pageNumber.toString())
+    ];
 
-    if (pageNumber == null) {
-      pageNumber = 1;
-    }
-
-    const parameters = [];
-
-    parameters.push('pageSize=' + pageSize.toString());
-    parameters.push('pageNumber=' + pageNumber.toString());
     if (name != null) {
-      parameters.push('name=' + name.toString());
+      parameters.push('name=' + name);
     }
 
     const url: string = [this.baseUrl, 'Product'].join('/') + '?' + parameters.join('&');
