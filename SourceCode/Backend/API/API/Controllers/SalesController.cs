@@ -34,8 +34,14 @@ namespace API.Controllers
         /// </summary>
         /// <param name="request">Order request</param>
         /// <returns>A single response as for order creation</returns>
-        [HttpPost("PlaceOrder")]
+        /// <response code="200">Returns the newly created order</response>
+        /// <response code="400">For bad request</response>
+        /// <response code="500">If there was an error</response>
         [Authorize(Policy = "CustomerPolicy")]
+        [HttpPost("PlaceOrder")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
         public async Task<IActionResult> PlaceOrderAsync([FromBody]PlaceOrderRequest request)
         {
             Logger?.LogDebug("'{0}' has been invoked", nameof(PlaceOrderAsync));

@@ -15,6 +15,9 @@
             </summary>
             <param name="request">Order request</param>
             <returns>A single response as for order creation</returns>
+            <response code="200">Returns the newly created order</response>
+            <response code="400">For bad request</response>
+            <response code="500">If there was an error</response>
         </member>
         <member name="T:API.Controllers.WarehouseController">
             <summary>
@@ -30,6 +33,9 @@
             <param name="name">Product name</param>
             <param name="sortBy">Sort by popularity</param>
             <returns>A list of product according to criteria</returns>
+            <response code="200">A success response with products list</response>
+            <response code="204">If there are not products</response>
+            <response code="500">If there was an error</response>
         </member>
         <member name="M:API.Controllers.WarehouseController.AddProductAsync(API.Models.AddProductRequest)">
             <summary>
@@ -37,6 +43,9 @@
             </summary>
             <param name="request">Request for add product</param>
             <returns>A single response with new product info</returns>
+            <response code="200">Returns the newly created product</response>
+            <response code="400">For bad request</response>
+            <response code="500">If there was an error</response>
         </member>
         <member name="M:API.Controllers.WarehouseController.UpdateProductPriceAsync(System.Int32,API.Models.UpdateProductPriceRequest)">
             <summary>
@@ -45,6 +54,10 @@
             <param name="id">Product ID</param>
             <param name="request">Request for update price</param>
             <returns>A single response for product price update</returns>
+            <response code="200">If update for product price it was success</response>
+            <response code="400">For bad request</response>
+            <response code="404">If product not exists</response>
+            <response code="500">If there was an error</response>
         </member>
         <member name="M:API.Controllers.WarehouseController.LikeProductAsync(System.Int32,API.Models.LikeProductRequest)">
             <summary>
@@ -53,6 +66,10 @@
             <param name="id">Product ID</param>
             <param name="request">Request model for </param>
             <returns>A single response as result of like product</returns>
+            <response code="200">If like for product it was success</response>
+            <response code="400">For bad request</response>
+            <response code="404">If product not exists</response>
+            <response code="500">If there was an error</response>
         </member>
     </members>
 </doc>
