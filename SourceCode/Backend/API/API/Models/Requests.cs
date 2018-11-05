@@ -22,7 +22,7 @@ namespace API.Models
         public string User { get; set; }
     }
 
-    public class UpdatePriceRequest
+    public class UpdateProductPriceRequest
     {
         [Required]
         public decimal Price { get; set; }

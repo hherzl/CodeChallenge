@@ -38,7 +38,7 @@
             <param name="request">Request for add product</param>
             <returns>A single response with new product info</returns>
         </member>
-        <member name="M:API.Controllers.WarehouseController.UpdatePriceAsync(System.Int32,API.Models.UpdatePriceRequest)">
+        <member name="M:API.Controllers.WarehouseController.UpdateProductPriceAsync(System.Int32,API.Models.UpdateProductPriceRequest)">
             <summary>
             Updates the price for existing product
             </summary>

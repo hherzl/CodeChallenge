@@ -59,14 +59,14 @@ namespace API.UnitTests
         }
 
         [Fact]
-        public async Task TestUpdatePriceAsync()
+        public async Task TestUpdateProductPriceAsync()
         {
             // Arrange
-            var dbContext = DbContextMocker.GetStoreDbContext(nameof(TestUpdatePriceAsync));
+            var dbContext = DbContextMocker.GetStoreDbContext(nameof(TestUpdateProductPriceAsync));
             var service = ServiceMocker.GetWarehouseService(dbContext);
             var controller = new WarehouseController(service, null);
             var id = 1;
-            var request = new UpdatePriceRequest
+            var request = new UpdateProductPriceRequest
             {
                 Price = 2.15m
             };
@@ -74,8 +74,8 @@ namespace API.UnitTests
             controller.MockControllerContext();
 
             // Act
-            var response = await controller.UpdatePriceAsync(id, request) as ObjectResult;
-            var value = response.Value as ISingleResponse<UpdatePriceRequest>;
+            var response = await controller.UpdateProductPriceAsync(id, request) as ObjectResult;
+            var value = response.Value as ISingleResponse<UpdateProductPriceRequest>;
 
             service.Dispose();
 

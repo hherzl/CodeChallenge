@@ -129,17 +129,17 @@ namespace API.Controllers
         /// <param name="id">Product ID</param>
         /// <param name="request">Request for update price</param>
         /// <returns>A single response for product price update</returns>
-        [HttpPut("Product/{id}")]
+        [HttpPut("UpdateProductPrice/{id}")]
         [Authorize(Policy = "AdministratorPolicy")]
-        public async Task<IActionResult> UpdatePriceAsync(int id, [FromBody]UpdatePriceRequest request)
+        public async Task<IActionResult> UpdateProductPriceAsync(int id, [FromBody]UpdateProductPriceRequest request)
         {
-            Logger?.LogDebug("'{0}' has been invoked", nameof(UpdatePriceAsync));
+            Logger?.LogDebug("'{0}' has been invoked", nameof(UpdateProductPriceAsync));
 
             // Validate request model
             if (!ModelState.IsValid)
                 return BadRequest(request);
 
-            var response = new SingleResponse<UpdatePriceRequest>();
+            var response = new SingleResponse<UpdateProductPriceRequest>();
 
             try
             {
@@ -161,7 +161,7 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                response.SetError(Logger, nameof(UpdatePriceAsync), ex);
+                response.SetError(Logger, nameof(UpdateProductPriceAsync), ex);
             }
 
             return response.ToHttpResponse();
