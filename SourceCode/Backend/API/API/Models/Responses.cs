@@ -71,7 +71,7 @@ namespace API.Models
         public int ItemsCount { get; set; }
 
         public int PageCount =>
-            PageSize == 0 ? 0 : ItemsCount / PageSize;
+            PageSize == 0 ? 1 : ItemsCount / PageSize;
     }
 
     public static class ResponseExtensions
