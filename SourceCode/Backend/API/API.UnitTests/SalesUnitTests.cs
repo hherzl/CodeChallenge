@@ -23,7 +23,7 @@ namespace API.UnitTests
                 {
                     new PlaceOrderDetailRequest
                     {
-                        ProductID = 1,
+                        ProductID = 1000,
                         Quantity = 1
                     }
                 }
@@ -33,7 +33,7 @@ namespace API.UnitTests
 
             // Act
             var response = await controller.PlaceOrderAsync(request) as ObjectResult;
-            var value = response.Value as ISingleResponse<PlaceOrderRequest>;
+            var value = response.Value as IResponse;
 
             service.Dispose();
 

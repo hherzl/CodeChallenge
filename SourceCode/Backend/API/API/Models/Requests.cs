@@ -28,17 +28,8 @@ namespace API.Models
         public decimal Price { get; set; }
     }
 
-    public class LikeProductRequest
-    {
-        [StringLength(25)]
-        public string User { get; set; }
-    }
-
     public class PlaceOrderRequest
     {
-        [StringLength(25)]
-        public string User { get; set; }
-
         public IEnumerable<PlaceOrderDetailRequest> Details { get; set; }
     }
 

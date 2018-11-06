@@ -33,11 +33,11 @@ namespace API.Controllers
         /// Places a new order
         /// </summary>
         /// <param name="request">Order request</param>
-        /// <returns>A single response as for order creation</returns>
-        /// <response code="200">Returns the newly created order</response>
+        /// <returns>A response as result of place new order</returns>
+        /// <response code="200">If creation of order it was succes</response>
         /// <response code="400">For bad request</response>
         /// <response code="401">For unauthorized clients</response>
-        /// <response code="403">If client doesn't have rights to add product</response>
+        /// <response code="403">If client doesn't have rights to place order</response>
         /// <response code="500">If there was an error</response>
         [Authorize(Policy = "CustomerPolicy")]
         [HttpPost("PlaceOrder")]
@@ -54,7 +54,7 @@ namespace API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(request);
 
-            var response = new SingleResponse<PlaceOrderRequest>();
+            var response = new Response();
 
             try
             {
@@ -99,8 +99,6 @@ namespace API.Controllers
                 };
 
                 await SalesService.PlaceOrderAsync(header, orderDetails);
-
-                response.Model = new PlaceOrderRequest { };
 
                 response.Message = string.Format("The order was placed successfully, ID: {0}.", header.OrderHeaderID);
 

@@ -10,7 +10,7 @@ namespace API.UnitTests.Mockers
         {
             dbContext.Set<Product>().Add(new Product
             {
-                ProductID = 1,
+                ProductID = 1000,
                 ProductName = "Coca Cola 24 fl Oz Bottle",
                 ProductDescription = "Enjoy Coca-Cola’s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.",
                 Price = 1.99m,
@@ -23,7 +23,7 @@ namespace API.UnitTests.Mockers
 
             dbContext.Set<Product>().Add(new Product
             {
-                ProductID = 2,
+                ProductID = 2000,
                 ProductName = "Diet Coca Cola 24 fl Oz Bottle",
                 ProductDescription = "Enjoy Coca-Cola’s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.",
                 Price = 1.99m,
@@ -36,7 +36,7 @@ namespace API.UnitTests.Mockers
 
             dbContext.Set<Product>().Add(new Product
             {
-                ProductID = 3,
+                ProductID = 3000,
                 ProductName = "Coca Cola 8.5 Oz Aluminum Bottle",
                 ProductDescription = "Enjoy Coca-Cola’s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.",
                 Price = 1.99m,
@@ -49,7 +49,7 @@ namespace API.UnitTests.Mockers
 
             dbContext.Set<Product>().Add(new Product
             {
-                ProductID = 4,
+                ProductID = 4000,
                 ProductName = "Diet Coca Cola 8.5 Oz Aluminum Bottle",
                 ProductDescription = "Enjoy Coca-Cola’s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.",
                 Price = 1.99m,
@@ -62,7 +62,7 @@ namespace API.UnitTests.Mockers
 
             dbContext.Set<Product>().Add(new Product
             {
-                ProductID = 5,
+                ProductID = 5000,
                 ProductName = "Coca Cola Zero 24 fl Oz Bottle",
                 ProductDescription = "Enjoy Coca-Cola’s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.",
                 Price = 1.99m,
@@ -75,7 +75,7 @@ namespace API.UnitTests.Mockers
 
             dbContext.Set<Product>().Add(new Product
             {
-                ProductID = 6,
+                ProductID = 6000,
                 ProductName = "Diet Coca Cola Zero 24 fl Oz Bottle",
                 ProductDescription = "Enjoy Coca-Cola’s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.",
                 Price = 1.99m,

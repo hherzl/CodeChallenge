@@ -143,12 +143,12 @@ namespace API.Controllers
         /// Updates the price for existing product
         /// </summary>
         /// <param name="id">Product ID</param>
-        /// <param name="request">Request for update price</param>
-        /// <returns>A single response for product price update</returns>
-        /// <response code="200">If update for product price it was success</response>
+        /// <param name="request">Request for update product price</param>
+        /// <returns>A response as result of update product price</returns>
+        /// <response code="200">If product price update it was success</response>
         /// <response code="400">For bad request</response>
         /// <response code="401">For unauthorized clients</response>
-        /// <response code="403">If client doesn't have rights to update product's price</response>
+        /// <response code="403">If client doesn't have rights to update product price</response>
         /// <response code="404">If product not exists</response>
         /// <response code="500">If there was an error</response>
         [Authorize(Policy = "AdministratorPolicy")]
@@ -167,7 +167,7 @@ namespace API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(request);
 
-            var response = new SingleResponse<UpdateProductPriceRequest>();
+            var response = new Response();
 
             try
             {
@@ -199,10 +199,8 @@ namespace API.Controllers
         /// Likes an existing product
         /// </summary>
         /// <param name="id">Product ID</param>
-        /// <param name="request">Request model for </param>
         /// <returns>A single response as result of like product</returns>
         /// <response code="200">If like for product it was success</response>
-        /// <response code="400">For bad request</response>
         /// <response code="401">For unauthorized clients</response>
         /// <response code="403">If client doesn't have rights to like product</response>
         /// <response code="404">If product not exists</response>
@@ -215,15 +213,11 @@ namespace API.Controllers
         [ProducesResponseType(403)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> LikeProductAsync(int id, [FromBody]LikeProductRequest request)
+        public async Task<IActionResult> LikeProductAsync(int id)
         {
             Logger?.LogDebug("'{0}' has been invoked", nameof(LikeProductAsync));
 
-            // Validate request model
-            if (!ModelState.IsValid)
-                return BadRequest(request);
-
-            var response = new SingleResponse<LikeProductRequest>();
+            var response = new Response();
 
             try
             {
@@ -237,9 +231,7 @@ namespace API.Controllers
 
                 await Service.LikeProductAsync(entity);
 
-                response.Model = new LikeProductRequest { User = entity.LastUpdateUser };
-
-                response.Message = string.Format("The product '{0}' has a new like, user: '{1}'.", entity.ProductName, response.Model.User);
+                response.Message = string.Format("The product '{0}' has a new like, user: '{1}'.", entity.ProductName, entity.LastUpdateUser);
 
                 Logger?.LogInformation(response.Message);
             }

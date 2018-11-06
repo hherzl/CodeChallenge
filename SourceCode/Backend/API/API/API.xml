@@ -14,11 +14,11 @@
             Places a new order
             </summary>
             <param name="request">Order request</param>
-            <returns>A single response as for order creation</returns>
-            <response code="200">Returns the newly created order</response>
+            <returns>A response as result of place new order</returns>
+            <response code="200">If creation of order it was succes</response>
             <response code="400">For bad request</response>
             <response code="401">For unauthorized clients</response>
-            <response code="403">If client doesn't have rights to add product</response>
+            <response code="403">If client doesn't have rights to place order</response>
             <response code="500">If there was an error</response>
         </member>
         <member name="T:API.Controllers.WarehouseController">
@@ -56,24 +56,22 @@
             Updates the price for existing product
             </summary>
             <param name="id">Product ID</param>
-            <param name="request">Request for update price</param>
-            <returns>A single response for product price update</returns>
-            <response code="200">If update for product price it was success</response>
+            <param name="request">Request for update product price</param>
+            <returns>A response as result of update product price</returns>
+            <response code="200">If product price update it was success</response>
             <response code="400">For bad request</response>
             <response code="401">For unauthorized clients</response>
-            <response code="403">If client doesn't have rights to update product's price</response>
+            <response code="403">If client doesn't have rights to update product price</response>
             <response code="404">If product not exists</response>
             <response code="500">If there was an error</response>
         </member>
-        <member name="M:API.Controllers.WarehouseController.LikeProductAsync(System.Int32,API.Models.LikeProductRequest)">
+        <member name="M:API.Controllers.WarehouseController.LikeProductAsync(System.Int32)">
             <summary>
             Likes an existing product
             </summary>
             <param name="id">Product ID</param>
-            <param name="request">Request model for </param>
             <returns>A single response as result of like product</returns>
             <response code="200">If like for product it was success</response>
-            <response code="400">For bad request</response>
             <response code="401">For unauthorized clients</response>
             <response code="403">If client doesn't have rights to like product</response>
             <response code="404">If product not exists</response>

@@ -112,10 +112,7 @@ namespace API.Models
 
         public static IActionResult ToHttpResponse(this IResponse response)
         {
-            var status = HttpStatusCode.OK;
-
-            if (response.DidError)
-                status = HttpStatusCode.InternalServerError;
+            var status = response.DidError ? HttpStatusCode.InternalServerError : HttpStatusCode.OK;
 
             return new ObjectResult(response)
             {

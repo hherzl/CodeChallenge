@@ -65,17 +65,17 @@ namespace API.UnitTests
             var dbContext = DbContextMocker.GetStoreDbContext(nameof(TestUpdateProductPriceAsync));
             var service = ServiceMocker.GetWarehouseService(dbContext);
             var controller = new WarehouseController(service, null);
-            var id = 1;
+            var id = 1000;
             var request = new UpdateProductPriceRequest
             {
-                Price = 2.15m
+                Price = 2.25m
             };
 
             controller.MockControllerContext();
 
             // Act
             var response = await controller.UpdateProductPriceAsync(id, request) as ObjectResult;
-            var value = response.Value as ISingleResponse<UpdateProductPriceRequest>;
+            var value = response.Value as IResponse;
 
             service.Dispose();
 
@@ -90,14 +90,13 @@ namespace API.UnitTests
             var dbContext = DbContextMocker.GetStoreDbContext(nameof(TestLikeProductAsync));
             var service = ServiceMocker.GetWarehouseService(dbContext);
             var controller = new WarehouseController(service, null);
-            var id = 1;
-            var request = new LikeProductRequest();
+            var id = 1000;
 
             controller.MockControllerContext();
 
             // Act
-            var response = await controller.LikeProductAsync(id, request) as ObjectResult;
-            var value = response.Value as ISingleResponse<LikeProductRequest>;
+            var response = await controller.LikeProductAsync(id) as ObjectResult;
+            var value = response.Value as IResponse;
 
             service.Dispose();
 
@@ -112,7 +111,7 @@ namespace API.UnitTests
             var dbContext = DbContextMocker.GetStoreDbContext(nameof(TestDeleteProductAsync));
             var service = ServiceMocker.GetWarehouseService(dbContext);
             var controller = new WarehouseController(service, null);
-            var id = 1;
+            var id = 3000;
 
             controller.MockControllerContext();
 
