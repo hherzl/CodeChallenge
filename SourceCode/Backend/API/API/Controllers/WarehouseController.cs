@@ -250,5 +250,57 @@ namespace API.Controllers
 
             return response.ToHttpResponse();
         }
+
+        /// <summary>
+        /// Deletes an existing product
+        /// </summary>
+        /// <param name="id">Product ID</param>
+        /// <returns>A response as result of delete product</returns>
+        /// <response code="200">If deleting product it was success</response>
+        /// <response code="401">For unauthorized clients</response>
+        /// <response code="403">If client doesn't have rights to delete product</response>
+        /// <response code="404">If product not exists</response>
+        /// <response code="500">If there was an error</response>
+        [Authorize(Policy = "AdministratorPolicy")]
+        [HttpDelete("Product/{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(403)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> DeleteProductAsync(int id)
+        {
+            Logger?.LogDebug("'{0}' has been invoked", nameof(DeleteProductAsync));
+
+            var response = new Response();
+
+            try
+            {
+                // Get entity by id
+                var entity = await Service.WarehouseRepository.GetProductAsync(new Product(id));
+
+                if (entity == null)
+                    return NotFound();
+
+                var count = await Service.SalesRepository.GetOrderDetails().CountAsync(item => item.ProductID == id);
+
+                if (count > 0)
+                    throw new ApiException(
+                        string.Format("The product: '{0}', with ID: '{1}' cannot be deleted, has dependencies in sales.", entity.ProductName, entity.ProductID)
+                        );
+
+                Service.WarehouseRepository.Remove(entity);
+
+                await Service.CommitChangesAsync();
+
+                response.Message = "The product was deleted successfully";
+            }
+            catch (Exception ex)
+            {
+                response.SetError(Logger, nameof(DeleteProductAsync), ex);
+            }
+
+            return response.ToHttpResponse();
+        }
     }
 }

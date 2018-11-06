@@ -9,6 +9,7 @@
 |Add Product|Yes|Administrator|Adds a product|
 |Update Price for Product|Yes|Administrator|Updates price for existing product|
 |Like Product|Yes|Customer|Likes an existing product|
+|Delete Product|Yes|Administrator|Deletes an existing product|
 |Place Order|Yes|Customer|Places a new order|
 
 There are two roles for **Snacks API**:

@@ -79,5 +79,17 @@
             <response code="404">If product not exists</response>
             <response code="500">If there was an error</response>
         </member>
+        <member name="M:API.Controllers.WarehouseController.DeleteProductAsync(System.Int32)">
+            <summary>
+            Deletes an existing product
+            </summary>
+            <param name="id">Product ID</param>
+            <returns>A response as result of delete product</returns>
+            <response code="200">If deleting product it was success</response>
+            <response code="401">For unauthorized clients</response>
+            <response code="403">If client doesn't have rights to delete product</response>
+            <response code="404">If product not exists</response>
+            <response code="500">If there was an error</response>
+        </member>
     </members>
 </doc>

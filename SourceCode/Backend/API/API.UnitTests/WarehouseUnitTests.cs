@@ -104,5 +104,26 @@ namespace API.UnitTests
             // Assert
             Assert.False(value?.DidError);
         }
+
+        [Fact]
+        public async Task TestDeleteProductAsync()
+        {
+            // Arrange
+            var dbContext = DbContextMocker.GetStoreDbContext(nameof(TestDeleteProductAsync));
+            var service = ServiceMocker.GetWarehouseService(dbContext);
+            var controller = new WarehouseController(service, null);
+            var id = 1;
+
+            controller.MockControllerContext();
+
+            // Act
+            var response = await controller.DeleteProductAsync(id) as ObjectResult;
+            var value = response.Value as IResponse;
+
+            service.Dispose();
+
+            // Assert
+            Assert.False(value?.DidError);
+        }
     }
 }

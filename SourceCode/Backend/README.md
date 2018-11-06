@@ -36,6 +36,7 @@ This *API* has the following route table:
 |POST|api/v1/Warehouse/Product|Creates a new product|
 |PUT|api/v1/Warehouse/Product/{id}|Updates the price for an existing product|
 |PUT|api/v1/Warehouse/LikeProduct/{id}|Likes an existing product|
+|DELETE|api/v1/Warehouse/Product/{id}|Deletes an existing product|
 |POST|api/v1/Sales/PostOrder|Places a new order|
 
 ## API.UnitTests
