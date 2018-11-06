@@ -34,6 +34,7 @@ export class AppComponent implements OnInit {
     this.response = new PagedResponse<Product>();
     this.response.pageSize = 10;
     this.response.pageNumber = 1;
+    this.response.pageCount = 0;
     this.search();
   }
 
@@ -44,7 +45,7 @@ export class AppComponent implements OnInit {
       .subscribe((data: PagedResponse<Product>) => {
         this.response = data;
         this.isPreviousDisabled = this.response.pageNumber === 1;
-        this.isNextDisabled = this.response.pageNumber >= this.response.pageCount;
+        this.isNextDisabled = this.response.pageNumber > this.response.pageCount;
       });
   }
 
