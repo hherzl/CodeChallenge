@@ -101,35 +101,35 @@ go
 insert into [Warehouse].[Product]
 	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
 values
-	('Coca Cola 24 fl Oz Bottle', 'Enjoy Coca-Cola’s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.', 1.99, 50, 100, 1, 'seed', getdate())
+	('Coca Cola 24 fl Oz Bottle', 'Enjoy Coca-Colaï¿½s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.', 1.99, 50, 100, 1, 'seed', getdate())
 
 insert into [Warehouse].[Product]
 	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
 values
-	('Diet Coca Cola 24 fl Oz Bottle', 'Enjoy Coca-Cola’s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
+	('Diet Coca Cola 24 fl Oz Bottle', 'Enjoy Coca-Colaï¿½s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
 go
 
 insert into [Warehouse].[Product]
 	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
 values
-	('Coca Cola 8.5 Oz Aluminum Bottle', 'Enjoy Coca-Cola’s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
+	('Coca Cola 8.5 Oz Aluminum Bottle', 'Enjoy Coca-Colaï¿½s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
 go
 
 insert into [Warehouse].[Product]
 	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
 values
-	('Diet Coca Cola 8.5 Oz Aluminum Bottle', 'Enjoy Coca-Cola’s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.', 1.99, 10, 100, 1, 'seed', getdate())
+	('Diet Coca Cola 8.5 Oz Aluminum Bottle', 'Enjoy Coca-Colaï¿½s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.', 1.99, 10, 100, 1, 'seed', getdate())
 go
 
 insert into [Warehouse].[Product]
 	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
 values
-	('Coca Cola Zero 24 fl Oz Bottle', 'Enjoy Coca-Cola’s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
+	('Coca Cola Zero 24 fl Oz Bottle', 'Enjoy Coca-Colaï¿½s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
 
 insert into [Warehouse].[Product]
 	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
 values
-	('Diet Coca Cola Zero 24 fl Oz Bottle', 'Enjoy Coca-Cola’s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
+	('Diet Coca Cola Zero 24 fl Oz Bottle', 'Enjoy Coca-Colaï¿½s crisp, delicious taste with meals, on the go, or to share. Serve ice cold for maximum refreshment.', 1.99, 0, 100, 1, 'seed', getdate())
 	
 insert into [Warehouse].[Product]
 	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
@@ -169,9 +169,49 @@ values
 insert into [Warehouse].[Product]
 	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
 values
+	('Chips Ahoy! Scooby Doo - 13oz', 'Original Chocolate Chip Cookies', 1.25, 75, 175, 1, 'seed', getdate())
+
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
 	('Oreo - 14.3oz', 'Original Chocolate Sandwich Cookies', 0.99, 30, 200, 1, 'seed', getdate())
 
 insert into [Warehouse].[Product]
 	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
 values
+	('Oreo Vanilla - 14.3oz', 'Original Vanilla Sandwich Cookies', 0.99, 15, 130, 1, 'seed', getdate())
+
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
 	('Cristal Water 24 oz Bottle', 'Natural water', 1.50, 100, 300, 1, 'seed', getdate())
+
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
+	('Pringles Original 134 g', 'Pringles Original', 2.50, 75, 100, 1, 'seed', getdate())
+
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
+	('Pringles Chicken 134 g', 'Pringles Chicken', 2.50, 50, 100, 1, 'seed', getdate())
+
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
+	('Pringles Pizza 134 g', 'Pringles Pizza', 2.50, 40, 100, 1, 'seed', getdate())
+
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
+	('Pringles Cheese 134 g', 'Pringles Cheese', 2.50, 30, 100, 1, 'seed', getdate())
+
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
+	('Pringles JalapeÃ±o 134 g', 'Pringles JalapeÃ±o', 2.50, 30, 100, 1, 'seed', getdate())
+
+insert into [Warehouse].[Product]
+	([ProductName], [ProductDescription], [Price], [Likes], [Stocks], [Available], [CreationUser], [CreationDateTime])
+values
+	('Pringles Ranch 134 g', 'Pringles Ranch', 2.50, 30, 100, 1, 'seed', getdate())
