@@ -80,7 +80,7 @@ namespace API.Models
         public int ItemsCount { get; set; }
 
         public double PageCount
-            => ItemsCount < PageSize ? 1 : Math.Round(((double)ItemsCount / PageSize));
+            => ItemsCount < PageSize ? 1 : (int)(((double)ItemsCount / PageSize) + 1);
     }
 
     public class ApiException : Exception
