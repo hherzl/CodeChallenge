@@ -4,8 +4,6 @@ using System.Reflection;
 using API.Controllers;
 using API.Core.BusinessLayer;
 using API.Core.DataLayer;
-using API.Core.DataLayer.Contracts;
-using API.Core.DataLayer.Repositories;
 using API.PolicyRequirements;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -40,10 +38,7 @@ namespace API
             services.AddScoped<ILogger, Logger<WarehouseController>>();
             services.AddScoped<ILogger, Logger<SalesController>>();
 
-            // Set up dependency injection for repository
-            services.AddScoped<IWarehouseRepository, WarehouseRepository>();
-            services.AddScoped<ISalesRepository, SalesRepository>();
-
+            // Set up dependency injection for services
             services.AddScoped<IWarehouseService, WarehouseService>();
             services.AddScoped<ISalesService, SalesService>();
 

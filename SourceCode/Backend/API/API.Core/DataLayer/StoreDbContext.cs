@@ -1,5 +1,7 @@
 using API.Core.DataLayer.Configurations.Sales;
 using API.Core.DataLayer.Configurations.Warehouse;
+using API.Core.EntityLayer.Sales;
+using API.Core.EntityLayer.Warehouse;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Core.DataLayer
@@ -10,6 +12,14 @@ namespace API.Core.DataLayer
             : base(options)
         {
         }
+
+        public DbSet<Product> Products { get; set; }
+
+        public DbSet<ProductPriceHistory> ProductPriceHistory { get; set; }
+
+        public DbSet<OrderHeader> OrderHeaders { get; set; }
+
+        public DbSet<OrderDetail> OrderDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

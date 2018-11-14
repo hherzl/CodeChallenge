@@ -19,9 +19,9 @@ namespace API.Core.BusinessLayer
             entity.Stocks = 0;
             entity.Available = true;
 
-            WarehouseRepository.Add(entity);
+            DbContext.Add(entity);
 
-            await CommitChangesAsync();
+            await DbContext.SaveChangesAsync();
         }
 
         public async Task UpdatePriceProductAsync(Product entity)
@@ -33,9 +33,9 @@ namespace API.Core.BusinessLayer
                     // Set changes
                     entity.Price = entity.Price;
 
-                    WarehouseRepository.Update(entity);
+                    DbContext.Update(entity);
 
-                    await CommitChangesAsync();
+                    await DbContext.SaveChangesAsync();
 
                     // Add product price to history
                     var history = new ProductPriceHistory
@@ -46,9 +46,9 @@ namespace API.Core.BusinessLayer
                         CreationUser = entity.LastUpdateUser
                     };
 
-                    WarehouseRepository.Add(history);
+                    DbContext.Add(history);
 
-                    await CommitChangesAsync();
+                    await DbContext.SaveChangesAsync();
 
                     txn.Commit();
                 }
@@ -68,9 +68,9 @@ namespace API.Core.BusinessLayer
 
             // todo: Save who likes the product in history
 
-            WarehouseRepository.Update(entity);
+            DbContext.Update(entity);
 
-            await CommitChangesAsync();
+            await DbContext.SaveChangesAsync();
         }
     }
 }

@@ -26,28 +26,28 @@ namespace API.Core.BusinessLayer
                     header.Total = 0m;
                     header.Total = details.Sum(item => item.Total);
 
-                    SalesRepository.Add(header);
+                    DbContext.Add(header);
 
-                    await CommitChangesAsync();
+                    await DbContext.SaveChangesAsync();
 
                     foreach (var item in details)
                     {
                         item.OrderHeaderID = header.OrderHeaderID;
 
-                        SalesRepository.Add(item);
+                        DbContext.Add(item);
                     }
 
-                    await CommitChangesAsync();
+                    await DbContext.SaveChangesAsync();
 
                     foreach (var detail in details)
                     {
-                        var product = await WarehouseRepository.GetProductAsync(new Product(detail.ProductID));
+                        var product = await DbContext.GetProductAsync(new Product(detail.ProductID));
 
                         // Update stocks for product
                         product.Stocks -= 1;
                     }
 
-                    await CommitChangesAsync();
+                    await DbContext.SaveChangesAsync();
 
                     txn.Commit();
                 }

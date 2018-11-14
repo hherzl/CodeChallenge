@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using API.Core.BusinessLayer;
-using API.Core.DataLayer.Repositories;
+using API.Core.DataLayer;
 using API.Core.EntityLayer.Warehouse;
 using API.Extensions;
 using API.Models;
@@ -55,7 +55,7 @@ namespace API.Controllers
             try
             {
                 // Get query from repository
-                var query = Service.WarehouseRepository.GetProducts(name);
+                var query = Service.DbContext.GetProducts(name);
 
                 // Sorting list
                 if (sortBy == "popularity")
@@ -115,7 +115,7 @@ namespace API.Controllers
                 var entity = request.ToEntity();
 
                 // Check if entity exists
-                var existingProduct = await Service.WarehouseRepository.GetProductByProductNameAsync(entity);
+                var existingProduct = await Service.DbContext.GetProductByProductNameAsync(entity);
 
                 if (existingProduct != null)
                 {
@@ -172,7 +172,7 @@ namespace API.Controllers
             try
             {
                 // Get entity by id
-                var entity = await Service.WarehouseRepository.GetProductAsync(new Product(id));
+                var entity = await Service.DbContext.GetProductAsync(new Product(id));
 
                 if (entity == null)
                     return NotFound();
@@ -222,7 +222,7 @@ namespace API.Controllers
             try
             {
                 // Get entity by id
-                var entity = await Service.WarehouseRepository.GetProductAsync(new Product(id));
+                var entity = await Service.DbContext.GetProductAsync(new Product(id));
 
                 if (entity == null)
                     return NotFound();
@@ -269,21 +269,21 @@ namespace API.Controllers
             try
             {
                 // Get entity by id
-                var entity = await Service.WarehouseRepository.GetProductAsync(new Product(id));
+                var entity = await Service.DbContext.GetProductAsync(new Product(id));
 
                 if (entity == null)
                     return NotFound();
 
-                var count = await Service.SalesRepository.GetOrderDetails().CountAsync(item => item.ProductID == id);
+                var count = await Service.DbContext.GetOrderDetails().CountAsync(item => item.ProductID == id);
 
                 if (count > 0)
                     throw new ApiException(
                         string.Format("The product: '{0}', with ID: '{1}' cannot be deleted, has dependencies in sales.", entity.ProductName, entity.ProductID)
                         );
 
-                Service.WarehouseRepository.Remove(entity);
+                Service.DbContext.Remove(entity);
 
-                await Service.CommitChangesAsync();
+                await Service.DbContext.SaveChangesAsync();
 
                 response.Message = "The product was deleted successfully";
             }
