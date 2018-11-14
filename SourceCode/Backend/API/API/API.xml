@@ -4,11 +4,6 @@
         <name>API</name>
     </assembly>
     <members>
-        <member name="T:API.Controllers.SalesController">
-            <summary>
-            Contains all operations related to Sales feature
-            </summary>
-        </member>
         <member name="M:API.Controllers.SalesController.PlaceOrderAsync(API.Models.PlaceOrderRequest)">
             <summary>
             Places a new order
@@ -20,11 +15,6 @@
             <response code="401">For unauthorized clients</response>
             <response code="403">If client doesn't have rights to place order</response>
             <response code="500">If there was an error</response>
-        </member>
-        <member name="T:API.Controllers.WarehouseController">
-            <summary>
-            Contains all operations related to Warehouse feature
-            </summary>
         </member>
         <member name="M:API.Controllers.WarehouseController.GetProductsAsync(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String)">
             <summary>

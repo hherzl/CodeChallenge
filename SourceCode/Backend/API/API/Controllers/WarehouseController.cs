@@ -13,9 +13,6 @@ using Microsoft.Extensions.Logging;
 
 namespace API.Controllers
 {
-    /// <summary>
-    /// Contains all operations related to Warehouse feature
-    /// </summary>
     [Authorize]
     [ApiController]
     [Route("api/v1/[controller]")]
