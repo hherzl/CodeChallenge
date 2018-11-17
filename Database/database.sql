@@ -45,6 +45,17 @@ create table [Warehouse].[ProductPriceHistory]
 	[Timestamp] rowversion null
 )
 
+create table [Warehouse].[ProductLike]
+(
+    [ProductLikeID] int not null identity(1, 1),
+	[ProductID] int not null,
+    [CreationUser] varchar(25) not null,
+	[CreationDateTime] datetime not null,
+	[LastUpdateUser] varchar(25) null,
+	[LastUpdateDateTime] datetime null,
+	[Timestamp] rowversion null
+)
+
 create table [Sales].[OrderHeader]
 (
     [OrderHeaderID] int not null identity(1, 1),
@@ -83,18 +94,32 @@ alter table [Warehouse].[Product]
 alter table [Warehouse].[ProductPriceHistory]
     add constraint [PK_Warehouse_ProductPriceHistory] primary key ([ProductPriceHistoryID])
 
+alter table [Warehouse].[ProductLike]
+	add constraint [PK_Warehouse_ProductLike] primary key ([ProductLikeID])
+
+alter table [Warehouse].[ProductLike]
+	add constraint [U_Warehouse_ProductLike_ProductID_CreationUser] unique ([ProductID], [CreationUser])
+
 alter table [Sales].[OrderHeader]
     add constraint [PK_Sales_OrderHeader] primary key ([OrderHeaderID])
 
 alter table [Sales].[OrderDetail]
     add constraint [PK_Sales_OrderDetail] primary key ([OrderDetailID])
 
+alter table [Warehouse].[ProductPriceHistory]
+	add constraint [FK_Warehouse_ProductPriceHistory_Warehouse_Product] foreign key ([ProductID])
+		references [Warehouse].[Product]
+
+alter table [Warehouse].[ProductLike]
+	add constraint [FK_Warehouse_ProductLike_Warehouse_Product] foreign key ([ProductID])
+		references [Warehouse].[Product]
+
 alter table [Sales].[OrderDetail]
-	add constraint [FK_Sales_OrderDetail_Sales_OrderHeader] foreign key (OrderHeaderID)
+	add constraint [FK_Sales_OrderDetail_Sales_OrderHeader] foreign key ([OrderHeaderID])
 		references [Sales].[OrderHeader]
 
 alter table [Sales].[OrderDetail]
-	add constraint [FK_Sales_OrderDetail_Warehouse_Product] foreign key (ProductID)
+	add constraint [FK_Sales_OrderDetail_Warehouse_Product] foreign key ([ProductID])
 		references [Warehouse].[Product]
 go
 

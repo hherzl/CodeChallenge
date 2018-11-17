@@ -38,15 +38,13 @@ namespace API.Core.BusinessLayer
                     await DbContext.SaveChangesAsync();
 
                     // Add product price to history
-                    var history = new ProductPriceHistory
+                    DbContext.Add(new ProductPriceHistory
                     {
                         ProductID = entity.ProductID,
                         Price = entity.Price,
                         StartDate = DateTime.Now,
                         CreationUser = entity.LastUpdateUser
-                    };
-
-                    DbContext.Add(history);
+                    });
 
                     await DbContext.SaveChangesAsync();
 
@@ -61,16 +59,22 @@ namespace API.Core.BusinessLayer
             }
         }
 
-        public async Task LikeProductAsync(Product entity)
+        public async Task<int> LikeProductAsync(Product entity)
         {
-            // Set changes
-            entity.Likes += 1;
+            var productLike = await DbContext.GetProductLikeByProductIDAndCreationUserAsync(entity.ProductID, entity.LastUpdateUser);
 
-            // todo: Save who likes the product in history
+            if (productLike == null)
+            {
+                DbContext.Add(new ProductLike { ProductID = entity.ProductID, CreationUser = entity.LastUpdateUser, CreationDateTime = DateTime.Now });
 
-            DbContext.Update(entity);
+                entity.Likes += 1;
 
-            await DbContext.SaveChangesAsync();
+                DbContext.Update(entity);
+
+                return await DbContext.SaveChangesAsync();
+            }
+
+            return 0;
         }
     }
 }

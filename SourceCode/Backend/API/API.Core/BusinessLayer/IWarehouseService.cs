@@ -9,6 +9,6 @@ namespace API.Core.BusinessLayer
 
         Task UpdatePriceProductAsync(Product entity);
 
-        Task LikeProductAsync(Product entity);
+        Task<int> LikeProductAsync(Product entity);
     }
 }

@@ -49,6 +49,9 @@ namespace API.Core.DataLayer
         public static async Task<Product> GetProductByProductNameAsync(this StoreDbContext dbContext, Product entity)
             => await dbContext.Products.FirstOrDefaultAsync(item => item.ProductName == entity.ProductName);
 
+        public static async Task<ProductLike> GetProductLikeByProductIDAndCreationUserAsync(this StoreDbContext dbContext, int? productID, string creationUser)
+            => await dbContext.ProductLikes.FirstOrDefaultAsync(item => item.ProductID == productID && item.CreationUser == creationUser);
+
         public static async Task<ProductPriceHistory> GetProductPriceHistoryAsync(this StoreDbContext dbContext, ProductPriceHistory entity)
             => await dbContext.ProductPriceHistory.FirstOrDefaultAsync(item => item.ProductPriceHistoryID == entity.ProductPriceHistoryID);
 

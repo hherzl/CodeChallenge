@@ -15,6 +15,8 @@ namespace API.Core.DataLayer
 
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<ProductLike> ProductLikes { get; set; }
+
         public DbSet<ProductPriceHistory> ProductPriceHistory { get; set; }
 
         public DbSet<OrderHeader> OrderHeaders { get; set; }
@@ -26,10 +28,11 @@ namespace API.Core.DataLayer
             // Apply all configurations for tables
 
             modelBuilder
+                .ApplyConfiguration(new ProductConfiguration())
+                .ApplyConfiguration(new ProductLikeConfiguration())
+                .ApplyConfiguration(new ProductPriceHistoryConfiguration())
                 .ApplyConfiguration(new OrderDetailConfiguration())
                 .ApplyConfiguration(new OrderHeaderConfiguration())
-                .ApplyConfiguration(new ProductConfiguration())
-                .ApplyConfiguration(new ProductPriceHistoryConfiguration())
             ;
 
             base.OnModelCreating(modelBuilder);

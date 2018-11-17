@@ -5,7 +5,7 @@ namespace API.Extensions
 {
     public static class ClaimsPrincipalExtensions
     {
-        public static string GetClientName(this ClaimsPrincipal claimsPrincipal)
-            => claimsPrincipal.Identities.First().Claims.First(item => item.Type == "client_id").Value;
+        public static string GetUserName(this ClaimsPrincipal claimsPrincipal)
+            => claimsPrincipal.Identities.First().Claims.First(item => item.Type == "preferred_username").Value;
     }
 }

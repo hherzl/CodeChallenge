@@ -90,13 +90,13 @@ namespace API.Controllers
                         UnitPrice = product.Price,
                         Quantity = detail.Quantity,
                         Total = product.Price * detail.Quantity,
-                        CreationUser = User.GetClientName()
+                        CreationUser = User.GetUserName()
                     });
                 }
 
                 var header = new OrderHeader
                 {
-                    CreationUser = User.GetClientName()
+                    CreationUser = User.GetUserName()
                 };
 
                 await SalesService.PlaceOrderAsync(header, orderDetails);

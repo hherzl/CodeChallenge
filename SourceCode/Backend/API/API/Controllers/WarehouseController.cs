@@ -117,10 +117,11 @@ namespace API.Controllers
                 if (existingProduct != null)
                 {
                     ModelState.AddModelError("ProductName", "Product name already exists");
+
                     return BadRequest(ModelState);
                 }
 
-                entity.CreationUser = User.GetClientName();
+                entity.CreationUser = User.GetUserName();
 
                 await Service.CreateProductAsync(entity);
 
@@ -174,7 +175,7 @@ namespace API.Controllers
                 if (entity == null)
                     return NotFound();
 
-                entity.LastUpdateUser = User.GetClientName();
+                entity.LastUpdateUser = User.GetUserName();
 
                 await Service.UpdatePriceProductAsync(entity);
 
@@ -224,13 +225,16 @@ namespace API.Controllers
                 if (entity == null)
                     return NotFound();
 
-                entity.LastUpdateUser = User.GetClientName();
+                entity.LastUpdateUser = User.GetUserName();
 
-                await Service.LikeProductAsync(entity);
+                var affectedRows = await Service.LikeProductAsync(entity);
 
-                response.Message = string.Format("The product '{0}' has a new like, user: '{1}'.", entity.ProductName, entity.LastUpdateUser);
+                if (affectedRows > 0)
+                {
+                    response.Message = string.Format("The product '{0}' has a new like, user: '{1}'.", entity.ProductName, entity.LastUpdateUser);
 
-                Logger?.LogInformation(response.Message);
+                    Logger?.LogInformation(response.Message);
+                }
             }
             catch (Exception ex)
             {
@@ -271,12 +275,10 @@ namespace API.Controllers
                 if (entity == null)
                     return NotFound();
 
-                var count = await Service.DbContext.GetOrderDetails().CountAsync(item => item.ProductID == id);
+                var count = await Service.DbContext.GetOrderDetails(productID: id).CountAsync();
 
                 if (count > 0)
-                    throw new ApiException(
-                        string.Format("The product: '{0}', with ID: '{1}' cannot be deleted, has dependencies in sales.", entity.ProductName, entity.ProductID)
-                        );
+                    throw new ApiException(string.Format("The product: '{0}', with ID: '{1}' cannot be deleted, has dependencies in sales.", entity.ProductName, entity.ProductID));
 
                 Service.DbContext.Remove(entity);
 
