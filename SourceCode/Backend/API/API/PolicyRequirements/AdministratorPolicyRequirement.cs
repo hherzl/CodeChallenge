@@ -7,7 +7,7 @@ namespace API.PolicyRequirements
     {
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AdministratorPolicyRequirement requirement)
         {
-            if (context.User.HasClaim(c => c.Type == "client_role" && c.Value == "Administrator"))
+            if (context.User.HasClaim(c => c.Type == "role" && c.Value == "Administrator"))
                 context.Succeed(requirement);
             else
                 context.Fail();
