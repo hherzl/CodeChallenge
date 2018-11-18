@@ -275,16 +275,12 @@ namespace API.Controllers
                 if (entity == null)
                     return NotFound();
 
-                var count = await Service.DbContext.GetOrderDetails(productID: id).CountAsync();
+                var affectedRows = await Service.DeleteProductAsync(entity);
 
-                if (count > 0)
-                    throw new ApiException(string.Format("The product: '{0}', with ID: '{1}' cannot be deleted, has dependencies in sales.", entity.ProductName, entity.ProductID));
-
-                Service.DbContext.Remove(entity);
-
-                await Service.DbContext.SaveChangesAsync();
-
-                response.Message = "The product was deleted successfully";
+                if (affectedRows > 0)
+                {
+                    response.Message = "The product was deleted successfully";
+                }
             }
             catch (Exception ex)
             {

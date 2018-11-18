@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using API.Core.DataLayer;
 using API.Core.EntityLayer.Warehouse;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Core.BusinessLayer
 {
@@ -12,7 +13,7 @@ namespace API.Core.BusinessLayer
         {
         }
 
-        public async Task CreateProductAsync(Product entity)
+        public async Task<int> CreateProductAsync(Product entity)
         {
             // Set default values
             entity.Likes = 0;
@@ -21,10 +22,10 @@ namespace API.Core.BusinessLayer
 
             DbContext.Add(entity);
 
-            await DbContext.SaveChangesAsync();
+            return await DbContext.SaveChangesAsync();
         }
 
-        public async Task UpdatePriceProductAsync(Product entity)
+        public async Task<int> UpdatePriceProductAsync(Product entity)
         {
             using (var txn = await DbContext.Database.BeginTransactionAsync())
             {
@@ -46,9 +47,11 @@ namespace API.Core.BusinessLayer
                         CreationUser = entity.LastUpdateUser
                     });
 
-                    await DbContext.SaveChangesAsync();
+                    var affectedRows = await DbContext.SaveChangesAsync();
 
                     txn.Commit();
+
+                    return affectedRows;
                 }
                 catch (Exception ex)
                 {
@@ -75,6 +78,18 @@ namespace API.Core.BusinessLayer
             }
 
             return 0;
+        }
+
+        public async Task<int> DeleteProductAsync(Product entity)
+        {
+            var count = await DbContext.GetOrderDetails(productID: entity.ProductID).CountAsync();
+
+            if (count > 0)
+                throw new ApiException(string.Format("The product: '{0}', with ID: '{1}' cannot be deleted, has dependencies in sales.", entity.ProductName, entity.ProductID));
+
+            DbContext.Remove(entity);
+
+            return await DbContext.SaveChangesAsync();
         }
     }
 }

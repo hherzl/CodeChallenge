@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using API.Core.BusinessLayer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -81,19 +82,6 @@ namespace API.Models
 
         public double PageCount
             => ItemsCount < PageSize ? 1 : (int)(((double)ItemsCount / PageSize) + 1);
-    }
-
-    public class ApiException : Exception
-    {
-        public ApiException()
-            : base()
-        {
-        }
-
-        public ApiException(string message)
-            : base(message)
-        {
-        }
     }
 
     public static class ResponseExtensions
