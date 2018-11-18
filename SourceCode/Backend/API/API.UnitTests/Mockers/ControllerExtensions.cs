@@ -14,7 +14,7 @@ namespace API.UnitTests.Mockers
                 {
                     User = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
                     {
-                        new Claim("client_id", "unittests")
+                        new Claim("preferred_username", "unittests")
                     }))
                 }
             };
