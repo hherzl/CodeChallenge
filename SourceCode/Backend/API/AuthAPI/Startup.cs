@@ -1,4 +1,7 @@
-﻿using IdentityServer4.Services;
+﻿using AuthAPI.Models;
+using AuthAPI.Services;
+using AuthAPI.Validation;
+using IdentityServer4.Services;
 using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,8 +20,7 @@ namespace AuthAPI
 
             services
                 .AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>()
-                .AddTransient<IProfileService, ProfileService>()
-                .AddTransient<IAuthRepository, AuthRepository>();
+                .AddTransient<IProfileService, ProfileService>();
 
             services
                 .AddIdentityServer()

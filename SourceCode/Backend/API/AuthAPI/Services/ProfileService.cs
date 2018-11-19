@@ -1,19 +1,20 @@
 ﻿using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AuthAPI.Models;
 using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 
-namespace AuthAPI
+namespace AuthAPI.Services
 {
     public class ProfileService : IProfileService
     {
-        private IAuthRepository Repository;
+        private AuthDbContext DbContext;
 
-        public ProfileService(IAuthRepository repository)
+        public ProfileService(AuthDbContext dbContext)
         {
-            Repository = repository;
+            DbContext = dbContext;
         }
 
         public Task GetProfileDataAsync(ProfileDataRequestContext context)
@@ -22,9 +23,12 @@ namespace AuthAPI
             {
                 var subjectId = context.Subject.GetSubjectId();
 
-                var user = Repository.GetUserById(subjectId);
+                var user = DbContext.GetUserById(subjectId);
 
-                context.IssuedClaims = Repository.GetUserClaimsByUserId(user.UserId).Select(item => new Claim(item.ClaimType, item.ClaimValue)).ToList();
+                context.IssuedClaims = DbContext
+                    .GetUserClaimsByUserId(user.UserId)
+                    .Select(item => new Claim(item.ClaimType, item.ClaimValue))
+                    .ToList();
 
                 return Task.FromResult(0);
             }
@@ -36,7 +40,7 @@ namespace AuthAPI
 
         public Task IsActiveAsync(IsActiveContext context)
         {
-            var user = Repository.GetUserById(context.Subject.GetSubjectId());
+            var user = DbContext.GetUserById(context.Subject.GetSubjectId());
 
             context.IsActive = user != null && user.Active == true;
 

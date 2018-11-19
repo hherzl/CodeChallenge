@@ -1,23 +1,24 @@
 ﻿using System.Threading.Tasks;
+using AuthAPI.Models;
 using IdentityServer4.Models;
 using IdentityServer4.Validation;
 
-namespace AuthAPI
+namespace AuthAPI.Validation
 {
     public class ResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
     {
-        private IAuthRepository Repository;
+        private AuthDbContext DbContext;
 
-        public ResourceOwnerPasswordValidator(IAuthRepository repository)
+        public ResourceOwnerPasswordValidator(AuthDbContext dbContext)
         {
-            Repository = repository;
+            DbContext = dbContext;
         }
 
         public Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
         {
-            if (Repository.ValidatePassword(context.UserName, context.Password))
+            if (DbContext.ValidatePassword(context.UserName, context.Password))
             {
-                context.Result = new GrantValidationResult(Repository.GetUserByUserName(context.UserName).UserId, "password", null, "local", null);
+                context.Result = new GrantValidationResult(DbContext.GetUserByUserName(context.UserName).UserId, "password", null, "local", null);
 
                 return Task.FromResult(context.Result);
             }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace AuthAPI
+namespace AuthAPI.Models
 {
     public class AuthDbContext : DbContext
     {

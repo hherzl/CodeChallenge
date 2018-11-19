@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AuthAPI
+namespace AuthAPI.Models
 {
     public class UserClaim
     {
