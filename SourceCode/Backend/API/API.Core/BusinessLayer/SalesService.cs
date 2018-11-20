@@ -26,7 +26,7 @@ namespace API.Core.BusinessLayer
                     header.Total = 0m;
                     header.Total = details.Sum(item => item.Total);
 
-                    DbContext.Add(header);
+                    DbContext.AddEntity(header);
 
                     await DbContext.SaveChangesAsync();
 
@@ -34,14 +34,15 @@ namespace API.Core.BusinessLayer
                     {
                         item.OrderHeaderID = header.OrderHeaderID;
 
-                        DbContext.Add(item);
+                        DbContext.AddEntity(item);
                     }
 
                     await DbContext.SaveChangesAsync();
 
                     foreach (var detail in details)
                     {
-                        var product = await DbContext.GetProductAsync(new Product(detail.ProductID));
+                        var product = await DbContext
+                            .GetProductAsync(new Product(detail.ProductID));
 
                         // Update stocks for product
                         product.Stocks -= 1;

@@ -48,6 +48,7 @@ namespace API
                 .AddMvcCore()
                 .AddAuthorization(options =>
                 {
+                    //options.AddPolicy("GeneralPolicy", policy => policy.Requirements.Add(new GeneralPolicyRequirement()));
                     options.AddPolicy("CustomerPolicy", policy => policy.Requirements.Add(new CustomerPolicyRequirement()));
                     options.AddPolicy("AdministratorPolicy", policy => policy.Requirements.Add(new AdministratorPolicyRequirement()));
                 })

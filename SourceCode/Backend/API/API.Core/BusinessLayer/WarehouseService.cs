@@ -20,7 +20,7 @@ namespace API.Core.BusinessLayer
             entity.Stocks = 0;
             entity.Available = true;
 
-            DbContext.Products.Add(entity);
+            DbContext.AddEntity(entity);
 
             return await DbContext.SaveChangesAsync();
         }
@@ -34,12 +34,12 @@ namespace API.Core.BusinessLayer
                     // Set changes
                     entity.Price = entity.Price;
 
-                    DbContext.Update(entity);
+                    DbContext.UpdateEntity(entity);
 
                     await DbContext.SaveChangesAsync();
 
                     // Add product price to history
-                    DbContext.ProductPriceHistory.Add(new ProductPriceHistory
+                    DbContext.AddEntity(new ProductPriceHistory
                     {
                         ProductID = entity.ProductID,
                         Price = entity.Price,
@@ -69,7 +69,7 @@ namespace API.Core.BusinessLayer
 
             if (productLike == null)
             {
-                DbContext.ProductLikes.Add(new ProductLike
+                DbContext.AddEntity(new ProductLike
                 {
                     ProductID = entity.ProductID,
                     CreationUser = entity.LastUpdateUser,
@@ -78,7 +78,7 @@ namespace API.Core.BusinessLayer
 
                 entity.Likes += 1;
 
-                DbContext.Update(entity);
+                DbContext.UpdateEntity(entity);
 
                 return await DbContext.SaveChangesAsync();
             }

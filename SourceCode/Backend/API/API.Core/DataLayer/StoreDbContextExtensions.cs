@@ -10,7 +10,7 @@ namespace API.Core.DataLayer
 {
     public static class StoreDbContextExtensions
     {
-        public static void Add<TEntity>(this StoreDbContext dbContext, TEntity entity) where TEntity : class
+        public static void AddEntity<TEntity>(this StoreDbContext dbContext, TEntity entity) where TEntity : class
         {
             // Set creation date time
             if (entity is IAuditEntity cast)
@@ -19,7 +19,7 @@ namespace API.Core.DataLayer
             dbContext.Set<TEntity>().Add(entity);
         }
 
-        public static void Update<TEntity>(this StoreDbContext dbContext, TEntity entity) where TEntity : class
+        public static void UpdateEntity<TEntity>(this StoreDbContext dbContext, TEntity entity) where TEntity : class
         {
             // Set last update date time
             if (entity is IAuditEntity cast)
