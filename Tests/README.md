@@ -12,6 +12,15 @@
 |Delete Product|Yes|Administrator|Deletes an existing product|
 |Place Order|Yes|Customer|Places a new order|
 
+Users:
+
+|Email|Password|Role|
+|-----|--------|----|
+|juanperez@gmail.com|password1|Customer|
+|mariarosales@yahoo.com|password1|Customer|
+|carlosfdez@outlook.com|password1|Administrator|
+|maritzabatres@hotmail.com|password1|Administrator|
+
 There are two roles for **Snacks API**:
 
 * Customer
@@ -24,9 +33,11 @@ To get a token for *Customer* role, use these values once you have running **Aut
 |Parameter|Value|
 |---------|-----|
 |Token Name|SnacksCustomerToken|
-|Grant Type|Client Credentials|
+|Grant Type|Password Credentials|
 |Access Token URL|http://localhost:5600/connect/token|
-|Client ID|snackscustomer|
+|User name|juanperez@gmail.com|
+|Password|password1|
+|Client ID|snacksclient|
 |Client Secret|secret1|
 |Scope|SnacksApi|
 |Client Authentication|Send as Basic Auth Header|
@@ -42,7 +53,9 @@ To get a token for *Administrator* role, use these values once you have running 
 |Token Name|SnacksAdministratorToken|
 |Grant Type|Client Credentials|
 |Access Token URL|http://localhost:5600/connect/token|
-|Client ID|snacksadministrator|
+|User name|carlosfdez@outlook.com|
+|Password|password1|
+|Client ID|snacksclient|
 |Client Secret|secret1|
 |Scope|SnacksApi|
 |Client Authentication|Send as Basic Auth Header|
