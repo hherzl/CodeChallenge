@@ -20,7 +20,7 @@ namespace API.Core.BusinessLayer
             entity.Stocks = 0;
             entity.Available = true;
 
-            DbContext.Add(entity);
+            DbContext.Products.Add(entity);
 
             return await DbContext.SaveChangesAsync();
         }
@@ -39,7 +39,7 @@ namespace API.Core.BusinessLayer
                     await DbContext.SaveChangesAsync();
 
                     // Add product price to history
-                    DbContext.Add(new ProductPriceHistory
+                    DbContext.ProductPriceHistory.Add(new ProductPriceHistory
                     {
                         ProductID = entity.ProductID,
                         Price = entity.Price,
@@ -64,11 +64,17 @@ namespace API.Core.BusinessLayer
 
         public async Task<int> LikeProductAsync(Product entity)
         {
-            var productLike = await DbContext.GetProductLikeByProductIDAndCreationUserAsync(entity.ProductID, entity.LastUpdateUser);
+            var productLike = await DbContext
+                .GetProductLikeByProductIDAndCreationUserAsync(entity.ProductID, entity.LastUpdateUser);
 
             if (productLike == null)
             {
-                DbContext.Add(new ProductLike { ProductID = entity.ProductID, CreationUser = entity.LastUpdateUser, CreationDateTime = DateTime.Now });
+                DbContext.ProductLikes.Add(new ProductLike
+                {
+                    ProductID = entity.ProductID,
+                    CreationUser = entity.LastUpdateUser,
+                    CreationDateTime = DateTime.Now
+                });
 
                 entity.Likes += 1;
 
@@ -82,7 +88,8 @@ namespace API.Core.BusinessLayer
 
         public async Task<int> DeleteProductAsync(Product entity)
         {
-            var count = await DbContext.GetOrderDetails(productID: entity.ProductID).CountAsync();
+            var count = await DbContext
+                .GetOrderDetails(productID: entity.ProductID).CountAsync();
 
             if (count > 0)
                 throw new ApiException(string.Format("The product: '{0}', with ID: '{1}' cannot be deleted, has dependencies in sales.", entity.ProductName, entity.ProductID));

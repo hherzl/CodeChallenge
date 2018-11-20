@@ -33,17 +33,35 @@ namespace AuthAPI.Models
         {
             dbContext.Users.Add(new User { UserId = "1000", Email = "juanperez@gmail.com", Password = "password1", Active = true });
 
-            dbContext.UserClaims.Add(new UserClaim { UserClaimId = Guid.NewGuid(), UserId = "1000", ClaimType = JwtClaimTypes.Subject, ClaimValue = "1000" });
-            dbContext.UserClaims.Add(new UserClaim { UserClaimId = Guid.NewGuid(), UserId = "1000", ClaimType = JwtClaimTypes.Role, ClaimValue = "Customer" });
-            dbContext.UserClaims.Add(new UserClaim { UserClaimId = Guid.NewGuid(), UserId = "1000", ClaimType = JwtClaimTypes.PreferredUserName, ClaimValue = "juanperez" });
-
-            dbContext.SaveChanges();
+            dbContext.UserClaims.AddRange(
+                new UserClaim { UserClaimId = Guid.NewGuid(), UserId = "1000", ClaimType = JwtClaimTypes.Subject, ClaimValue = "1000" },
+                new UserClaim { UserClaimId = Guid.NewGuid(), UserId = "1000", ClaimType = JwtClaimTypes.Role, ClaimValue = "Customer" },
+                new UserClaim { UserClaimId = Guid.NewGuid(), UserId = "1000", ClaimType = JwtClaimTypes.PreferredUserName, ClaimValue = "juanperez" }
+            );
 
             dbContext.Users.Add(new User { UserId = "2000", Email = "mariarosales@yahoo.com", Password = "password1", Active = true });
 
-            dbContext.UserClaims.Add(new UserClaim { UserClaimId = Guid.NewGuid(), UserId = "2000", ClaimType = JwtClaimTypes.Subject, ClaimValue = "2000" });
-            dbContext.UserClaims.Add(new UserClaim { UserClaimId = Guid.NewGuid(), UserId = "2000", ClaimType = JwtClaimTypes.Role, ClaimValue = "Customer" });
-            dbContext.UserClaims.Add(new UserClaim { UserClaimId = Guid.NewGuid(), UserId = "2000", ClaimType = JwtClaimTypes.PreferredUserName, ClaimValue = "mariarosales" });
+            dbContext.UserClaims.AddRange(
+                new UserClaim { UserClaimId = Guid.NewGuid(), UserId = "2000", ClaimType = JwtClaimTypes.Subject, ClaimValue = "2000" },
+                new UserClaim { UserClaimId = Guid.NewGuid(), UserId = "2000", ClaimType = JwtClaimTypes.Role, ClaimValue = "Customer" },
+                new UserClaim { UserClaimId = Guid.NewGuid(), UserId = "2000", ClaimType = JwtClaimTypes.PreferredUserName, ClaimValue = "mariarosales" }
+                );
+
+            dbContext.Users.Add(new User { UserId = "3000", Email = "carlosfdez@outlook.com", Password = "password1", Active = true });
+
+            dbContext.UserClaims.AddRange(
+                new UserClaim { UserClaimId = Guid.NewGuid(), UserId = "3000", ClaimType = JwtClaimTypes.Subject, ClaimValue = "3000" },
+                new UserClaim { UserClaimId = Guid.NewGuid(), UserId = "3000", ClaimType = JwtClaimTypes.Role, ClaimValue = "Administrator" },
+                new UserClaim { UserClaimId = Guid.NewGuid(), UserId = "3000", ClaimType = JwtClaimTypes.PreferredUserName, ClaimValue = "carlosfdez" }
+                );
+
+            dbContext.Users.Add(new User { UserId = "4000", Email = "maritzabatres@hotmail.com", Password = "password1", Active = true });
+
+            dbContext.UserClaims.AddRange(
+                new UserClaim { UserClaimId = Guid.NewGuid(), UserId = "4000", ClaimType = JwtClaimTypes.Subject, ClaimValue = "4000" },
+                new UserClaim { UserClaimId = Guid.NewGuid(), UserId = "4000", ClaimType = JwtClaimTypes.Role, ClaimValue = "Administrator" },
+                new UserClaim { UserClaimId = Guid.NewGuid(), UserId = "4000", ClaimType = JwtClaimTypes.PreferredUserName, ClaimValue = "maritzabatres" }
+                );
 
             dbContext.SaveChanges();
         }

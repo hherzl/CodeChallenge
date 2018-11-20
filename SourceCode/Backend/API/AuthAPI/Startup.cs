@@ -27,6 +27,10 @@ namespace AuthAPI
                 .AddDeveloperSigningCredential()
                 .AddInMemoryApiResources(Config.GetApiResources())
                 .AddInMemoryClients(Config.GetClients());
+
+            services
+                .AddAuthentication()
+                .AddIdentityServerAuthentication();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,9 +39,11 @@ namespace AuthAPI
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
-            var scope = app.ApplicationServices.CreateScope();
-
-            var authDbContext = scope.ServiceProvider.GetService<AuthDbContext>();
+            var authDbContext = app
+                .ApplicationServices
+                .CreateScope()
+                .ServiceProvider
+                .GetService<AuthDbContext>();
 
             authDbContext.SeedInMemory();
 

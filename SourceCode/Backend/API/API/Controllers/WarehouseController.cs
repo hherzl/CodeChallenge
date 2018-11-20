@@ -229,9 +229,15 @@ namespace API.Controllers
 
                 var affectedRows = await Service.LikeProductAsync(entity);
 
-                if (affectedRows > 0)
+                if (affectedRows == 0)
                 {
                     response.Message = string.Format("The product '{0}' has a new like, user: '{1}'.", entity.ProductName, entity.LastUpdateUser);
+
+                    Logger?.LogInformation(response.Message);
+                }
+                if (affectedRows == 0)
+                {
+                    response.Message = string.Format("The product '{0}' already have a like from '{1}' user.", entity.ProductName, entity.LastUpdateUser);
 
                     Logger?.LogInformation(response.Message);
                 }

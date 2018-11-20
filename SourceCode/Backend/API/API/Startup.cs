@@ -53,12 +53,14 @@ namespace API
                 })
                 .AddJsonFormatters();
 
-            services.AddAuthentication("Bearer").AddIdentityServerAuthentication(options =>
-            {
-                options.Authority = "http://localhost:5600";
-                options.RequireHttpsMetadata = false;
-                options.ApiName = "SnacksApi";
-            });
+            services
+                .AddAuthentication("Bearer")
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = "http://localhost:5600";
+                    options.RequireHttpsMetadata = false;
+                    options.ApiName = "SnacksApi";
+                });
 
             services.AddSwaggerGen(c =>
             {
