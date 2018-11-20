@@ -12,7 +12,7 @@
 |Delete Product|Yes|Administrator|Deletes an existing product|
 |Place Order|Yes|Customer|Places a new order|
 
-Users:
+## Users
 
 |Email|Password|Role|
 |-----|--------|----|
