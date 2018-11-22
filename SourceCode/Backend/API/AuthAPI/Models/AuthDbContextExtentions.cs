@@ -26,8 +26,8 @@ namespace AuthAPI.Models
         public static User GetUserById(this AuthDbContext dbContext, string id)
             => dbContext.Users.FirstOrDefault(item => item.UserId == id);
 
-        public static IEnumerable<UserClaim> GetUserClaimsByUserId(this AuthDbContext dbContext, string id)
-            => dbContext.UserClaims.Where(item => item.UserId == id);
+        public static IEnumerable<UserClaim> GetUserClaimsByUserId(this AuthDbContext dbContext, string userId)
+            => dbContext.UserClaims.Where(item => item.UserId == userId);
 
         public static void SeedInMemory(this AuthDbContext dbContext)
         {

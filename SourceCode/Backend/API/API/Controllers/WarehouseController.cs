@@ -231,13 +231,13 @@ namespace API.Controllers
 
                 if (affectedRows == 0)
                 {
-                    response.Message = string.Format("The product '{0}' has a new like, user: '{1}'.", entity.ProductName, entity.LastUpdateUser);
+                    response.Message = string.Format("The product '{0}' already have a like from '{1}' user.", entity.ProductName, entity.LastUpdateUser);
 
                     Logger?.LogInformation(response.Message);
                 }
-                if (affectedRows == 0)
+                else
                 {
-                    response.Message = string.Format("The product '{0}' already have a like from '{1}' user.", entity.ProductName, entity.LastUpdateUser);
+                    response.Message = string.Format("The product '{0}' has a new like, user: '{1}'.", entity.ProductName, entity.LastUpdateUser);
 
                     Logger?.LogInformation(response.Message);
                 }
@@ -284,9 +284,7 @@ namespace API.Controllers
                 var affectedRows = await Service.DeleteProductAsync(entity);
 
                 if (affectedRows > 0)
-                {
                     response.Message = "The product was deleted successfully";
-                }
             }
             catch (Exception ex)
             {

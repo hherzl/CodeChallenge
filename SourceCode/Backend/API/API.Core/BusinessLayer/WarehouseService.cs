@@ -72,8 +72,7 @@ namespace API.Core.BusinessLayer
                 DbContext.AddEntity(new ProductLike
                 {
                     ProductID = entity.ProductID,
-                    CreationUser = entity.LastUpdateUser,
-                    CreationDateTime = DateTime.Now
+                    CreationUser = entity.LastUpdateUser
                 });
 
                 entity.Likes += 1;

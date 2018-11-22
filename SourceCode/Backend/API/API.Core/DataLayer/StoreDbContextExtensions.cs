@@ -28,7 +28,7 @@ namespace API.Core.DataLayer
             dbContext.Set<TEntity>().Update(entity);
         }
 
-        public static IQueryable<Product> GetProducts(this StoreDbContext dbContext, string name = "")
+        public static IQueryable<Product> GetProducts(this StoreDbContext dbContext, string productName = "")
         {
             // Get query from DbSet
             var query = dbContext.Products.AsQueryable();
@@ -37,8 +37,8 @@ namespace API.Core.DataLayer
             query = query.Where(item => item.Available == true);
 
             // Search by name
-            if (!string.IsNullOrEmpty(name))
-                query = query.Where(item => item.ProductName.ToLower().Contains(name.ToLower()));
+            if (!string.IsNullOrEmpty(productName))
+                query = query.Where(item => item.ProductName.ToLower().Contains(productName.ToLower()));
 
             return query;
         }
