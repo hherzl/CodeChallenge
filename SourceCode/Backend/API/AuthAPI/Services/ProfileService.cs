@@ -21,10 +21,13 @@ namespace AuthAPI.Services
         {
             try
             {
+                // Retrieve subject
                 var subjectId = context.Subject.GetSubjectId();
 
+                // Retrieve user by id
                 var user = DbContext.GetUserById(subjectId);
 
+                // Set claims for user
                 context.IssuedClaims = DbContext
                     .GetUserClaimsByUserId(user.UserId)
                     .Select(item => new Claim(item.ClaimType, item.ClaimValue))
@@ -40,6 +43,7 @@ namespace AuthAPI.Services
 
         public Task IsActiveAsync(IsActiveContext context)
         {
+            // Retrieve user by id (subject)
             var user = DbContext.GetUserById(context.Subject.GetSubjectId());
 
             context.IsActive = user != null && user.Active == true;

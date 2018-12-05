@@ -16,13 +16,16 @@ namespace AuthAPI.Validation
 
         public Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
         {
+            // Validate credentials (user name and password)
             if (DbContext.ValidatePassword(context.UserName, context.Password))
             {
+                // Set result for context
                 context.Result = new GrantValidationResult(DbContext.GetUserByUserName(context.UserName).UserId, "password", null, "local", null);
 
                 return Task.FromResult(context.Result);
             }
 
+            // If validation fails, set result as invalid
             context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, "The username and password do not match.", null);
 
             return Task.FromResult(context.Result);

@@ -15,9 +15,11 @@ namespace AuthAPI.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Define key for entities
+
             modelBuilder.Entity<User>(builder => builder.HasKey(p => p.UserId));
 
-            modelBuilder.Entity<UserClaim>(builder => builder.HasKey(p => new { p.UserClaimId }));
+            modelBuilder.Entity<UserClaim>(builder => builder.HasKey(p => p.UserClaimId));
 
             base.OnModelCreating(modelBuilder);
         }
