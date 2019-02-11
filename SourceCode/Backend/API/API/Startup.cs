@@ -46,11 +46,13 @@ namespace API
 
             services
                 .AddMvcCore()
-                .AddAuthorization(options =>
+                .AddAuthorization(builder =>
                 {
-                    //options.AddPolicy("GeneralPolicy", policy => policy.Requirements.Add(new GeneralPolicyRequirement()));
-                    options.AddPolicy("CustomerPolicy", policy => policy.Requirements.Add(new CustomerPolicyRequirement()));
-                    options.AddPolicy("AdministratorPolicy", policy => policy.Requirements.Add(new AdministratorPolicyRequirement()));
+                    builder.AddPolicy("AdministratorPolicy",
+                        policy => policy.Requirements.Add(new AdministratorPolicyRequirement()));
+
+                    builder.AddPolicy("CustomerPolicy",
+                        policy => policy.Requirements.Add(new CustomerPolicyRequirement()));
                 })
                 .AddJsonFormatters();
 
@@ -63,16 +65,16 @@ namespace API
                     options.ApiName = "SnacksApi";
                 });
 
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(options =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Snacks API", Version = "v1" });
+                options.SwaggerDoc("v1", new Info { Title = "Snacks API", Version = "v1" });
 
                 // Set the comments path for the Swagger JSON and UI.
 
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 
-                c.IncludeXmlComments(xmlPath);
+                options.IncludeXmlComments(xmlPath);
             });
         }
 
@@ -83,9 +85,11 @@ namespace API
                 app.UseDeveloperExceptionPage();
 
             // todo: Set port number for client app
+
             app.UseCors(policy =>
             {
                 // Add client origin in CORS policy
+
                 policy.WithOrigins("http://localhost:4200");
                 policy.AllowAnyHeader();
                 policy.AllowAnyMethod();
@@ -95,9 +99,9 @@ namespace API
 
             app.UseSwagger();
 
-            app.UseSwaggerUI(c =>
+            app.UseSwaggerUI(options =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Snacks API");
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Snacks API");
             });
 
             app.UseMvc();

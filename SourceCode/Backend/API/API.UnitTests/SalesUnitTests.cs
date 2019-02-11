@@ -11,10 +11,10 @@ namespace API.UnitTests
     public class SalesUnitTests
     {
         [Fact]
-        public async Task TestPlaceOrderAsync()
+        public async Task TestPostOrderAsync()
         {
             // Arrange
-            var dbContext = DbContextMocker.GetStoreDbContext(nameof(TestPlaceOrderAsync));
+            var dbContext = DbContextMocker.GetStoreDbContext(nameof(TestPostOrderAsync));
             var service = ServiceMocker.GetSalesService(dbContext);
             var controller = new SalesController(service, null);
             var request = new PlaceOrderRequest
@@ -32,7 +32,7 @@ namespace API.UnitTests
             controller.MockControllerContext();
 
             // Act
-            var response = await controller.PlaceOrderAsync(request) as ObjectResult;
+            var response = await controller.PostOrderAsync(request) as ObjectResult;
             var value = response.Value as IResponse;
 
             service.Dispose();

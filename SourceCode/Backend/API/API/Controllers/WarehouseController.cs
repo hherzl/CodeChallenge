@@ -19,7 +19,7 @@ namespace API.Controllers
     public class WarehouseController : ControllerBase
     {
         protected readonly IWarehouseService Service;
-        protected ILogger Logger;
+        protected readonly ILogger Logger;
 
         public WarehouseController(IWarehouseService warehouseService, ILogger<WarehouseController> logger)
         {

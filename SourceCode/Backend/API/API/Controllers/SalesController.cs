@@ -19,7 +19,7 @@ namespace API.Controllers
     public class SalesController : ControllerBase
     {
         protected readonly ISalesService SalesService;
-        protected ILogger Logger;
+        protected readonly ILogger Logger;
 
         public SalesController(ISalesService salesService, ILogger<WarehouseController> logger)
         {
@@ -44,9 +44,9 @@ namespace API.Controllers
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> PlaceOrderAsync([FromBody]PlaceOrderRequest request)
+        public async Task<IActionResult> PostOrderAsync([FromBody]PlaceOrderRequest request)
         {
-            Logger?.LogDebug("'{0}' has been invoked", nameof(PlaceOrderAsync));
+            Logger?.LogDebug("'{0}' has been invoked", nameof(PostOrderAsync));
 
             // Validate request model
             if (!ModelState.IsValid)
@@ -107,7 +107,7 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                response.SetError(Logger, nameof(PlaceOrderAsync), ex);
+                response.SetError(Logger, nameof(PostOrderAsync), ex);
             }
 
             return response.ToHttpResponse();

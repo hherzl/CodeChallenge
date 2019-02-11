@@ -4,7 +4,7 @@
         <name>API</name>
     </assembly>
     <members>
-        <member name="M:API.Controllers.SalesController.PlaceOrderAsync(API.Models.PlaceOrderRequest)">
+        <member name="M:API.Controllers.SalesController.PostOrderAsync(API.Models.PlaceOrderRequest)">
             <summary>
             Places a new order
             </summary>
