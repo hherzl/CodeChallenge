@@ -32,14 +32,14 @@ namespace API.Controllers
         /// </summary>
         /// <param name="request">Order request</param>
         /// <returns>A response as result of place new order</returns>
-        /// <response code="200">If creation of order it was succes</response>
+        /// <response code="201">If creation of order it was succes</response>
         /// <response code="400">For bad request</response>
         /// <response code="401">For unauthorized clients</response>
         /// <response code="403">If client doesn't have rights to place order</response>
         /// <response code="500">If there was an error</response>
         [Authorize(Policy = "CustomerPolicy")]
         [HttpPost("PlaceOrder")]
-        [ProducesResponseType(200)]
+        [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]

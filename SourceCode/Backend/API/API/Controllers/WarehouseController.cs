@@ -36,7 +36,7 @@ namespace API.Controllers
         /// <param name="sortBy">Sort by popularity</param>
         /// <returns>A list of product according to criteria</returns>
         /// <response code="200">A success response with products list</response>
-        /// <response code="204">If there are not products</response>
+        /// <response code="204">If there no products</response>
         /// <response code="500">If there was an error</response>
         [AllowAnonymous]
         [HttpGet("Product")]
@@ -85,14 +85,14 @@ namespace API.Controllers
         /// </summary>
         /// <param name="request">Request for add product</param>
         /// <returns>A single response with new product info</returns>
-        /// <response code="200">Returns the newly created product</response>
+        /// <response code="201">Returns the newly created product</response>
         /// <response code="400">For bad request</response>
         /// <response code="401">For unauthorized clients</response>
         /// <response code="403">If client doesn't have rights to add product</response>
         /// <response code="500">If there was an error</response>
         [Authorize(Policy = "AdministratorPolicy")]
         [HttpPost("Product")]
-        [ProducesResponseType(200)]
+        [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
@@ -134,7 +134,7 @@ namespace API.Controllers
                 response.SetError(Logger, nameof(AddProductAsync), ex);
             }
 
-            return response.ToHttpResponse();
+            return response.ToHttpCreatedResponse();
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace API.Controllers
         /// <param name="id">Product ID</param>
         /// <param name="request">Request for update product price</param>
         /// <returns>A response as result of update product price</returns>
-        /// <response code="200">If product price update it was success</response>
+        /// <response code="200">If product price update it was successfully</response>
         /// <response code="400">For bad request</response>
         /// <response code="401">For unauthorized clients</response>
         /// <response code="403">If client doesn't have rights to update product price</response>
@@ -157,9 +157,9 @@ namespace API.Controllers
         [ProducesResponseType(403)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> UpdateProductPriceAsync(int id, [FromBody]UpdateProductPriceRequest request)
+        public async Task<IActionResult> PutProductPriceAsync(int id, [FromBody]UpdateProductPriceRequest request)
         {
-            Logger?.LogDebug("'{0}' has been invoked", nameof(UpdateProductPriceAsync));
+            Logger?.LogDebug("'{0}' has been invoked", nameof(PutProductPriceAsync));
 
             // Validate request model
             if (!ModelState.IsValid)
@@ -177,7 +177,7 @@ namespace API.Controllers
 
                 entity.LastUpdateUser = User.GetUserName();
 
-                await Service.UpdatePriceProductAsync(entity);
+                await Service.UpdateProductPriceAsync(entity);
 
                 response.Message = string.Format("The price for product: {0} was changed successfully.", entity.ProductID);
 
@@ -187,7 +187,7 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                response.SetError(Logger, nameof(UpdateProductPriceAsync), ex);
+                response.SetError(Logger, nameof(PutProductPriceAsync), ex);
             }
 
             return response.ToHttpResponse();

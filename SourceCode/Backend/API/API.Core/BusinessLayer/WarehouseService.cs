@@ -25,13 +25,14 @@ namespace API.Core.BusinessLayer
             return await DbContext.SaveChangesAsync();
         }
 
-        public async Task<int> UpdatePriceProductAsync(Product entity)
+        public async Task<int> UpdateProductPriceAsync(Product entity)
         {
             using (var txn = await DbContext.Database.BeginTransactionAsync())
             {
                 try
                 {
                     // Set changes
+
                     entity.Price = entity.Price;
 
                     DbContext.UpdateEntity(entity);
@@ -39,6 +40,7 @@ namespace API.Core.BusinessLayer
                     await DbContext.SaveChangesAsync();
 
                     // Add product price to history
+
                     DbContext.AddEntity(new ProductPriceHistory
                     {
                         ProductID = entity.ProductID,

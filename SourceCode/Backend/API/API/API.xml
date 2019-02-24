@@ -10,7 +10,7 @@
             </summary>
             <param name="request">Order request</param>
             <returns>A response as result of place new order</returns>
-            <response code="200">If creation of order it was succes</response>
+            <response code="201">If creation of order it was succes</response>
             <response code="400">For bad request</response>
             <response code="401">For unauthorized clients</response>
             <response code="403">If client doesn't have rights to place order</response>
@@ -26,7 +26,7 @@
             <param name="sortBy">Sort by popularity</param>
             <returns>A list of product according to criteria</returns>
             <response code="200">A success response with products list</response>
-            <response code="204">If there are not products</response>
+            <response code="204">If there no products</response>
             <response code="500">If there was an error</response>
         </member>
         <member name="M:API.Controllers.WarehouseController.AddProductAsync(API.Models.AddProductRequest)">
@@ -35,20 +35,20 @@
             </summary>
             <param name="request">Request for add product</param>
             <returns>A single response with new product info</returns>
-            <response code="200">Returns the newly created product</response>
+            <response code="201">Returns the newly created product</response>
             <response code="400">For bad request</response>
             <response code="401">For unauthorized clients</response>
             <response code="403">If client doesn't have rights to add product</response>
             <response code="500">If there was an error</response>
         </member>
-        <member name="M:API.Controllers.WarehouseController.UpdateProductPriceAsync(System.Int32,API.Models.UpdateProductPriceRequest)">
+        <member name="M:API.Controllers.WarehouseController.PutProductPriceAsync(System.Int32,API.Models.UpdateProductPriceRequest)">
             <summary>
             Updates the price for existing product
             </summary>
             <param name="id">Product ID</param>
             <param name="request">Request for update product price</param>
             <returns>A response as result of update product price</returns>
-            <response code="200">If product price update it was success</response>
+            <response code="200">If product price update it was successfully</response>
             <response code="400">For bad request</response>
             <response code="401">For unauthorized clients</response>
             <response code="403">If client doesn't have rights to update product price</response>

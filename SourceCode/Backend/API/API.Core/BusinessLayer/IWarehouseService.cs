@@ -7,7 +7,7 @@ namespace API.Core.BusinessLayer
     {
         Task<int> CreateProductAsync(Product entity);
 
-        Task<int> UpdatePriceProductAsync(Product entity);
+        Task<int> UpdateProductPriceAsync(Product entity);
 
         Task<int> LikeProductAsync(Product entity);
 

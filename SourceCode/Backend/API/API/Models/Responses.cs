@@ -108,6 +108,16 @@ namespace API.Models
             };
         }
 
+        public static IActionResult ToHttpCreatedResponse(this IResponse response)
+        {
+            var status = response.DidError ? HttpStatusCode.InternalServerError : HttpStatusCode.Created;
+
+            return new ObjectResult(response)
+            {
+                StatusCode = (int)status
+            };
+        }
+
         public static IActionResult ToHttpResponse<TModel>(this ISingleResponse<TModel> response)
         {
             var status = HttpStatusCode.OK;
